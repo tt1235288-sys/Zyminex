@@ -3,12 +3,9 @@ import type { Metadata } from 'next';
 import { CONSTANTS } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  metadataBase: new URL(`https://zyminex.stream`),
-  title: {
-    default: `Zyminex - Best IPTV Plans 2026 - 4K Streaming | Official Website`,
-    template: `%s | Zyminex - Official Pricing`,
-  },
-  description: `Zyminex: Multi-device IPTV plans from $35/3mo. 15,000+ channels, 60,000+ VODs, 4K quality. 7-day money-back guarantee. Official website - Subscribe now!`,
+  metadataBase: new URL(`https://www.zyminex.stream`),
+  title: `IPTV Subscription Pricing & Plans 2026 | Zyminex Official`,
+  description: `Zyminex multi-device IPTV plans from $35/3mo. Stream 15,000+ live channels, 60,000+ VODs in 4K quality with a 7-day money-back guarantee. Subscribe now!`,
   authors: [{ name: `Zyminex Team` }],
   creator: 'Zyminex',
   publisher: 'Zyminex',
@@ -29,18 +26,18 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: `https://zyminex.stream/pricing`,
+    canonical: `https://www.zyminex.stream/pricing`,
   },
   openGraph: {
-    title: `Zyminex - Best IPTV Plans 2026 | Official Website`,
+    title: `IPTV Subscription Pricing & Plans 2026 | Zyminex Official`,
     description: `Subscribe to Zyminex from $35/3mo. 15,000+ channels, 60,000+ VODs, 4K quality. Multi-device support. Official website.`,
-    url: `https://zyminex.stream/pricing`,
+    url: `https://www.zyminex.stream/pricing`,
     siteName: 'Zyminex',
     locale: 'en_US',
     type: 'website',
     images: [
       {
-        url: `https://zyminex.stream/img/structer.webp`,
+        url: `https://www.zyminex.stream/img/structer.webp`,
         width: 1200,
         height: 630,
         alt: `Zyminex Pricing Plans - Best IPTV Subscription Official Website`,
@@ -49,9 +46,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: `Zyminex - Best IPTV Plans 2026 | Official Website`,
+    title: `IPTV Subscription Pricing & Plans 2026 | Zyminex Official`,
     description: `From $35/3mo. 15,000+ channels, 60,000+ VODs, 4K quality. Multi-device plans available.`,
-    images: [`https://zyminex.stream/img/structer.webp`],
+    images: [`https://www.zyminex.stream/img/structer.webp`],
     creator: `@Zyminex`,
     site: `@Zyminex`,
   },
@@ -89,7 +86,7 @@ export const metadata: Metadata = {
   ],
 };
 
-// JSON-LD Pricing Page Schema with Updated Pricing
+// JSON-LD Pricing Page Schema with Complete Offers
 const PricingPageSchema = () => (
   <script
     type="application/ld+json"
@@ -101,7 +98,7 @@ const PricingPageSchema = () => (
         "@type": "Product",
         "name": `Zyminex IPTV Subscription Plans`,
         "alternateName": "Zyminex",
-        "image": `https://zyminex.stream/img/structer.webp`,
+        "image": `https://www.zyminex.stream/img/structer.webp`,
         "description": `Premium IPTV service with multi-device subscription plans starting at $35 for 3 months. Access 15,000+ live channels and 60,000+ VODs in 4K quality. Zyminex offers the best value in IPTV entertainment.`,
         "brand": {
           "@type": "Brand",
@@ -123,7 +120,7 @@ const PricingPageSchema = () => (
             "priceCurrency": "USD",
             "priceValidUntil": "2027-12-31",
             "availability": "https://schema.org/OnlineOnly",
-            "url": `https://zyminex.stream/pricing`,
+            "url": `https://www.zyminex.stream/pricing`,
             "description": `3 months Zyminex access on 1 device with 15,000+ live channels and 60,000+ VODs`,
             "shippingDetails": {
               "@type": "OfferShippingDetails",
@@ -164,7 +161,7 @@ const PricingPageSchema = () => (
             "priceCurrency": "USD",
             "priceValidUntil": "2027-12-31",
             "availability": "https://schema.org/OnlineOnly",
-            "url": `https://zyminex.stream/pricing`,
+            "url": `https://www.zyminex.stream/pricing`,
             "description": `6 months Zyminex access on 1 device with 15,000+ live channels and 60,000+ VODs`,
             "shippingDetails": {
               "@type": "OfferShippingDetails",
@@ -205,7 +202,7 @@ const PricingPageSchema = () => (
             "priceCurrency": "USD",
             "priceValidUntil": "2027-12-31",
             "availability": "https://schema.org/OnlineOnly",
-            "url": `https://zyminex.stream/pricing`,
+            "url": `https://www.zyminex.stream/pricing`,
             "description": `12 months Zyminex access on 1 device with 15,000+ live channels and 60,000+ VODs`,
             "shippingDetails": {
               "@type": "OfferShippingDetails",
@@ -247,7 +244,7 @@ const PricingPageSchema = () => (
             "priceCurrency": "USD",
             "priceValidUntil": "2027-12-31",
             "availability": "https://schema.org/OnlineOnly",
-            "url": `https://zyminex.stream/pricing`,
+            "url": `https://www.zyminex.stream/pricing`,
             "description": `3 months Zyminex access on 2 devices with 15,000+ live channels and 60,000+ VODs`,
             "shippingDetails": {
               "@type": "OfferShippingDetails",
@@ -288,7 +285,7 @@ const PricingPageSchema = () => (
             "priceCurrency": "USD",
             "priceValidUntil": "2027-12-31",
             "availability": "https://schema.org/OnlineOnly",
-            "url": `https://zyminex.stream/pricing`,
+            "url": `https://www.zyminex.stream/pricing`,
             "description": `6 months Zyminex access on 2 devices with 15,000+ live channels and 60,000+ VODs`,
             "shippingDetails": {
               "@type": "OfferShippingDetails",
@@ -329,7 +326,7 @@ const PricingPageSchema = () => (
             "priceCurrency": "USD",
             "priceValidUntil": "2027-12-31",
             "availability": "https://schema.org/OnlineOnly",
-            "url": `https://zyminex.stream/pricing`,
+            "url": `https://www.zyminex.stream/pricing`,
             "description": `12 months Zyminex access on 2 devices with 15,000+ live channels and 60,000+ VODs`,
             "shippingDetails": {
               "@type": "OfferShippingDetails",
@@ -371,7 +368,7 @@ const PricingPageSchema = () => (
             "priceCurrency": "USD",
             "priceValidUntil": "2027-12-31",
             "availability": "https://schema.org/OnlineOnly",
-            "url": `https://zyminex.stream/pricing`,
+            "url": `https://www.zyminex.stream/pricing`,
             "description": `3 months Zyminex access on 3 devices with 15,000+ live channels and 60,000+ VODs`,
             "shippingDetails": {
               "@type": "OfferShippingDetails",
@@ -412,7 +409,7 @@ const PricingPageSchema = () => (
             "priceCurrency": "USD",
             "priceValidUntil": "2027-12-31",
             "availability": "https://schema.org/OnlineOnly",
-            "url": `https://zyminex.stream/pricing`,
+            "url": `https://www.zyminex.stream/pricing`,
             "description": `6 months Zyminex access on 3 devices with 15,000+ live channels and 60,000+ VODs`,
             "shippingDetails": {
               "@type": "OfferShippingDetails",
@@ -453,7 +450,7 @@ const PricingPageSchema = () => (
             "priceCurrency": "USD",
             "priceValidUntil": "2027-12-31",
             "availability": "https://schema.org/OnlineOnly",
-            "url": `https://zyminex.stream/pricing`,
+            "url": `https://www.zyminex.stream/pricing`,
             "description": `12 months Zyminex access on 3 devices with 15,000+ live channels and 60,000+ VODs`,
             "shippingDetails": {
               "@type": "OfferShippingDetails",
@@ -493,7 +490,7 @@ const PricingPageSchema = () => (
   />
 );
 
-// FAQ JSON-LD Schema
+// FAQ JSON-LD Schema (All 8 Questions Retained)
 const PricingFAQSchema = () => (
   <script
     type="application/ld+json"
@@ -586,9 +583,9 @@ const OrganizationSchema = () => (
         "@type": "Organization",
         "name": "Zyminex",
         "alternateName": "Zyminex",
-        "url": `https://zyminex.stream`,
-        "logo": `https://zyminex.stream/img/structer.webp`,
-        "image": `https://zyminex.stream/img/structer.webp`,
+        "url": `https://www.zyminex.stream`,
+        "logo": `https://www.zyminex.stream/img/structer.webp`,
+        "image": `https://www.zyminex.stream/img/structer.webp`,
         "description": `Premium IPTV service with multi-device subscription plans starting at $35 for 3 months. Zyminex is the best IPTV provider for 2026.`,
         "contactPoint": {
           "@type": "ContactPoint",
@@ -620,11 +617,11 @@ const WebsiteSchema = () => (
         "@type": "WebSite",
         "name": "Zyminex",
         "alternateName": "Zyminex",
-        "url": `https://zyminex.stream`,
+        "url": `https://www.zyminex.stream`,
         "description": `Zyminex - Best IPTV subscription plans starting at $35 for 3 months. Read our Zyminex Review and Zyminex Guide.`,
         "potentialAction": {
           "@type": "SearchAction",
-          "target": `https://zyminex.stream/search?q={search_term_string}`,
+          "target": `https://www.zyminex.stream/search?q={search_term_string}`,
           "query-input": "required name=search_term_string",
         },
       }),
@@ -632,7 +629,7 @@ const WebsiteSchema = () => (
   />
 );
 
-// WebPage Schema for better image display
+// WebPage Schema
 const WebPageSchema = () => (
   <script
     type="application/ld+json"
@@ -644,10 +641,10 @@ const WebPageSchema = () => (
         "@type": "WebPage",
         "name": `Zyminex - Pricing & Subscription Plans | Official Website`,
         "description": `Choose your Zyminex subscription plan starting at $35 for 3 months. 15,000+ channels, 60,000+ VODs, 4K quality. Official website.`,
-        "url": `https://zyminex.stream/pricing`,
+        "url": `https://www.zyminex.stream/pricing`,
         "primaryImageOfPage": {
           "@type": "ImageObject",
-          "url": `https://zyminex.stream/img/structer.webp`,
+          "url": `https://www.zyminex.stream/img/structer.webp`,
           "width": "1200",
           "height": "630"
         }
@@ -656,7 +653,7 @@ const WebPageSchema = () => (
   />
 );
 
-// Article Schema for better image display in search
+// Article Schema
 const ArticleSchema = () => (
   <script
     type="application/ld+json"
@@ -668,7 +665,7 @@ const ArticleSchema = () => (
         "@type": "Article",
         "headline": `Zyminex - Best IPTV Plans 2026 - 4K Streaming | Official Website`,
         "image": [
-          `https://zyminex.stream/img/structer.webp`
+          `https://www.zyminex.stream/img/structer.webp`
         ],
         "datePublished": "2026-01-01T00:00:00+00:00",
         "dateModified": new Date().toISOString(),
@@ -681,7 +678,7 @@ const ArticleSchema = () => (
           "name": "Zyminex",
           "logo": {
             "@type": "ImageObject",
-            "url": `https://zyminex.stream/img/structer.webp`
+            "url": `https://www.zyminex.stream/img/structer.webp`
           }
         }
       })

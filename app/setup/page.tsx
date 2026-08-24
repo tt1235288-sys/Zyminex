@@ -1,13 +1,13 @@
 'use client';
 
-import { useRef, useState, useEffect, useMemo } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { CONSTANTS } from '@/lib/seo';
 import Image from 'next/image';
 import { 
   MonitorSmartphone, Tv, Apple, Laptop, Sparkles, Lock, Zap, Users, 
   CheckCircle2, PlayCircle, ArrowRight, MessageCircle, Clock, Headphones, 
-  Shield, Download, Mail, Cpu, Search, AlertCircle, TrendingUp, X, ShoppingCart, ChevronDown
+  Shield, Download, Mail, Cpu, Search, AlertCircle, TrendingUp, X, ChevronDown
 } from 'lucide-react';
 import { FadeIn, FadeInStagger, FadeInItem } from '../components/AnimatedSection';
 import Link from 'next/link';
@@ -51,7 +51,7 @@ const stepData = {
       { 
         number: 4, 
         title: 'Enter Installation Code', 
-        description: `Open the Downloader app. You will see a URL text field. Using your remote, carefully type the following code: 83492. Click "Go" or press the select button on your remote. The ${CONSTANTS.FOCUS_KEYWORD} app will begin downloading automatically. Once the download completes (usually 10-20 seconds), a popup will appear asking if you want to install the app. Click "Install". After installation, you can click "Open" or "Done".`, 
+        description: `Open the Downloader app. You will see a URL text field. Using your remote, carefully type the following code: 83492. Click "Go" or press the select button on your remote. The ${CONSTANTS.BRAND_NAME} app will begin downloading automatically. Once the download completes (usually 10-20 seconds), a popup will appear asking if you want to install the app. Click "Install". After installation, you can click "Open" or "Done".`, 
         duration: '2 min', 
         icon: MonitorSmartphone, 
         tip: 'Make sure you have a stable internet connection before entering the code. The download speed depends on your connection. If the code doesn\'t work, contact our support for the latest code.' 
@@ -59,7 +59,7 @@ const stepData = {
       { 
         number: 5, 
         title: 'Login with Credentials', 
-        description: `Open the newly installed ${CONSTANTS.FOCUS_KEYWORD} app from your apps section. On the login screen, select "Login with Xtream Codes API" (not "Login with Playlist"). You will see three fields: Server URL / Portal URL, Username, and Password. Enter the information exactly as provided in your welcome email. The Portal URL usually starts with http:// or https://. After entering all details, click "Login" or "Add User". Wait 5-10 seconds for authentication.`, 
+        description: `Open the newly installed ${CONSTANTS.BRAND_NAME} app from your apps section. On the login screen, select "Login with Xtream Codes API" (not "Login with Playlist"). You will see three fields: Server URL / Portal URL, Username, and Password. Enter the information exactly as provided in your welcome email. The Portal URL usually starts with http:// or https://. After entering all details, click "Login" or "Add User". Wait 5-10 seconds for authentication.`, 
         duration: '3 min', 
         icon: Mail, 
         tip: 'Double-check that you\'re using Xtream Codes login method, not M3U playlist. Copy-paste credentials from your email to avoid typing errors. The login is case-sensitive.' 
@@ -67,7 +67,7 @@ const stepData = {
       { 
         number: 6, 
         title: 'Start streaming!', 
-        description: 'Congratulations! Your device is now fully configured. You now have access to 15,000+ live channels including sports, news, entertainment, and international content. Explore 60,000+ movies and TV series in our VOD library. Use the Electronic Program Guide (EPG) to see what\'s playing now and next. You can favorite channels, use catch-up TV, and enjoy buffer-free 4K streaming. For best experience, learn how to connect HDMI to IPTV or use a wired ethernet connection or ensure your WiFi is strong (minimum 15 Mbps for HD, 30 Mbps for 4K).', 
+        description: 'Congratulations! Your device is now fully configured. You now have access to 15,000+ live channels including sports, news, entertainment, and international content. Explore 60,000+ movies and TV series in our VOD library. Use the Electronic Program Guide (EPG) to see what\'s playing now and next. You can favorite channels, use catch-up TV, and enjoy buffer-free 4K streaming. For best experience, use a wired ethernet connection or ensure your WiFi is strong (minimum 15 Mbps for HD, 30 Mbps for 4K).', 
         duration: 'Done!', 
         icon: PlayCircle, 
         tip: 'Explore all app features including search, favorites, parental controls, and external player options. Contact our 24/7 support if you need any assistance.' 
@@ -121,7 +121,7 @@ const stepData = {
       { 
         number: 6, 
         title: 'Start streaming!', 
-        description: 'Congratulations! Your Smart TV is now ready to stream premium content. Explore 15,000+ live channels organized by category: Sports (ESPN, Sky Sports, DAZN), News (CNN, BBC), Entertainment (HBO, Showtime), Kids, International (including iptv italiane 4k blocks), and more. Access 60,000+ movies and series in the VOD section. Use the Electronic Program Guide (EPG) to see schedule information. Enjoy 4K, FHD, and HD quality streaming with our anti-freeze technology.', 
+        description: 'Congratulations! Your Smart TV is now ready to stream premium content. Explore 15,000+ live channels organized by category: Sports (ESPN, Sky Sports, DAZN), News (CNN, BBC), Entertainment (HBO, Showtime), Kids, International, and more. Access 60,000+ movies and series in the VOD section. Use the Electronic Program Guide (EPG) to see schedule information. Enjoy 4K, FHD, and HD quality streaming with our anti-freeze technology.', 
         duration: 'Done!', 
         icon: PlayCircle, 
         tip: 'Take time to explore the app settings - you can adjust video player, buffer size, and enable hardware acceleration for smoother playback.' 
@@ -213,7 +213,7 @@ const stepData = {
       { 
         number: 4, 
         title: 'Get Your M3U Link', 
-        description: `Check your welcome email from ${CONSTANTS.FOCUS_KEYWORD}. You will find either an M3U URL (looks like http://your-server.net:8080/get.php?username=xxx&password=xxx&type=m3u&output=ts) or Xtream Codes (Portal URL, Username, Password). For VLC, you will use the M3U URL. Copy the entire M3U URL - you can highlight it and press Ctrl+C (Windows) or Cmd+C (Mac). Keep this URL handy for the next step.`, 
+        description: `Check your welcome email from ${CONSTANTS.BRAND_NAME}. You will find either an M3U URL or Xtream Codes (Portal URL, Username, Password). For VLC, you will use the M3U URL. Copy the entire M3U URL - you can highlight it and press Ctrl+C (Windows) or Cmd+C (Mac). Keep this URL handy for the next step.`, 
         duration: '1 min', 
         icon: Mail, 
         tip: 'The M3U URL contains your personal credentials - do not share it with anyone. Keep it secure.' 
@@ -229,7 +229,7 @@ const stepData = {
       { 
         number: 6, 
         title: 'Start streaming!', 
-        description: 'Congratulations! Your computer is now ready to stream premium IPTV content. Browse through thousands of channels organized by category: Live Sports, Breaking News, Prime Entertainment, Kids, International (channels from 100+ countries). Access 60,000+ movies and series in the VOD section. For the best experience, use a wired ethernet connection or ensure your WiFi is strong. You can also discover how to connect HDMI to IPTV or hook your computer directly to your TV via an active IPTV encoder box or HDMI pipeline.', 
+        description: 'Congratulations! Your computer is now ready to stream premium IPTV content. Browse through thousands of channels organized by category: Live Sports, Breaking News, Prime Entertainment, Kids, International (channels from 100+ countries). Access 60,000+ movies and series in the VOD section. For the best experience, use a wired ethernet connection or ensure your WiFi is strong.', 
         duration: 'Done!', 
         icon: TrendingUp, 
         tip: 'Use VLC\'s hotkeys: F for fullscreen, Space for play/pause, Ctrl+Up/Down for volume, and Ctrl+Left/Right for seeking.' 
@@ -245,27 +245,27 @@ const setupFaqs = [
   },
   {
     q: "Can I use my configuration credentials on multiple devices?",
-    a: "You can download and install our setups on unlimited hardware panels. However, simultaneous media network line loops depend strictly on your plan tier allowance. Our fixed architecture maps out distinct 1, 2, or 3 device configurations."
+    a: "You can download and install our setups on unlimited hardware panels. However, simultaneous media network lines depend strictly on your plan tier allowance. Our fixed architecture maps out distinct 1, 2, or 3 device configurations."
   },
   {
     q: "What should I do if my Xtream credentials throw a login error?",
-    a: "First, verify that your interface is configured to use the Xtream Codes API mode rather than standard M3U line inputs. Ensure there are no trail blank spaces before or after the password strings, as layout character processing is strictly case-sensitive."
+    a: "First, verify that your interface is configured to use the Xtream Codes API mode rather than standard M3U line inputs. Ensure there are no trailing blank spaces before or after the password strings, as layout character processing is strictly case-sensitive."
   },
   {
     q: "Do I need a VPN to route my IPTV streaming streams safely?",
-    a: "No, our enterprise architecture incorporates secure global routing networks natively. However, if your regional ISP executes performance throttling loops on streaming media data, activating a local proxy layer can bypass those parameters."
+    a: "No, our enterprise architecture incorporates secure global routing networks natively. However, if your regional ISP executes performance throttling on streaming media data, activating a local proxy layer can bypass those parameters."
   },
   {
     q: "What minimum internet speed is required for 4K IPTV buffers?",
-    a: "For uncompressed 4K Ultra HD video loop streams, we recommend a stable internet connection download threshold of at least 30 Mbps. Standard high-definition 1080p rendering requires a minimum threshold of 15 Mbps."
+    a: "For uncompressed 4K Ultra HD video streams, we recommend a stable internet connection download threshold of at least 30 Mbps. Standard high-definition 1080p rendering requires a minimum threshold of 15 Mbps."
   },
   {
     q: "Can I watch live major sports PPV events with these setups?",
-    a: "Yes, all premium global Pay-Per-View live sports events, including football pipelines, UFC matches, boxing blocks, and formula loops, are completely embedded inside your streaming directory indices with no extra costs."
+    a: "Yes, all premium global Pay-Per-View live sports events, including football tournaments, UFC matches, boxing blocks, and motorsport races, are completely embedded inside your streaming directory indices with no extra costs."
   },
   {
     q: "How do I update the Electronic Program Guide channels layout?",
-    a: "Our EPG system syncs cache profiles automatically over our platform database. If your layout elements fall out of sync or show blank blocks, simply navigate to your player settings menu and select 'Refresh EPG Data Sources' to force synchronization loops."
+    a: "Our EPG system syncs cache profiles automatically over our platform database. If your layout elements fall out of sync or show blank blocks, simply navigate to your player settings menu and select 'Refresh EPG Data Sources' to force synchronization."
   }
 ];
 
@@ -342,11 +342,11 @@ function StepItem({ step, index, isLast }: { step: any; index: number; isLast: b
                     isInView ? 'text-[#3CAFFF]' : 'text-[#003554]/40'
                   }`} />
                 </div>
-                <h3 className={`text-xl md:text-2xl font-black uppercase tracking-tight transition-colors duration-300 ${
+                <p className={`text-xl md:text-2xl font-black uppercase tracking-tight transition-colors duration-300 ${
                   isInView ? 'text-[#3CAFFF]' : 'text-[#003554]'
                 }`}>
                   {step.title}
-                </h3>
+                </p>
               </div>
               <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/5">
                 <Clock className="w-3.5 h-3.5 text-[#3CAFFF]" />
@@ -425,7 +425,7 @@ export default function SetupPage() {
         <div className="absolute inset-0 z-0">
           <Image
             src="/img/bg-1.webp"
-            alt="Zyminex device setup guide - Easy Installation Tutorial"
+            alt={`${CONSTANTS.BRAND_NAME} device setup guide - Easy Installation Tutorial`}
             width={1920}
             height={1080}
             priority
@@ -460,13 +460,13 @@ export default function SetupPage() {
             </FadeInItem>
             <FadeInItem>
               <h1 className="text-5xl md:text-7xl font-black text-[#fff1d0] tracking-tighter uppercase mb-6 leading-none text-center">
-                Quick setup guide to <br />
-                <span className="text-[#3CAFFF]">start streaming</span>
+                IPTV Device Setup & <br />
+                <span className="text-[#3CAFFF]">Installation Guide</span>
               </h1>
             </FadeInItem>
             <FadeInItem>
               <p className="text-lg md:text-xl text-[#fff1d0]/80 font-bold max-w-2xl mx-auto leading-relaxed px-2 text-center">
-                Follow the steps below to quickly set up your Zyminex account parameters and start streaming premium stations without technical layout delays via zyminex.stream.
+                Follow our step-by-step IPTV device setup and installation guide to activate {CONSTANTS.BRAND_NAME} on Firestick, Smart TV, Android, iOS, Apple TV, PC, and Mac in under 5 minutes on {CONSTANTS.DOMAIN}.
               </p>
             </FadeInItem>
             <FadeInItem>
@@ -482,13 +482,13 @@ export default function SetupPage() {
               <button 
                 onClick={openVideo}
                 className="inline-flex items-center justify-center p-2 rounded-full bg-[#fff1d0]/10 border border-[#fff1d0]/20 hover:border-[#3CAFFF]/60 transition-all duration-300 relative z-10 shadow-inner group"
-                aria-label="Watch setup video tutorial sandbox player"
+                aria-label="Watch setup video tutorial"
               >
                 <div className="flex items-center gap-4 bg-[#fff1d0]/5 px-8 py-5 rounded-full border border-[#fff1d0]/10 hover:bg-[#fff1d0]/10 transition-colors">
                   <PlayCircle className="w-10 h-10 text-[#3CAFFF] shrink-0 group-hover:scale-110 transition-transform" />
                   <div className="text-left">
                     <p className="text-[#fff1d0] font-black uppercase tracking-widest text-sm md:text-base">Setup Video Tutorial</p>
-                    <p className="text-[#fff1d0]/60 text-xs font-bold uppercase tracking-wide mt-0.5">Visual sandbox guide layer</p>
+                    <p className="text-[#fff1d0]/60 text-xs font-bold uppercase tracking-wide mt-0.5">Visual installation guide</p>
                   </div>
                 </div>
               </button>
@@ -508,15 +508,16 @@ export default function SetupPage() {
             </div>
             <div className="absolute inset-0 rounded-full bg-[#fff1d0]/30 animate-ping opacity-75 pointer-events-none" />
           </div>
-          <h4 className="text-[#fff1d0] text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tighter leading-none drop-shadow-md max-w-2xl">
+          <p className="text-[#fff1d0] text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tighter leading-none drop-shadow-md max-w-2xl">
             BOOST YOUR EXPERIENCE<br/>BUY PREMIUM IPTV FROM US!
-          </h4>
+          </p>
           <p className="text-[#fff1d0]/90 text-sm sm:text-base md:text-lg font-bold max-w-xl leading-relaxed">
-            We rank among top IPTV Providers. Get stable, buffering-free 4K network loops loaded layout instantly on zyminex tv.
+            We rank among top IPTV Providers. Get stable, buffering-free 4K streaming access loaded instantly on {CONSTANTS.BRAND_NAME}.
           </p>
           <div className="w-full sm:w-auto mt-2">
             <Link
               href="/pricing"
+              aria-label="Buy IPTV subscription now"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-[#fff1d0] text-[#003554] hover:bg-[#003554] hover:text-[#fff1d0] hover:scale-105 hover:shadow-[0_0_30px_rgba(241,232,219,0.5)] transition-all duration-300 px-10 py-4 rounded-full font-black text-sm uppercase tracking-widest shadow-2xl relative group/btn animate-pulse"
             >
               <span>Buy IPTV Now</span>
@@ -561,7 +562,7 @@ export default function SetupPage() {
                 }`}>
                   <Icon className="w-8 h-8 shrink-0" />
                 </div>
-                <h3 className="text-lg font-black uppercase tracking-wide mb-2">{device.name}</h3>
+                <p className="text-lg font-black uppercase tracking-wide mb-2 text-[#003554]">{device.name}</p>
                 <p className={`text-xs font-bold ${isActive ? 'text-[#003554]/60' : 'text-[#003554]/40'}`}>{device.steps} easy steps</p>
               </button>
             );
@@ -605,20 +606,22 @@ export default function SetupPage() {
           viewport={{ once: true }}
         >
           <CheckCircle2 className="w-14 h-14 text-[#3CAFFF] mx-auto mb-4" />
-          <h3 className="text-2xl md:text-3xl font-black text-[#003554] uppercase tracking-tight mb-3">Setup Complete!</h3>
+          <p className="text-2xl md:text-3xl font-black text-[#003554] uppercase tracking-tight mb-3">Setup Complete!</p>
           <p className="text-[#3CAFFF] font-bold text-base max-w-md mx-auto mb-8">
-            You\'ve successfully mapped out your hardware client terminal loops. Start enjoying full uncompressed premium media playback streams instantly.
+            You have successfully configured your device. Start enjoying full uncompressed premium media playback streams instantly.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full max-w-md mx-auto px-4">
             <Link
               href="/"
+              aria-label="Return to Zyminex Homepage"
               className="w-full sm:w-auto text-center whitespace-nowrap px-6 py-4 rounded-full bg-[#3CAFFF] text-[#fff1d0] font-black text-sm uppercase tracking-widest transition-transform hover:scale-105 shrink-0"
             >
               Go to Homepage
             </Link>
             <Link
               href="/pricing"
+              aria-label="View Zyminex subscription pricing plans"
               className="w-full sm:w-auto text-center whitespace-nowrap px-6 py-4 rounded-full bg-[#003554] text-[#fff1d0] font-black text-sm uppercase tracking-widest transition-transform hover:scale-105 border-2 border-[#3CAFFF] shrink-0"
             >
               View Plans
@@ -635,10 +638,11 @@ export default function SetupPage() {
             <div className="w-16 h-16 rounded-xl bg-[#3CAFFF]/10 flex items-center justify-center mx-auto mb-5 group-hover:bg-[#3CAFFF]/20 transition-colors">
               <PlayCircle className="w-8 h-8 text-[#3CAFFF]" />
             </div>
-            <h3 className="text-xl font-black text-[#003554] mb-2 uppercase tracking-wide">Video Tutorial</h3>
-            <p className="text-[#3CAFFF] text-sm font-medium mb-5">Watch our step-by-step visual configuration sequence directly inside our interface sandbox player layer.</p>
+            <p className="text-xl font-black text-[#003554] mb-2 uppercase tracking-wide">Video Tutorial</p>
+            <p className="text-[#3CAFFF] text-sm font-medium mb-5">Watch our step-by-step visual configuration sequence directly inside our interface player.</p>
             <button 
               onClick={openVideo}
+              aria-label="Watch video installation tutorial"
               className="inline-flex items-center gap-2 text-[#3CAFFF] font-black uppercase text-xs tracking-widest hover:gap-3 transition-all cursor-pointer"
             >
               Watch Now <ArrowRight className="w-4 h-4 text-[#fdc500]" />
@@ -649,13 +653,13 @@ export default function SetupPage() {
             <div className="w-16 h-16 rounded-xl bg-green-500/10 flex items-center justify-center mx-auto mb-5 group-hover:bg-green-500/20 transition-colors">
               <MessageCircle className="w-8 h-8 text-green-500" />
             </div>
-            <h3 className="text-xl font-black text-[#003554] mb-2 uppercase tracking-wide">24/7 Live Support</h3>
-            <p className="text-[#3CAFFF] text-sm font-medium mb-5">Open an operational messaging terminal path to get immediate technical routing diagnostic deployment variables.</p>
+            <p className="text-xl font-black text-[#003554] mb-2 uppercase tracking-wide">24/7 Live Support</p>
+            <p className="text-[#3CAFFF] text-sm font-medium mb-5">Connect with our support engineering crew on WhatsApp for instant setup assistance.</p>
             <a 
               href="https://wa.me/447549589503?text=Hello%20Zyminex%2C%20I%20need%20help%20with%20setup"
-              target="_blank"
-              onMouseOver={(e) => e.stopPropagation()}
-              rel="noopener noreferrer"
+              target="_blank" 
+              rel="noopener noreferrer" 
+              aria-label="Contact Zyminex customer support on WhatsApp"
               className="inline-flex items-center gap-2 text-green-500 font-black uppercase text-xs tracking-widest hover:gap-3 transition-all cursor-pointer"
             >
               Chat on WhatsApp <ArrowRight className="w-4 h-4 text-green-500" />
@@ -676,7 +680,7 @@ export default function SetupPage() {
             Installation <span className="text-[#3CAFFF]">Assistance</span>
           </h2>
           <p className="text-[#fdc500] font-bold text-lg max-w-2xl mx-auto mt-4">
-            Everything you need to know about setting up your account configuration loops with an IPTV Service overview.
+            Everything you need to know about setting up your account and installing player apps.
           </p>
         </FadeIn>
         
@@ -689,10 +693,10 @@ export default function SetupPage() {
                 aria-expanded={openFaqIndex === i}
               >
                 <div className="flex justify-between items-center gap-4">
-                  <h3 className={`text-lg md:text-xl font-black uppercase tracking-tight transition-colors ${openFaqIndex === i ? 'text-[#3CAFFF]' : 'text-[#003554] group-hover:text-[#3CAFFF]'} flex items-center gap-3`}>
+                  <span className={`text-lg md:text-xl font-black uppercase tracking-tight transition-colors ${openFaqIndex === i ? 'text-[#3CAFFF]' : 'text-[#003554] group-hover:text-[#3CAFFF]'} flex items-center gap-3`}>
                     <span className={`${openFaqIndex === i ? 'text-[#3CAFFF]' : 'text-[#003554]/30'} font-black text-2xl`}>Q.</span> 
                     {faq.q}
-                  </h3>
+                  </span>
                   <ChevronDown className={`w-6 h-6 flex-shrink-0 transition-transform duration-300 ${openFaqIndex === i ? 'rotate-180 text-[#3CAFFF]' : 'text-[#003554]/30 group-hover:text-[#3CAFFF]/50'}`} />
                 </div>
                 <div 
@@ -721,6 +725,7 @@ export default function SetupPage() {
           <div className="relative w-full max-w-4xl mx-4">
             <button 
               onClick={closeVideo}
+              aria-label="Close setup video tutorial"
               className="absolute -top-12 right-0 text-[#fff1d0]/60 hover:text-[#3CAFFF] transition-colors cursor-pointer flex items-center gap-2 text-sm font-bold z-10 uppercase tracking-widest"
             >
               <X className="w-5 h-5 shrink-0" /> Close Video

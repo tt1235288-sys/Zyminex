@@ -92,7 +92,7 @@ export default function PricingSection() {
         <FadeInItem className="bg-[#fff1d0] border-4 border-[#3CAFFF] rounded-3xl p-6 md:p-8 flex flex-col group relative overflow-hidden shadow-2xl">
           <div className="relative z-10 flex flex-col h-full">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-black text-[#3CAFFF] uppercase tracking-[0.2em]">Starter</h3>
+              <p className="text-lg font-black text-[#3CAFFF] uppercase tracking-[0.2em]">Starter</p>
               <MonitorPlay className="w-5 h-5 text-[#3CAFFF]" />
             </div>
             <div className="text-3xl font-black text-[#003554] mb-2 tracking-tighter uppercase">3 Months</div>
@@ -145,7 +145,7 @@ export default function PricingSection() {
           
           <div className="relative z-10 flex flex-col h-full">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-black text-[#3CAFFF] uppercase tracking-[0.2em]">Ultimate</h3>
+              <p className="text-lg font-black text-[#3CAFFF] uppercase tracking-[0.2em]">Ultimate</p>
             </div>
             <div className="text-3xl font-black text-[#003554] mb-2 tracking-tighter uppercase">12 Months</div>
             
@@ -191,7 +191,7 @@ export default function PricingSection() {
         <FadeInItem className="bg-[#fff1d0] border-4 border-[#3CAFFF] rounded-3xl p-6 md:p-8 flex flex-col group relative overflow-hidden shadow-2xl">
           <div className="relative z-10 flex flex-col h-full">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-black text-[#3CAFFF] uppercase tracking-[0.2em]">Value</h3>
+              <p className="text-lg font-black text-[#3CAFFF] uppercase tracking-[0.2em]">Value</p>
               <MonitorPlay className="w-5 h-5 text-[#3CAFFF]" />
             </div>
             <div className="text-3xl font-black text-[#003554] mb-2 tracking-tighter uppercase">6 Months</div>

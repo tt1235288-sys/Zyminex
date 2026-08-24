@@ -3,7 +3,7 @@ import { CONSTANTS, generateSEOMetadata } from '@/lib/seo';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowLeft, Calendar, User, Tag, Clock, ArrowRight, Sparkles, Zap, ShieldCheck, Headphones } from 'lucide-react';
+import { ArrowLeft, Calendar, User, Tag, Clock, ArrowRight, Sparkles, Zap, ShieldCheck, Headphones, ExternalLink } from 'lucide-react';
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -18,22 +18,34 @@ export async function generateMetadata({ params }: Props) {
   const post = blogPosts.find((p) => p.slug === resolvedParams.slug);
   if (!post) return generateSEOMetadata('Post Not Found');
   
-  const shortTitle = post.title.length > 55 ? post.title.substring(0, 52) + '...' : post.title;
+  // Clean, short title strictly under 550px
+  const cleanTitle = post.title.length > 45 ? post.title.substring(0, 42).trim() + '...' : post.title;
+  const metaTitle = `${cleanTitle} | Zyminex Blog`;
   
+  // Clean description under 150 chars (under 950px)
+  const rawDesc = post.description || post.excerpt || `Read our definitive guide on IPTV streaming, bandwidth optimization, and 4K server setup.`;
+  const metaDescription = rawDesc.length > 145 ? rawDesc.substring(0, 142).trim() + '...' : rawDesc;
+  
+  const postUrl = `https://www.zyminex.stream/blog/${post.slug}`;
+  const postImage = post.image || `https://www.zyminex.stream/img/structer.webp`;
+
   return {
-    title: `${shortTitle} | IPTV Service Blog`,
-    description: post.description || post.excerpt || `Read the full IPTV Service guide.`,
-    keywords: post.keywords.join(', '),
+    title: metaTitle,
+    description: metaDescription,
+    keywords: post.keywords ? post.keywords.join(', ') : '',
+    alternates: {
+      canonical: postUrl,
+    },
     openGraph: {
-      title: `${shortTitle} | IPTV Service Blog`,
-      description: post.description || post.excerpt || `Read the full IPTV Service guide.`,
-      url: `https://zyminex.stream/blog/${post.slug}`,
+      title: metaTitle,
+      description: metaDescription,
+      url: postUrl,
       type: 'article',
       publishedTime: post.date,
       authors: [post.author],
       images: [
         {
-          url: post.image || `https://zyminex.stream/img/structer.png`,
+          url: postImage,
           width: 1200,
           height: 630,
           alt: post.title,
@@ -42,9 +54,9 @@ export async function generateMetadata({ params }: Props) {
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${shortTitle} | IPTV Service`,
-      description: post.description || post.excerpt || `Read the full IPTV Service guide.`,
-      images: [post.image || `https://zyminex.stream/img/structer.png`],
+      title: metaTitle,
+      description: metaDescription,
+      images: [postImage],
     },
   };
 }
@@ -57,18 +69,17 @@ export default async function BlogPostPage({ params }: Props) {
     notFound();
   }
 
-  // Exact reading time logic preserved from your file
   const wordCount = post.content.replace(/<[^>]*>/g, '').split(/\s+/).length;
   const readTime = Math.max(3, Math.ceil(wordCount / 200));
-
   const displayCategory = post.keywords && post.keywords.length > 0 ? post.keywords[0] : 'IPTV Guide';
+  const postUrl = `https://www.zyminex.stream/blog/${post.slug}`;
 
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: post.title,
-    description: post.description,
-    keywords: post.keywords.join(', '),
+    description: post.description || post.excerpt,
+    keywords: post.keywords ? post.keywords.join(', ') : '',
     image: post.image,
     datePublished: post.date,
     dateModified: post.date,
@@ -81,12 +92,12 @@ export default async function BlogPostPage({ params }: Props) {
       name: "Zyminex",
       logo: {
         '@type': 'ImageObject',
-        url: `https://zyminex.stream/img/structer.png`,
+        url: `https://www.zyminex.stream/img/structer.webp`,
       },
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://zyminex.stream/blog/${post.slug}`,
+      '@id': postUrl,
     },
   };
 
@@ -163,7 +174,11 @@ export default async function BlogPostPage({ params }: Props) {
 
       {/* Back Button Link */}
       <div className="max-w-4xl mx-auto w-full px-4 sm:px-6 lg:px-8 mt-8 md:mt-10">
-        <Link href="/blog" className="inline-flex items-center gap-2 text-[#3CAFFF] hover:text-[#fff1d0] transition-colors font-black text-xs uppercase tracking-widest group">
+        <Link 
+          href="/blog" 
+          aria-label="Back to all IPTV guides and blog articles"
+          className="inline-flex items-center gap-2 text-[#3CAFFF] hover:text-[#fff1d0] transition-colors font-black text-xs uppercase tracking-widest group"
+        >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Back to all articles
         </Link>
       </div>
@@ -192,11 +207,27 @@ export default async function BlogPostPage({ params }: Props) {
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
 
+        {/* Network & Speed Verification Reference (External Link for SEO) */}
+        <div className="my-8 p-6 bg-[#fff1d0] border-4 border-[#3CAFFF] rounded-2xl text-[#003554]">
+          <p className="font-black text-lg uppercase mb-2">Network Diagnostic Note</p>
+          <p className="text-sm font-medium leading-relaxed">
+            Ensure your connection meets the recommended 25+ Mbps threshold for uncompressed 4K streaming. You can benchmark your network throughput via{' '}
+            <a 
+              href="https://www.speedtest.net/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-[#3CAFFF] underline font-black inline-flex items-center gap-1"
+            >
+              Speedtest by Ookla <ExternalLink className="w-3.5 h-3.5" />
+            </a>.
+          </p>
+        </div>
+
         {/* Topics Tag Section Module Area */}
         <div className="mt-8 md:mt-12 pt-6 md:pt-8 border-t border-white/10">
           <div className="flex items-center gap-2 mb-4">
             <Tag className="w-5 h-5 text-[#3CAFFF]" />
-            <h4 className="text-[#fff1d0] font-black text-base md:text-lg uppercase tracking-wide">Topics</h4>
+            <p className="text-[#fff1d0] font-black text-base md:text-lg uppercase tracking-wide">Topics</p>
           </div>
           <div className="flex flex-wrap gap-2 md:gap-3">
             {post.keywords.slice(0, 8).map(keyword => (
@@ -217,7 +248,7 @@ export default async function BlogPostPage({ params }: Props) {
               {post.author[0]}
             </div>
             <div>
-              <h4 className="text-[#003554] font-black text-xl md:text-2xl mb-1 uppercase tracking-tight">{post.author}</h4>
+              <p className="text-[#003554] font-black text-xl md:text-2xl mb-1 uppercase tracking-tight">{post.author}</p>
               <p className="text-[#3CAFFF] text-xs md:text-sm uppercase tracking-widest font-black mb-2 md:mb-3">Content Editor at Zyminex</p>
               <p className="text-[#003554]/80 text-sm md:text-base font-medium leading-relaxed">
                 Dedicated to bringing you the best insights, tutorials, and updates about IPTV technology, 
@@ -234,19 +265,21 @@ export default async function BlogPostPage({ params }: Props) {
             <Sparkles className="w-4 h-4 text-[#fff1d0]" />
             <span className="text-[#fff1d0] font-black text-xs uppercase tracking-widest">Continue Reading</span>
           </div>
-          <h3 className="text-xl md:text-2xl font-black text-[#003554] uppercase tracking-wide mb-2">Enjoyed this article?</h3>
+          <p className="text-xl md:text-2xl font-black text-[#003554] uppercase tracking-wide mb-2">Enjoyed this article?</p>
           <p className="text-[#3CAFFF] font-bold text-sm md:text-base max-w-md mx-auto mb-6">
-            Explore more guides and tutorials to enhance your IPTV Service experience parameters.
+            Explore more guides and tutorials to enhance your IPTV Service experience.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full max-w-md mx-auto px-4">
             <Link 
               href="/blog" 
+              aria-label="Explore all IPTV tutorial articles"
               className="w-full sm:w-auto text-center px-6 py-4 rounded-full bg-[#3CAFFF] text-[#fff1d0] font-black text-xs uppercase tracking-widest hover:bg-[#3CAFFF]/80 transition-colors"
             >
               View All Articles
             </Link>
             <Link 
               href="/pricing" 
+              aria-label="View Zyminex subscription plans"
               className="w-full sm:w-auto text-center px-6 py-4 rounded-full bg-[#003554] text-[#3CAFFF] font-black text-xs uppercase tracking-widest border-2 border-[#3CAFFF]"
             >
               View Plans

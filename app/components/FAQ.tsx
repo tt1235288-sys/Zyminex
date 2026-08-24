@@ -62,10 +62,10 @@ export default function FAQ() {
               aria-controls={`faq-answer-${i}`}
             >
               <div className="flex justify-between items-center gap-4">
-                <h3 className={`text-lg md:text-xl font-black uppercase tracking-tight transition-colors ${openIndex === i ? 'text-[#3CAFFF]' : 'text-[#003554] group-hover:text-[#3CAFFF]'} flex items-center gap-3`}>
+                <p className={`text-lg md:text-xl font-black uppercase tracking-tight transition-colors ${openIndex === i ? 'text-[#3CAFFF]' : 'text-[#003554] group-hover:text-[#3CAFFF]'} flex items-center gap-3`}>
                   <span className={`${openIndex === i ? 'text-[#3CAFFF]' : 'text-[#003554]/30'} font-black text-2xl`}>Q.</span> 
                   {faq.q}
-                </h3>
+                </p>
                 <ChevronDown className={`w-6 h-6 flex-shrink-0 transition-transform duration-300 ${openIndex === i ? 'rotate-180 text-[#3CAFFF]' : 'text-[#003554]/30 group-hover:text-[#3CAFFF]/50'}`} />
               </div>
               <div 

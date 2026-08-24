@@ -131,9 +131,9 @@ export default function MovieSlider() {
             <div className="w-2 h-7 bg-[#3CAFFF] rounded-full" />
             <div className="flex items-center gap-2">
               <Film className="w-5 h-5 text-[#003554]" />
-              <h3 className="text-2xl lg:text-3xl font-black text-[#003554] uppercase tracking-tight">
+              <p className="text-2xl lg:text-3xl font-black text-[#003554] uppercase tracking-tight">
                 Latest 4K Movies
-              </h3>
+              </p>
             </div>
           </div>
           <p className="text-[#003554]/80 text-sm mt-2 font-bold hidden md:block">
@@ -150,9 +150,9 @@ export default function MovieSlider() {
             <div className="w-2 h-7 bg-[#3CAFFF] rounded-full" />
             <div className="flex items-center gap-2">
               <Tv2 className="w-5 h-5 text-[#003554]" />
-              <h3 className="text-2xl lg:text-3xl font-black text-[#003554] uppercase tracking-tight">
+              <p className="text-2xl lg:text-3xl font-black text-[#003554] uppercase tracking-tight">
                 Trending TV Series & Box Sets
-              </h3>
+              </p>
             </div>
           </div>
           <p className="text-[#003554]/80 text-sm mt-2 font-bold hidden md:block">
@@ -169,9 +169,9 @@ export default function MovieSlider() {
             <div className="w-2 h-7 bg-[#003554] rounded-full" />
             <div className="flex items-center gap-2">
               <Trophy className="w-5 h-5 text-[#003554]" />
-              <h3 className="text-2xl lg:text-3xl font-black text-[#003554] uppercase tracking-tight">
+              <p className="text-2xl lg:text-3xl font-black text-[#003554] uppercase tracking-tight">
                 Live Sports & Pay-Per-View Events
-              </h3>
+              </p>
             </div>
           </div>
           <p className="text-[#003554]/80 text-sm mt-2 font-bold hidden md:block">

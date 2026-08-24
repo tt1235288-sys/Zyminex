@@ -13,12 +13,6 @@ import {
   PlayCircle, 
   ShieldCheck, 
   MonitorPlay, 
-  Send, 
-  Twitter, 
-  MessageCircle, 
-  Share2, 
-  Instagram, 
-  Facebook,
   Zap, 
   Download, 
   CreditCard, 
@@ -132,11 +126,17 @@ function HomePage() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 items-center justify-center w-full max-w-md sm:max-w-xl mx-auto px-4">
-            <Link href="/pricing" className="w-full sm:w-auto text-center whitespace-nowrap px-6 sm:px-8 py-4 rounded-full bg-[#3CAFFF] text-[#fff1d0] font-black text-base sm:text-lg hover:bg-[#3CAFFF]/80 transition-transform hover:scale-105 uppercase tracking-wider shrink-0">
+            <Link 
+              href="/pricing" 
+              className="w-full sm:w-auto text-center whitespace-nowrap px-6 sm:px-8 py-4 rounded-full bg-[#3CAFFF] text-[#fff1d0] font-black text-base sm:text-lg hover:bg-[#3CAFFF]/80 transition-transform hover:scale-105 uppercase tracking-wider shrink-0"
+            >
               View {CONSTANTS.BRAND_NAME} Cost & Plans
             </Link>
-            <Link href="#channels" className="w-full sm:w-auto text-center whitespace-nowrap px-6 sm:px-8 py-4 rounded-full bg-[#fff1d0] text-[#3CAFFF] font-black text-base sm:text-lg hover:bg-[#fdc500] transition-transform hover:scale-105 uppercase tracking-wider flex items-center justify-center gap-2 shrink-0">
-              <PlayCircle className="w-5 h-5 shrink-0" /> Browse Channels
+            <Link 
+              href="#channels" 
+              className="w-full sm:w-auto text-center whitespace-nowrap px-6 sm:px-8 py-4 rounded-full bg-[#fff1d0] text-[#3CAFFF] font-black text-base sm:text-lg hover:bg-[#fdc500] transition-transform hover:scale-105 uppercase tracking-wider flex items-center justify-center gap-2 shrink-0"
+            >
+              <PlayCircle className="w-5 h-5 shrink-0" /> Explore Channel Lineup
             </Link>
           </div>
           
@@ -173,7 +173,7 @@ function HomePage() {
                 <div className="absolute -top-1 -right-1 w-8 h-8 rounded-full bg-[#fff1d0] text-[#003554] font-black flex items-center justify-center text-sm shadow-lg">1</div>
                 <CreditCard className="w-10 h-10 text-[#fff1d0]" />
               </div>
-              <h3 className="text-2xl font-black text-[#fff1d0] mb-4 tracking-tighter uppercase">Choose Your Plan</h3>
+              <p className="text-2xl font-black text-[#fff1d0] mb-4 tracking-tighter uppercase">Choose Your Plan</p>
               <p className="text-[#fdc500] text-base font-bold leading-relaxed">
                 Select your preferred subscription period with flexible 1, 3, 6, or 12-month packages and multi-device connection options.
               </p>
@@ -184,7 +184,7 @@ function HomePage() {
                 <div className="absolute -top-1 -right-1 w-8 h-8 rounded-full bg-[#fff1d0] text-[#003554] font-black flex items-center justify-center text-sm shadow-lg">2</div>
                 <Download className="w-10 h-10 text-[#fff1d0]" />
               </div>
-              <h3 className="text-2xl font-black text-[#fff1d0] mb-4 tracking-tighter uppercase">Install Your App</h3>
+              <p className="text-2xl font-black text-[#fff1d0] mb-4 tracking-tighter uppercase">Install Your App</p>
               <p className="text-[#fdc500] text-base font-bold leading-relaxed">
                 Download your favorite player like IPTV Smarters Pro, TiviMate, or IBO Player onto your streaming hardware.
               </p>
@@ -195,7 +195,7 @@ function HomePage() {
                 <div className="absolute -top-1 -right-1 w-8 h-8 rounded-full bg-[#fff1d0] text-[#003554] font-black flex items-center justify-center text-sm shadow-lg">3</div>
                 <Tv2 className="w-10 h-10 text-[#fff1d0]" />
               </div>
-              <h3 className="text-2xl font-black text-[#fff1d0] mb-4 tracking-tighter uppercase">Instant Activation</h3>
+              <p className="text-2xl font-black text-[#fff1d0] mb-4 tracking-tighter uppercase">Instant Activation</p>
               <p className="text-[#fdc500] text-base font-bold leading-relaxed">
                 Log in using your Xtream Codes API credentials sent immediately to your email and start watching in ultra 4K.
               </p>
@@ -234,7 +234,10 @@ function HomePage() {
             Stream your favorite uncompressed live channels while relaxing in total comfort. {CONSTANTS.BRAND_NAME} delivers high-throughput server architecture directly to Smart TVs, streaming boxes, and mobile displays without complex hardware decoders.
           </p>
           <div className="w-full flex justify-center mt-8">
-            <Link href="/pricing" className="bg-[#fff1d0] px-10 py-4 text-sm font-black uppercase tracking-widest text-[#3CAFFF] hover:bg-[#3CAFFF] hover:text-[#fff1d0] transition duration-300 rounded-full">
+            <Link 
+              href="/pricing" 
+              className="bg-[#fff1d0] px-10 py-4 text-sm font-black uppercase tracking-widest text-[#3CAFFF] hover:bg-[#3CAFFF] hover:text-[#fff1d0] transition duration-300 rounded-full"
+            >
               Get Started with {CONSTANTS.BRAND_NAME}
             </Link>
           </div>
@@ -278,7 +281,7 @@ function HomePage() {
                 <Lock className="w-8 h-8 text-[#fff1d0]" />
               </div>
               <div>
-                <h3 className="font-black text-[#003554] text-xl uppercase tracking-tight">Encrypted Checkout</h3>
+                <p className="font-black text-[#003554] text-xl uppercase tracking-tight">Encrypted Checkout</p>
                 <p className="text-[#3CAFFF] font-bold text-sm">256-bit SSL encrypted payment protocols for secure billing</p>
               </div>
             </FadeInItem>
@@ -287,7 +290,7 @@ function HomePage() {
                 <ThumbsUp className="w-8 h-8 text-[#fff1d0]" />
               </div>
               <div>
-                <h3 className="font-black text-[#003554] text-xl uppercase tracking-tight">Satisfaction Guarantee</h3>
+                <p className="font-black text-[#003554] text-xl uppercase tracking-tight">Satisfaction Guarantee</p>
                 <p className="text-[#3CAFFF] font-bold text-sm">Risk-free trial period and fast credential activation</p>
               </div>
             </FadeInItem>
@@ -296,7 +299,7 @@ function HomePage() {
                 <LifeBuoy className="w-8 h-8 text-[#fff1d0]" />
               </div>
               <div>
-                <h3 className="font-black text-[#003554] text-xl uppercase tracking-tight">24/7 Live Support</h3>
+                <p className="font-black text-[#003554] text-xl uppercase tracking-tight">24/7 Live Support</p>
                 <p className="text-[#3CAFFF] font-bold text-sm">Technical assistance available via live chat and WhatsApp</p>
               </div>
             </FadeInItem>
@@ -305,7 +308,7 @@ function HomePage() {
                 <Medal className="w-8 h-8 text-[#fff1d0]" />
               </div>
               <div>
-                <h3 className="font-black text-[#003554] text-xl uppercase tracking-tight">Enterprise Servers</h3>
+                <p className="font-black text-[#003554] text-xl uppercase tracking-tight">Enterprise Servers</p>
                 <p className="text-[#3CAFFF] font-bold text-sm">Optimized for high-demand sports and 4K video feeds</p>
               </div>
             </FadeInItem>
@@ -376,7 +379,7 @@ function HomePage() {
                   <div className="w-14 h-14 rounded-xl bg-[#3CAFFF] flex items-center justify-center mb-6">
                     <Icon className="w-7 h-7 text-[#fff1d0]" />
                   </div>
-                  <h3 className="text-xl font-bold text-[#fff1d0] mb-3 uppercase tracking-wide">{item.title}</h3>
+                  <p className="text-xl font-bold text-[#fff1d0] mb-3 uppercase tracking-wide">{item.title}</p>
                   <p className="text-[#fdc500] font-medium">{item.desc}</p>
                 </div>
               );
@@ -412,7 +415,7 @@ function HomePage() {
                 <div key={idx} className="bg-[#fff1d0] rounded-xl p-4 border-3 border-[#3CAFFF] hover:border-[#fff1d0] transition-all">
                   <div className="flex items-center gap-2 mb-2">
                     <Icon className="w-5 h-5 text-[#3CAFFF]" />
-                    <h3 className="font-bold text-[#3CAFFF] text-sm sm:text-base uppercase tracking-wider">{item.cat}</h3>
+                    <p className="font-bold text-[#3CAFFF] text-sm sm:text-base uppercase tracking-wider">{item.cat}</p>
                   </div>
                   <p className="text-[#003554] font-medium text-xs">{item.channels}</p>
                 </div>
@@ -474,7 +477,10 @@ function HomePage() {
               </div>
               
               <div className="w-full flex sm:inline-flex mt-8 px-1">
-                <Link href="/pricing" className="w-full sm:w-auto text-center whitespace-nowrap bg-[#fff1d0] px-8 py-4 text-sm font-black uppercase tracking-widest text-[#3CAFFF] hover:bg-[#3CAFFF] hover:text-[#fff1d0] transition duration-300 rounded-full shrink-0">
+                <Link 
+                  href="/pricing" 
+                  className="w-full sm:w-auto text-center whitespace-nowrap bg-[#fff1d0] px-8 py-4 text-sm font-black uppercase tracking-widest text-[#3CAFFF] hover:bg-[#3CAFFF] hover:text-[#fff1d0] transition duration-300 rounded-full shrink-0"
+                >
                   Claim Your Access Now
                 </Link>
               </div>
@@ -500,7 +506,10 @@ function HomePage() {
               </div>
               
               <div className="w-full flex sm:inline-flex mt-8 px-1">
-                <Link href="/pricing" className="w-full sm:w-auto text-center whitespace-nowrap bg-[#3CAFFF] px-8 py-4 text-sm font-black uppercase tracking-widest text-[#003554] hover:bg-[#fff1d0] hover:text-[#003554] transition duration-300 rounded-full shrink-0">
+                <Link 
+                  href="/pricing" 
+                  className="w-full sm:w-auto text-center whitespace-nowrap bg-[#3CAFFF] px-8 py-4 text-sm font-black uppercase tracking-widest text-[#003554] hover:bg-[#fff1d0] hover:text-[#003554] transition duration-300 rounded-full shrink-0"
+                >
                   Unlock Sports Channels
                 </Link>
               </div>
@@ -556,9 +565,9 @@ function HomePage() {
           <div className="hidden md:block overflow-x-auto">
             <div className="bg-gradient-to-br from-[#003554]/80 to-black/80 backdrop-blur-sm rounded-3xl border border-white/10 overflow-hidden">
               <div className="grid grid-cols-3 gap-0">
-                <div className="p-6 border-b border-r border-white/10 bg-white/5"><h3 className="text-xl font-bold text-white">Feature</h3></div>
-                <div className="p-6 border-b border-r border-white/10 bg-gradient-to-r from-[#3CAFFF]/10 to-transparent"><h3 className="text-xl font-bold text-[#fdc500]">{CONSTANTS.BRAND_NAME}</h3></div>
-                <div className="p-6 border-b border-white/10"><h3 className="text-xl font-bold text-white/40">Traditional Cable</h3></div>
+                <div className="p-6 border-b border-r border-white/10 bg-white/5"><p className="text-xl font-bold text-white">Feature</p></div>
+                <div className="p-6 border-b border-r border-white/10 bg-gradient-to-r from-[#3CAFFF]/10 to-transparent"><p className="text-xl font-bold text-[#fdc500]">{CONSTANTS.BRAND_NAME}</p></div>
+                <div className="p-6 border-b border-white/10"><p className="text-xl font-bold text-white/40">Traditional Cable</p></div>
                 
                 {[
                   { feature: "Monthly Cost", us: "From $11.60/mo (No hidden fees)", cable: "$80-$150 per month", highlight: true },
@@ -675,9 +684,8 @@ function HomePage() {
         </FadeInStagger>
       </section>
 
-{/* 1-Click Social Sharing Section */}
+      {/* 1-Click Social Sharing Section */}
       <SocialShareSection />
-
 
       {/* FAQ Wrapper */}
       <div className="min-h-[400px] bg-[#003554]">
@@ -697,36 +705,54 @@ function HomePage() {
           </div>
           
           <div className="flex shrink-0">
-            <Link href="/blog" className="whitespace-nowrap px-6 py-3 rounded-full border border-white/10 text-[#fff1d0] font-bold hover:bg-white/5 transition-colors flex items-center gap-2 group shrink-0">
-              <span>View All Guides</span><ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform text-[#fdc500]" />
+            <Link 
+              href="/blog" 
+              className="whitespace-nowrap px-6 py-3 rounded-full border border-white/10 text-[#fff1d0] font-bold hover:bg-white/5 transition-colors flex items-center gap-2 group shrink-0"
+            >
+              <span>Explore All Guides</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform text-[#fdc500]" />
             </Link>
           </div>
         </FadeIn>
         
         <FadeInStagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
           {blogPosts.slice(0, 3).map((post) => (
-            <div key={post.id} className="group cursor-pointer">
-              <Link href={`/blog/${post.slug}`} className="block">
-                <div className="relative aspect-video rounded-3xl overflow-hidden mb-6 bg-white/[0.01] border border-white/5 shadow-lg group-hover:border-[#3CAFFF]/40 transition-colors duration-300">
-                  <Image 
-                    src={post.image} 
-                    alt={`${post.title} - ${CONSTANTS.BRAND_NAME} Guide`} 
-                    width={800}
-                    height={450}
-                    loading="lazy"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-[#003554]/40" />
-                  <div className="absolute bottom-6 left-6">
-                    <span className="px-3 py-1 bg-[#3CAFFF] text-[#fff1d0] text-[10px] font-black uppercase tracking-widest rounded-lg inline-block">{post.author}</span>
-                  </div>
+            <div key={post.id} className="group bg-white/[0.01] border border-white/5 rounded-3xl p-6 hover:border-[#3CAFFF]/40 transition-colors duration-300">
+              <div className="relative aspect-video rounded-2xl overflow-hidden mb-6 bg-black/40">
+                <Image 
+                  src={post.image} 
+                  alt={`${post.title} - ${CONSTANTS.BRAND_NAME} Guide`} 
+                  width={800} 
+                  height={450} 
+                  loading="lazy" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                  sizes="(max-width: 768px) 100vw, 33vw" 
+                />
+                <div className="absolute inset-0 bg-[#003554]/40" />
+                <div className="absolute bottom-4 left-4">
+                  <span className="px-3 py-1 bg-[#3CAFFF] text-[#fff1d0] text-[10px] font-black uppercase tracking-widest rounded-lg inline-block">
+                    {post.author}
+                  </span>
                 </div>
-                <h3 className="text-xl md:text-2xl font-bold text-[#fff1d0] mb-3 group-hover:text-[#3CAFFF] transition-colors tracking-tight line-clamp-2 uppercase">{post.title}</h3>
-                <p className="text-[#fff1d0]/70 text-sm md:text-base mb-4 line-clamp-2 leading-relaxed font-medium">{post.excerpt}</p>
-                <span className="inline-flex items-center gap-2 text-sm font-bold text-[#fdc500] uppercase tracking-widest group-hover:gap-3 transition-all">
-                  Read Full Guide<ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </span>
+              </div>
+
+              <h3 className="text-xl md:text-2xl font-bold text-[#fff1d0] mb-3 group-hover:text-[#3CAFFF] transition-colors tracking-tight line-clamp-2 uppercase">
+                <Link href={`/blog/${post.slug}`} className="hover:underline">
+                  {post.title}
+                </Link>
+              </h3>
+
+              <p className="text-[#fff1d0]/70 text-sm md:text-base mb-6 line-clamp-2 leading-relaxed font-medium">
+                {post.excerpt}
+              </p>
+
+              <Link 
+                href={`/blog/${post.slug}`}
+                className="inline-flex items-center gap-2 text-sm font-bold text-[#fdc500] uppercase tracking-widest group-hover:gap-3 transition-all"
+                aria-label={`Read guide: ${post.title}`}
+              >
+                <span>Read Full Guide</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           ))}
@@ -775,11 +801,17 @@ function HomePage() {
               </div>
               
               <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md mx-auto px-4">
-                <Link href="/pricing" className="w-full sm:w-auto text-center whitespace-nowrap rounded-full bg-[#3CAFFF] px-10 py-4 text-sm font-black uppercase tracking-widest text-[#fff1d0] shadow-[0_0_30px_rgba(60,175,255,0.35)] hover:bg-[#3CAFFF]/80 transition-all hover:scale-105 shrink-0">
+                <Link 
+                  href="/pricing" 
+                  className="w-full sm:w-auto text-center whitespace-nowrap rounded-full bg-[#3CAFFF] px-10 py-4 text-sm font-black uppercase tracking-widest text-[#fff1d0] shadow-[0_0_30px_rgba(60,175,255,0.35)] hover:bg-[#3CAFFF]/80 transition-all hover:scale-105 shrink-0"
+                >
                   Choose Your Subscription
                 </Link>
-                <Link href="/setup" className="w-full sm:w-auto text-center whitespace-nowrap inline-flex items-center justify-center gap-3 rounded-full border border-white/10 bg-white/5 px-8 py-4 text-sm font-bold text-[#fff1d0] backdrop-blur-md hover:bg-white/10 transition-all shrink-0">
-                  <Settings className="h-5 w-5 text-[#fdc500] shrink-0" /> Device Setup Guides
+                <Link 
+                  href="/setup" 
+                  className="w-full sm:w-auto text-center whitespace-nowrap inline-flex items-center justify-center gap-3 rounded-full border border-white/10 bg-white/5 px-8 py-4 text-sm font-bold text-[#fff1d0] backdrop-blur-md hover:bg-white/10 transition-all shrink-0"
+                >
+                  <Settings className="h-5 w-5 text-[#fdc500] shrink-0" /> Browse Setup Guides
                 </Link>
               </div>
               

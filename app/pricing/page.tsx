@@ -3,12 +3,12 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import PricingSection from '../components/PricingSection';
-import { ShieldCheck, Zap, ChevronDown, CreditCard, Award, Globe, Server, Trophy, Tv, Film, MonitorPlay, Wifi, Calendar, Lock, ThumbsUp, Users, LifeBuoy, Sparkles, Headphones, ShoppingCart } from 'lucide-react';
+import { ShieldCheck, Zap, ChevronDown, CreditCard, Award, Globe, Server, Trophy, Tv, Film, MonitorPlay, Wifi, Calendar, Lock, ThumbsUp, Users, LifeBuoy, Sparkles, Headphones, ShoppingCart, ExternalLink } from 'lucide-react';
 import { FadeIn, FadeInStagger, FadeInItem } from '../components/AnimatedSection';
 import Link from 'next/link';
 import { CONSTANTS } from '@/lib/seo';
 
-// FAQ Item Component with Premier Cream background and border styles
+// FAQ Item Component with semantic span instead of H3 heading
 function FAQItem({ question, answer }: { question: string; answer: string }) {
   const [isOpen, setIsOpen] = useState(false);
   
@@ -19,10 +19,10 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
       aria-expanded={isOpen}
     >
       <div className="flex justify-between items-center gap-4">
-        <h3 className={`text-lg md:text-xl font-black uppercase tracking-tight transition-colors ${isOpen ? 'text-[#3CAFFF]' : 'text-[#003554] group-hover:text-[#3CAFFF]'} flex items-center gap-3`}>
+        <span className={`text-lg md:text-xl font-black uppercase tracking-tight transition-colors ${isOpen ? 'text-[#3CAFFF]' : 'text-[#003554] group-hover:text-[#3CAFFF]'} flex items-center gap-3`}>
           <span className={`${isOpen ? 'text-[#3CAFFF]' : 'text-[#003554]/30'} font-black text-2xl`}>Q.</span> 
           {question}
-        </h3>
+        </span>
         <ChevronDown className={`w-6 h-6 flex-shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180 text-[#3CAFFF]' : 'text-[#003554]/30 group-hover:text-[#3CAFFF]/50'}`} />
       </div>
       <div 
@@ -40,7 +40,7 @@ export default function PricingPage() {
   return (
     <div className="min-h-screen bg-[#003554] flex flex-col">
       
-      {/* Hero Section - Fully Centered (Old Design Layout) */}
+      {/* Hero Section - Fully Centered */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         
         {/* Background Image Overlay */}
@@ -85,13 +85,13 @@ export default function PricingPage() {
             </FadeInItem>
             <FadeInItem>
               <h1 className="text-5xl md:text-7xl font-black text-[#fff1d0] tracking-tighter uppercase mb-6 leading-none text-center">
-                IPTV Service Pricing Plans <br />
-                <span className="text-[#3CAFFF]">Best Deals</span>
+                IPTV SUBSCRIPTION PRICING & <br />
+                <span className="text-[#3CAFFF]">PLANS 2026</span>
               </h1>
             </FadeInItem>
             <FadeInItem>
               <p className="text-lg md:text-xl text-[#fff1d0]/80 font-bold max-w-2xl mx-auto leading-relaxed px-2 text-center">
-                Enjoy live TV, movies, and sports from anywhere with a fast, reliable IPTV encoder system streaming experience via zyminex.stream.
+                Compare our IPTV subscription pricing plans and get the best deals on 4K streaming. Enjoy over 15,000 live channels, movies, and sports events with high-bitrate encoder servers across all your devices on {CONSTANTS.DOMAIN}.
               </p>
             </FadeInItem>
             <FadeInItem>
@@ -110,7 +110,7 @@ export default function PricingPage() {
         <PricingSection />
       </div>
 
-      {/* Features Section - Premier Cream Cards with border-4 on Layout background */}
+      {/* Features Section */}
       <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-[#003554] w-full">
         <FadeIn className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-black text-[#fff1d0] mb-4 uppercase tracking-tighter leading-none">
@@ -138,7 +138,7 @@ export default function PricingPage() {
                 <div className="w-12 h-12 rounded-xl bg-[#3CAFFF]/10 flex items-center justify-center mb-4 group-hover:bg-[#3CAFFF]/20 transition-colors">
                   <Icon className="w-6 h-6 text-[#3CAFFF]" />
                 </div>
-                <h3 className="font-black text-[#003554] uppercase tracking-wide text-lg mb-2">{feature.title}</h3>
+                <p className="font-black text-[#003554] uppercase tracking-wide text-lg mb-2">{feature.title}</p>
                 <p className="text-[#003554]/70 text-sm font-medium leading-relaxed">{feature.desc}</p>
               </FadeInItem>
             );
@@ -146,7 +146,7 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* Comparison Table Section - Styled to match theme */}
+      {/* Comparison Table Section */}
       <section className="py-24 bg-[#003554] border-y border-white/5 w-full">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-16">
@@ -193,7 +193,7 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* Trust Badges - Premier Cream Cards with border-4 on Layout background */}
+      {/* Trust Badges */}
       <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-[#003554] w-full">
         <FadeIn className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-black text-[#fff1d0] mb-4 uppercase tracking-tighter">
@@ -209,7 +209,7 @@ export default function PricingPage() {
             <div className="w-16 h-16 rounded-xl bg-[#3CAFFF]/10 flex items-center justify-center mb-4">
               <ShieldCheck className="w-8 h-8 text-[#3CAFFF]" />
             </div>
-            <h4 className="text-xl font-black text-[#003554] mb-2 uppercase tracking-wide">Secure Payments</h4>
+            <p className="text-xl font-black text-[#003554] mb-2 uppercase tracking-wide">Secure Payments</p>
             <p className="text-[#003554]/70 text-sm font-medium">Encrypted transactions with top-tier gateways for safety loops.</p>
           </FadeInItem>
           
@@ -217,7 +217,7 @@ export default function PricingPage() {
             <div className="w-16 h-16 rounded-xl bg-[#3CAFFF]/10 flex items-center justify-center mb-4">
               <Zap className="w-8 h-8 text-[#3CAFFF]" />
             </div>
-            <h4 className="text-xl font-black text-[#003554] mb-2 uppercase tracking-wide">Instant Setup</h4>
+            <p className="text-xl font-black text-[#003554] mb-2 uppercase tracking-wide">Instant Setup</p>
             <p className="text-[#003554]/70 text-sm font-medium">Get credentials instantly routed after validation metrics confirmation.</p>
           </FadeInItem>
           
@@ -225,7 +225,7 @@ export default function PricingPage() {
             <div className="w-16 h-16 rounded-full bg-[#003554] flex items-center justify-center shrink-0 mx-auto mb-2">
               <Headphones className="w-8 h-8 text-[#fff1d0]" />
             </div>
-            <h4 className="text-xl font-black text-[#003554] mb-2 uppercase tracking-wide">24/7 Support</h4>
+            <p className="text-xl font-black text-[#003554] mb-2 uppercase tracking-wide">24/7 Support</p>
             <p className="text-[#003554]/70 text-sm font-medium">Expert operational engineering dispatch crew available at all frames.</p>
           </FadeInItem>
           
@@ -233,27 +233,36 @@ export default function PricingPage() {
             <div className="w-16 h-16 rounded-xl bg-[#3CAFFF]/10 flex items-center justify-center mb-4">
               <Award className="w-8 h-8 text-[#3CAFFF]" />
             </div>
-            <h4 className="text-xl font-black text-[#003554] mb-2 uppercase tracking-wide">Top Tier Level</h4>
+            <p className="text-xl font-black text-[#003554] mb-2 uppercase tracking-wide">Top Tier Level</p>
             <p className="text-[#003554]/70 text-sm font-medium">Enjoy high-tech aesthetic premium layouts matching top infrastructure needs.</p>
           </FadeInItem>
         </div>
       </section>
 
-      {/* Money Back Guarantee Banner - Premier Cream Cards with border-4 on Layout background */}
+      {/* Money Back Guarantee Banner */}
       <section className="py-16 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 bg-[#003554] w-full">
         <div className="bg-[#fff1d0] border-4 border-[#3CAFFF] rounded-3xl p-8 md:p-10 text-center shadow-2xl">
           <div className="inline-flex items-center gap-2 bg-[#3CAFFF] px-4 py-2 rounded-full mb-4 shadow-md">
             <Award className="w-4 h-4 text-[#fff1d0]" />
             <span className="text-[#fff1d0] font-black text-xs uppercase tracking-widest">Risk-Free</span>
           </div>
-          <h3 className="text-2xl md:text-3xl font-black text-[#003554] uppercase tracking-tight mb-3">7-Day Money-Back Guarantee</h3>
-          <p className="text-[#003554]/80 max-w-2xl mx-auto text-sm md:text-base font-bold leading-relaxed">
-            Try Zyminex risk-free for 7 days. Not satisfied? Get a full refund parameters dispatch. Learn how to connect HDMI to IPTV or test our features with zero risks.
+          <p className="text-2xl md:text-3xl font-black text-[#003554] uppercase tracking-tight mb-3">7-Day Money-Back Guarantee</p>
+          <p className="text-[#003554]/80 max-w-2xl mx-auto text-sm md:text-base font-bold leading-relaxed mb-4">
+            Try Zyminex risk-free for 7 days. Not satisfied? Get a full refund on your plan. Check your internet connection via{' '}
+            <a 
+              href="https://www.speedtest.net/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-[#3CAFFF] underline hover:text-[#003554] inline-flex items-center gap-1 font-black"
+            >
+              Speedtest <ExternalLink className="w-3.5 h-3.5" />
+            </a>{' '}
+            to ensure optimum 25+ Mbps speed for Ultra 4K streams.
           </p>
         </div>
       </section>
 
-      {/* FAQ Section - Premier Cream Items with border-4 on Layout background */}
+      {/* FAQ Section */}
       <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 bg-[#003554] relative">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-96 bg-[#3CAFFF]/5 blur-[120px] rounded-full pointer-events-none" />
         
@@ -309,12 +318,14 @@ export default function PricingPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full max-w-md mx-auto">
               <Link
                 href="#pricing-section"
+                aria-label="Choose your IPTV pricing subscription plan"
                 className="w-full sm:w-auto text-center whitespace-nowrap px-8 py-4 rounded-full bg-[#3CAFFF] text-[#fff1d0] font-black uppercase tracking-widest text-sm transition-transform hover:scale-105 shadow-[0_0_30px_rgba(60,175,255,0.3)]"
               >
                 Choose Your Plan
               </Link>
               <Link
                 href="/setup"
+                aria-label="View multi-device IPTV setup instructions"
                 className="w-full sm:w-auto text-center whitespace-nowrap px-8 py-4 rounded-full bg-[#fff1d0] text-[#3CAFFF] font-black uppercase tracking-widest text-sm transition-transform hover:scale-105 border-2 border-[#3CAFFF]"
               >
                 Setup Guide

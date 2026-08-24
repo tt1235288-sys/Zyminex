@@ -73,10 +73,10 @@ export default function Footer() {
               Pages
             </h4>
             <ul className="space-y-3 text-sm font-bold">
-              <li><Link href="/" className="text-[#fff1d0]/50 hover:text-[#fdc500] transition-colors">Home</Link></li>
-              <li><Link href="/pricing" className="text-[#fff1d0]/50 hover:text-[#fdc500] transition-colors">Pricing</Link></li>
-              <li><Link href="/setup" className="text-[#fff1d0]/50 hover:text-[#fdc500] transition-colors">Setup Guide</Link></li>
-              <li><Link href="/blog" className="text-[#fff1d0]/50 hover:text-[#fdc500] transition-colors">Blog</Link></li>
+              <li><Link href="/" className="text-[#fff1d0]/50 hover:text-[#fdc500] transition-colors">Home Page</Link></li>
+              <li><Link href="/pricing" className="text-[#fff1d0]/50 hover:text-[#fdc500] transition-colors">Pricing Page</Link></li>
+              <li><Link href="/setup" className="text-[#fff1d0]/50 hover:text-[#fdc500] transition-colors">Setup Guide Page</Link></li>
+              <li><Link href="/blog" className="text-[#fff1d0]/50 hover:text-[#fdc500] transition-colors">Blog Page</Link></li>
               <li><Link href="/contact" className="text-[#fff1d0]/50 hover:text-[#fdc500] transition-colors">Contact</Link></li>
             </ul>
           </div>
