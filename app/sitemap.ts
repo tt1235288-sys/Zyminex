@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import { CONSTANTS } from '@/lib/seo';
 import { blogPosts } from '@/lib/blog';
+import { CHANNELS_DATA } from '@/lib/channels';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = `https://${CONSTANTS.DOMAIN}`;
@@ -19,7 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly' as const,
       priority: 0.9,
     },
-        {
+    {
       url: `${baseUrl}/setup`,
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
@@ -33,6 +34,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
+  // Dynamic channel category pages from lib/channels.ts
+  const dynamicChannels = Object.keys(CHANNELS_DATA).map((slug) => ({
+    url: `${baseUrl}/channels/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.85,
+  }));
+
   // Dynamic blog posts
   const dynamicBlogPosts = blogPosts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
@@ -41,5 +50,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...dynamicBlogPosts];
+  return [...staticPages, ...dynamicChannels, ...dynamicBlogPosts];
 }

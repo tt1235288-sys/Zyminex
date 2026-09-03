@@ -159,9 +159,7 @@ function HomePage() {
       </div>
 
 
-        {/* Infinite Country Flags Ticker */}
-        <CountryMarquee/>
-
+      <CountryMarquee />
 
 
       {/* 3-Step Setup Section */}
