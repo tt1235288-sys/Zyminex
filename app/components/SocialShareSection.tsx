@@ -17,7 +17,7 @@ import { FadeIn } from './AnimatedSection';
 export default function SocialShareSection() {
   const [copied, setCopied] = useState(false);
   const shareUrl = `https://${CONSTANTS.DOMAIN}`;
-  const shareTitle = `${CONSTANTS.FOCUS_KEYWORD}: Stream 4K Live TV & Sports with Zero Buffering!`;
+  const shareTitle = `${CONSTANTS.BRAND_NAME} IPTV: Stream 4K Live TV & Sports with Zero Buffering!`;
   const encodedUrl = encodeURIComponent(shareUrl);
   const encodedTitle = encodeURIComponent(shareTitle);
 
@@ -68,7 +68,10 @@ export default function SocialShareSection() {
   ];
 
   return (
-    <section className="py-16 bg-[#003554]/90 border-t border-b border-white/5 relative overflow-hidden">
+    <section 
+      className="py-16 bg-[#003554]/90 border-t border-b border-white/5 relative overflow-hidden"
+      aria-label={`Share ${CONSTANTS.BRAND_NAME} Platform`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <FadeIn className="text-center max-w-3xl mx-auto mb-10">
           <div className="inline-flex items-center gap-2 bg-[#3CAFFF]/10 border border-[#3CAFFF]/30 px-4 py-1.5 rounded-full mb-4">
@@ -79,7 +82,7 @@ export default function SocialShareSection() {
             SHARE <span className="text-[#3CAFFF]">{CONSTANTS.BRAND_NAME}</span> WITH FRIENDS
           </h2>
           <p className="text-[#fff1d0]/80 text-base md:text-lg mt-3 font-medium">
-            Found the best 4K streaming setup? Share {CONSTANTS.DOMAIN} across your social channels and communities with one click.
+            {`Found the premier 4K streaming setup? Share ${CONSTANTS.DOMAIN} across your social channels and communities with one click.`}
           </p>
         </FadeIn>
 
@@ -105,7 +108,7 @@ export default function SocialShareSection() {
           {/* Copy Direct Link Button */}
           <button
             onClick={handleCopyLink}
-            aria-label="Copy website link to clipboard"
+            aria-label={`Copy ${CONSTANTS.BRAND_NAME} website link to clipboard`}
             className="flex items-center gap-3 px-6 py-3.5 rounded-2xl bg-[#3CAFFF] text-[#003554] font-black text-sm uppercase tracking-wider transition-all duration-300 hover:bg-[#fff1d0] hover:scale-105 shadow-md cursor-pointer"
           >
             {copied ? (

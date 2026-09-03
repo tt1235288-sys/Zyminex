@@ -3,143 +3,165 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import PricingSection from '../components/PricingSection';
-import { ShieldCheck, Zap, ChevronDown, CreditCard, Award, Globe, Server, Trophy, Tv, Film, MonitorPlay, Wifi, Calendar, Lock, ThumbsUp, Users, LifeBuoy, Sparkles, Headphones, ShoppingCart, ExternalLink } from 'lucide-react';
+import { 
+  ShieldCheck, 
+  Zap, 
+  ChevronDown, 
+  CreditCard, 
+  Award, 
+  Globe, 
+  Server, 
+  Trophy, 
+  Tv, 
+  Film, 
+  MonitorPlay, 
+  Wifi, 
+  Calendar, 
+  Lock, 
+  ThumbsUp, 
+  Sparkles, 
+  Headphones, 
+  ExternalLink,
+  CheckCircle2,
+  XCircle
+} from 'lucide-react';
 import { FadeIn, FadeInStagger, FadeInItem } from '../components/AnimatedSection';
 import Link from 'next/link';
 import { CONSTANTS } from '@/lib/seo';
 
-// FAQ Item Component with semantic span instead of H3 heading
+// Synchronized FAQ Component with matching Schema text and semantic H3 trigger
 function FAQItem({ question, answer }: { question: string; answer: string }) {
   const [isOpen, setIsOpen] = useState(false);
   
   return (
-    <button
-      onClick={() => setIsOpen(!isOpen)}
-      className={`w-full text-left bg-[#fff1d0] border-4 ${isOpen ? 'border-[#3CAFFF]' : 'border-white/5'} rounded-2xl p-6 hover:border-[#3CAFFF]/60 transition-all duration-300 group`}
-      aria-expanded={isOpen}
-    >
-      <div className="flex justify-between items-center gap-4">
-        <span className={`text-lg md:text-xl font-black uppercase tracking-tight transition-colors ${isOpen ? 'text-[#3CAFFF]' : 'text-[#003554] group-hover:text-[#3CAFFF]'} flex items-center gap-3`}>
-          <span className={`${isOpen ? 'text-[#3CAFFF]' : 'text-[#003554]/30'} font-black text-2xl`}>Q.</span> 
-          {question}
-        </span>
-        <ChevronDown className={`w-6 h-6 flex-shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180 text-[#3CAFFF]' : 'text-[#003554]/30 group-hover:text-[#3CAFFF]/50'}`} />
-      </div>
-      <div 
-        className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96 mt-4 opacity-100' : 'max-h-0 opacity-0'}`}
+    <div className="w-full bg-[#fff1d0] border-4 border-[#3CAFFF] rounded-2xl overflow-hidden shadow-md transition-all duration-300">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full text-left p-6 flex justify-between items-center gap-4 group focus:outline-none"
+        aria-expanded={isOpen}
       >
-        <p className="text-[#003554]/80 font-medium leading-relaxed pl-10 md:pl-12 border-l-4 border-[#3CAFFF] ml-2 py-2">
+        <h3 className="text-base sm:text-lg md:text-xl font-black uppercase tracking-tight text-[#003554] group-hover:text-[#3CAFFF] transition-colors flex items-center gap-3">
+          <span className="text-[#3CAFFF] font-black text-xl md:text-2xl">Q.</span> 
+          {question}
+        </h3>
+        <ChevronDown 
+          className={`w-6 h-6 flex-shrink-0 text-[#003554]/50 group-hover:text-[#3CAFFF] transition-transform duration-300 ${
+            isOpen ? 'rotate-180 text-[#3CAFFF]' : ''
+          }`} 
+        />
+      </button>
+      <div 
+        className={`transition-all duration-300 ease-in-out ${
+          isOpen ? 'max-h-96 opacity-100 px-6 pb-6 pt-0' : 'max-h-0 opacity-0 overflow-hidden'
+        }`}
+      >
+        <p className="text-[#003554]/85 text-sm md:text-base font-bold leading-relaxed pl-4 border-l-4 border-[#3CAFFF]">
           {answer}
         </p>
       </div>
-    </button>
+    </div>
   );
 }
 
 export default function PricingPage() {
   return (
-    <div className="min-h-screen bg-[#003554] flex flex-col">
+    <div className="min-h-screen bg-[#003554] text-[#fff1d0] flex flex-col">
       
-      {/* Hero Section - Fully Centered */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        
-        {/* Background Image Overlay */}
+      {/* Hero Header Section */}
+      <section className="relative pt-32 pb-12 sm:pt-40 sm:pb-16 flex items-center justify-center overflow-hidden">
+        {/* Background Image Layer */}
         <div className="absolute inset-0 z-0">
           <Image
             src="/img/bg-2.webp"
-            alt="Zyminex premium IPTV service pricing plans - Best IPTV Providers Subscription Deals"
-            width={1920}
-            height={1080}
+            alt={`${CONSTANTS.BRAND_NAME} 4K streaming entertainment infrastructure`}
+            fill
             priority
-            className="w-full h-full object-cover brightness-[0.2]"
+            className="object-cover brightness-[0.18]"
             sizes="100vw"
             quality={85}
           />
-          <div className="absolute inset-0 bg-[#003554]/5" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#003554] via-transparent to-[#003554]/0" />
+          <div className="absolute inset-0 bg-[#003554]/20" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#003554]/20 via-transparent to-[#003554]" />
         </div>
-        
-        {/* Square Pattern Overlay */}
-        <div 
-          className="absolute inset-0 z-0 opacity-5"
-          style={{ 
-            backgroundImage: `
-              linear-gradient(to right, #3CAFFF 1px, transparent 1px),
-              linear-gradient(to bottom, #3CAFFF 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px',
-          }}
-        />
-        
-        {/* Ambient Glow Effects Layer */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#3CAFFF]/10 blur-[150px] rounded-full pointer-events-none z-0" />
-        
-        {/* Hero Content Perfectly Centered */}
-        <div className="max-w-4xl mx-auto px-4 text-center relative z-10 flex flex-col items-center justify-center">
-          <FadeInStagger className="flex flex-col items-center justify-center text-center">
+
+        {/* Ambient Glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#3CAFFF]/15 blur-[140px] rounded-full pointer-events-none z-0" />
+
+        <div className="max-w-5xl mx-auto px-4 text-center relative z-10">
+          <FadeInStagger className="flex flex-col items-center justify-center">
             <FadeInItem>
-              <div className="inline-flex items-center gap-2 bg-[#3CAFFF] px-4 py-2 rounded-full mb-6 shadow-md">
-                <Sparkles className="w-4 h-4 text-[#fff1d0]" />
-                <span className="text-[#fff1d0] font-black text-xs uppercase tracking-widest">Best Value Plans 2026</span>
+              <div className="inline-flex items-center gap-2 bg-[#fdc500] text-[#003554] px-4 py-1.5 rounded-full mb-6 shadow-lg">
+                <Sparkles className="w-4 h-4 fill-current" />
+                <span className="font-black text-xs uppercase tracking-widest">Official Pricing &amp; Plans</span>
               </div>
             </FadeInItem>
+
             <FadeInItem>
-              <h1 className="text-5xl md:text-7xl font-black text-[#fff1d0] tracking-tighter uppercase mb-6 leading-none text-center">
-                IPTV SUBSCRIPTION PRICING & <br />
-                <span className="text-[#3CAFFF]">PLANS 2026</span>
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-[#fff1d0] tracking-tighter uppercase mb-6 leading-none">
+                {`${CONSTANTS.BRAND_NAME.toUpperCase()} IPTV SERVICE &`} <br className="hidden sm:block" />
+                <span className="text-[#fdc500]">SUBSCRIPTION PLANS</span>
               </h1>
             </FadeInItem>
+
             <FadeInItem>
-              <p className="text-lg md:text-xl text-[#fff1d0]/80 font-bold max-w-2xl mx-auto leading-relaxed px-2 text-center">
-                Compare our IPTV subscription pricing plans and get the best deals on 4K streaming. Enjoy over 15,000 live channels, movies, and sports events with high-bitrate encoder servers across all your devices on {CONSTANTS.DOMAIN}.
+              <p className="text-base sm:text-lg md:text-xl text-[#fff1d0]/80 font-bold max-w-3xl mx-auto leading-relaxed px-2">
+                {`Choose your multi-month access plan. Stream over 15,000 live channels, 60,000+ on-demand movies, and major pay-per-view sports events with high-bitrate anti-freeze servers across all your devices.`}
               </p>
             </FadeInItem>
+
             <FadeInItem>
-              <div className="flex flex-wrap justify-center gap-6 mt-10 text-[#fff1d0]/50 text-xs md:text-sm font-black uppercase tracking-widest">
-                <span className="flex items-center gap-2"><Lock className="w-4 h-4 text-[#3CAFFF]" /> Cancel Anytime</span>
-                <span className="flex items-center gap-2"><Zap className="w-4 h-4 text-[#3CAFFF]" /> Instant Activation</span>
-                <span className="flex items-center gap-2"><ThumbsUp className="w-4 h-4 text-[#3CAFFF]" /> 7-Day Money-Back</span>
+              <div className="flex flex-wrap justify-center gap-6 mt-8 text-[#fff1d0]/60 text-xs sm:text-sm font-black uppercase tracking-widest">
+                <span className="flex items-center gap-2"><Lock className="w-4 h-4 text-[#fdc500]" /> No Long-Term Contracts</span>
+                <span className="flex items-center gap-2"><Zap className="w-4 h-4 text-[#fdc500]" /> Instant Setup</span>
+                <span className="flex items-center gap-2"><ThumbsUp className="w-4 h-4 text-[#fdc500]" /> 7-Day Money-Back</span>
               </div>
             </FadeInItem>
           </FadeInStagger>
         </div>
       </section>
 
-      {/* Main Pricing Cards Component */}
-      <div className="w-full relative z-20 bg-[#003554] py-12" id="pricing-section">
+      {/* Main Interactive Pricing Section Component */}
+      <div className="w-full relative z-20" id="pricing-section">
         <PricingSection />
       </div>
 
-      {/* Features Section */}
-      <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-[#003554] w-full">
+      {/* Included Features Grid */}
+      <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full" aria-label="Included Plan Features">
         <FadeIn className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-black text-[#fff1d0] mb-4 uppercase tracking-tighter leading-none">
-            Everything Included In <span className="text-[#3CAFFF]">Every Plan</span>
+          <h2 className="text-3xl sm:text-5xl font-black text-[#fff1d0] mb-4 uppercase tracking-tight">
+            EVERY PLAN INCLUDES <span className="text-[#3CAFFF]">FULL ACCESS</span>
           </h2>
-          <p className="text-[#fff1d0]/70 text-lg font-bold max-w-2xl mx-auto mt-4">
-            All Zyminex subscriptions come with these premium features parameters.
+          <p className="text-[#fff1d0]/75 text-base sm:text-lg font-bold max-w-2xl mx-auto">
+            {`No tier compromises—every ${CONSTANTS.BRAND_NAME} subscription plan unlocks our complete global network.`}
           </p>
         </FadeIn>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
-            { icon: Tv, title: "15,000+ Live Channels", desc: `Sports, news, entertainment, and international channels from 100+ countries including premium iptv italiane 4k streams.` },
-            { icon: Film, title: "60,000+ VOD Library", desc: `Movies, TV series, and documentaries updated daily on your zyminex subscription.` },
-            { icon: MonitorPlay, title: "4K Ultra HD Quality", desc: `Crystal clear streaming on compatible channels and devices processed through a top tier IPTV encoder.` },
-            { icon: Wifi, title: "Anti-Freeze Technology", desc: `Buffer-free playback with advanced streaming optimization from Zyminex.` },
-            { icon: Calendar, title: "Full EPG Guide", desc: `7-day electronic program guide for all channels with zyminex tv.` },
-            { icon: Trophy, title: "PPV Events Included", desc: `All major sports PPV events at no extra cost with your IPTV Service.` },
-            { icon: Globe, title: "Global Coverage", desc: `Servers in 100+ countries for low-latency IPTV Providers pipeline allocation.` },
-            { icon: Server, title: "99.9% Uptime", desc: `Enterprise-grade infrastructure with redundant servers for maximum streaming continuity.` },
+            { icon: Tv, title: "15,000+ Live Channels", desc: "Live sports, news, and entertainment networks from over 100 countries in high-bitrate video feeds." },
+            { icon: Film, title: "60,000+ VOD Releases", desc: "Extensive movie vault and complete television series updated on daily automated release schedules." },
+            { icon: MonitorPlay, title: "Native Ultra 4K Streams", desc: "Uncompressed 60 FPS sports coverage and crystal-clear picture resolution on all compatible displays." },
+            { icon: Wifi, title: "Anti-Freeze Server Protocol", desc: "Dedicated load-balanced streaming clusters eliminate playback stutter, lag, and buffering." },
+            { icon: Calendar, title: "Synchronized EPG Guide", desc: "Interactive 7-day electronic program guide with real-time schedule updates and catch-up availability." },
+            { icon: Trophy, title: "VIP Sports & PPV Pass", desc: "Direct access to championship boxing matches, UFC fight cards, and global football derbies at no extra fee." },
+            { icon: Globe, title: "High-Throughput Global CDN", desc: "Distributed edge servers across North America, Europe, and Asia for sub-second channel switching." },
+            { icon: Server, title: "99.9% Verified Uptime", desc: "Enterprise infrastructure built with redundant server failovers for reliable viewing during peak hours." },
           ].map((feature, idx) => {
             const Icon = feature.icon;
             return (
-              <FadeInItem key={idx} className="bg-[#fff1d0] border-4 border-[#3CAFFF] rounded-2xl p-6 hover:border-[#3CAFFF]/60 shadow-xl transition-all group">
-                <div className="w-12 h-12 rounded-xl bg-[#3CAFFF]/10 flex items-center justify-center mb-4 group-hover:bg-[#3CAFFF]/20 transition-colors">
+              <FadeInItem 
+                key={idx} 
+                className="bg-[#fff1d0] border-4 border-[#3CAFFF] rounded-2xl p-6 shadow-xl hover:-translate-y-1 transition-all"
+              >
+                <div className="w-12 h-12 rounded-xl bg-[#3CAFFF]/15 flex items-center justify-center mb-4">
                   <Icon className="w-6 h-6 text-[#3CAFFF]" />
                 </div>
-                <p className="font-black text-[#003554] uppercase tracking-wide text-lg mb-2">{feature.title}</p>
-                <p className="text-[#003554]/70 text-sm font-medium leading-relaxed">{feature.desc}</p>
+                <h3 className="font-black text-[#003554] uppercase tracking-wide text-lg mb-2">
+                  {feature.title}
+                </h3>
+                <p className="text-[#003554]/75 text-sm font-bold leading-relaxed">
+                  {feature.desc}
+                </p>
               </FadeInItem>
             );
           })}
@@ -147,44 +169,44 @@ export default function PricingPage() {
       </section>
 
       {/* Comparison Table Section */}
-      <section className="py-24 bg-[#003554] border-y border-white/5 w-full">
+      <section className="py-20 bg-[#00263d]/80 border-y border-white/5 w-full" aria-label="Subscription Comparison">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-[#fff1d0] mb-4 uppercase tracking-tighter">
-              Compare <span className="text-[#3CAFFF]">Zyminex Plans</span>
+            <h2 className="text-3xl sm:text-5xl font-black text-[#fff1d0] mb-4 uppercase tracking-tight">
+              COMPARE <span className="text-[#fdc500]">SUBSCRIPTION PLANS</span>
             </h2>
-            <p className="text-[#fff1d0]/60 text-base font-bold uppercase tracking-widest mt-2">
-              Find the perfect plan for your streaming needs
+            <p className="text-[#fff1d0]/70 text-sm sm:text-base font-bold uppercase tracking-widest">
+              Choose the ideal duration and multi-connection capacity for your household
             </p>
           </FadeIn>
 
           <div className="overflow-x-auto bg-[#fff1d0] border-4 border-[#3CAFFF] rounded-3xl p-4 md:p-6 shadow-2xl">
             <table className="w-full border-collapse">
               <thead>
-                <tr className="border-b-2 border-black/10">
-                  <th className="text-left p-4 text-[#003554] font-black uppercase tracking-wider text-base md:text-lg">Feature</th>
+                <tr className="border-b-2 border-[#003554]/10">
+                  <th className="text-left p-4 text-[#003554] font-black uppercase tracking-wider text-base md:text-lg">Streaming Feature</th>
                   <th className="text-center p-4 text-[#3CAFFF] font-black uppercase tracking-wider text-base md:text-lg">3 Months</th>
-                  <th className="text-center p-4 text-[#fdc500] font-black uppercase tracking-wider text-base md:text-lg bg-[#003554] rounded-t-xl">12 Months</th>
+                  <th className="text-center p-4 text-[#fdc500] font-black uppercase tracking-wider text-base md:text-lg bg-[#003554] rounded-t-xl">12 Months (Best Value)</th>
                   <th className="text-center p-4 text-[#3CAFFF] font-black uppercase tracking-wider text-base md:text-lg">6 Months</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-black/5">
+              <tbody className="divide-y divide-[#003554]/10">
                 {[
-                  { feature: "Live Channels", basic: "15,000+", pro: "25,000+", premium: "18,000+" },
-                  { feature: "VOD Library", basic: "60,000+", pro: "100,000+", premium: "80,000+" },
-                  { feature: "4K Streaming", basic: "Yes", pro: "Yes", premium: "Yes" },
-                  { feature: "Sports PPV", basic: "Basic", pro: "All Included", premium: "Premium" },
-                  { feature: "EPG Guide", basic: "Standard", pro: "Full 7-Day", premium: "Full" },
-                  { feature: "Anti-Freeze Tech", basic: "Standard", pro: "VIP Advanced", premium: "Pro" },
-                  { feature: "VPN Included", basic: "No", pro: "Yes", premium: "No" },
-                  { feature: "Multi-Screen", basic: "1 Device ($35)", pro: "3 Devices ($150)", premium: "2 Devices ($80)" },
-                  { feature: "Support", basic: "Standard", pro: "VIP Priority", premium: "Priority" },
+                  { feature: "Live Channels", basic: "15,000+ Worldwide", pro: "15,000+ Worldwide", premium: "15,000+ Worldwide" },
+                  { feature: "VOD Movies & Series", basic: "60,000+ Titles", pro: "60,000+ Titles", premium: "60,000+ Titles" },
+                  { feature: "Ultra 4K & 60 FPS", basic: "Included", pro: "Included", premium: "Included" },
+                  { feature: "Live Sports & PPV Pass", basic: "All Included", pro: "All Included", premium: "All Included" },
+                  { feature: "7-Day EPG Guide", basic: "Included", pro: "Included", premium: "Included" },
+                  { feature: "Anti-Freeze Protocol", basic: "Standard Dedicated", pro: "VIP High-Bitrate", premium: "Standard Dedicated" },
+                  { feature: "Device Connections", basic: "1 to 3 Devices", pro: "1 to 3 Devices", premium: "1 to 3 Devices" },
+                  { feature: "Monthly Effective Rate", basic: "$11.66 / mo", pro: "$6.25 / mo (Save 60%)", premium: "$7.50 / mo" },
+                  { feature: "Customer Support", basic: "24/7 Live Support", pro: "24/7 VIP Priority Support", premium: "24/7 Priority Support" },
                 ].map((row, idx) => (
-                  <tr key={idx} className="hover:bg-black/[0.02] transition-colors">
-                    <td className="p-4 text-[#003554] font-black uppercase text-sm">{row.feature}</td>
-                    <td className="p-4 text-center text-[#003554]/70 font-bold text-sm">{row.basic}</td>
-                    <td className="p-4 text-center text-[#fdc500] font-black text-sm bg-[#003554]">{row.pro}</td>
-                    <td className="p-4 text-center text-[#003554]/70 font-bold text-sm">{row.premium}</td>
+                  <tr key={idx} className="hover:bg-[#003554]/5 transition-colors">
+                    <td className="p-4 text-[#003554] font-black uppercase text-xs sm:text-sm">{row.feature}</td>
+                    <td className="p-4 text-center text-[#003554]/75 font-bold text-xs sm:text-sm">{row.basic}</td>
+                    <td className="p-4 text-center text-[#fdc500] font-black text-xs sm:text-sm bg-[#003554]">{row.pro}</td>
+                    <td className="p-4 text-center text-[#003554]/75 font-bold text-xs sm:text-sm">{row.premium}</td>
                   </tr>
                 ))}
               </tbody>
@@ -193,62 +215,72 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* Trust Badges */}
-      <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-[#003554] w-full">
+      {/* Trust & Guarantee Cards */}
+      <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full" aria-label="Service Guarantees">
         <FadeIn className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-black text-[#fff1d0] mb-4 uppercase tracking-tighter">
-            Why Choose <span className="text-[#3CAFFF]">Zyminex</span>
+          <h2 className="text-3xl sm:text-5xl font-black text-[#fff1d0] mb-4 uppercase tracking-tight">
+            WHY VIEWERS TRUST <span className="text-[#3CAFFF]">{CONSTANTS.BRAND_NAME}</span>
           </h2>
-          <p className="text-[#fff1d0]/70 text-lg font-bold max-w-2xl mx-auto mt-4">
-            Trusted by over 20,000 satisfied customers worldwide - Read our operational loops.
+          <p className="text-[#fff1d0]/75 text-base sm:text-lg font-bold max-w-2xl mx-auto">
+            Transparent subscription protocols backed by verified security standards.
           </p>
         </FadeIn>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           <FadeInItem className="flex flex-col items-center text-center p-6 bg-[#fff1d0] border-4 border-[#3CAFFF] rounded-2xl shadow-xl hover:-translate-y-1 transition-all">
-            <div className="w-16 h-16 rounded-xl bg-[#3CAFFF]/10 flex items-center justify-center mb-4">
+            <div className="w-16 h-16 rounded-xl bg-[#3CAFFF]/15 flex items-center justify-center mb-4">
               <ShieldCheck className="w-8 h-8 text-[#3CAFFF]" />
             </div>
-            <p className="text-xl font-black text-[#003554] mb-2 uppercase tracking-wide">Secure Payments</p>
-            <p className="text-[#003554]/70 text-sm font-medium">Encrypted transactions with top-tier gateways for safety loops.</p>
+            <h3 className="text-lg font-black text-[#003554] mb-2 uppercase tracking-wide">Secure Payments</h3>
+            <p className="text-[#003554]/75 text-sm font-bold leading-relaxed">
+              256-bit SSL encrypted checkout gateways safeguard all payment card and cryptocurrency transactions.
+            </p>
           </FadeInItem>
           
           <FadeInItem className="flex flex-col items-center text-center p-6 bg-[#fff1d0] border-4 border-[#3CAFFF] rounded-2xl shadow-xl hover:-translate-y-1 transition-all">
-            <div className="w-16 h-16 rounded-xl bg-[#3CAFFF]/10 flex items-center justify-center mb-4">
+            <div className="w-16 h-16 rounded-xl bg-[#3CAFFF]/15 flex items-center justify-center mb-4">
               <Zap className="w-8 h-8 text-[#3CAFFF]" />
             </div>
-            <p className="text-xl font-black text-[#003554] mb-2 uppercase tracking-wide">Instant Setup</p>
-            <p className="text-[#003554]/70 text-sm font-medium">Get credentials instantly routed after validation metrics confirmation.</p>
-          </FadeInItem>
-          
-          <FadeInItem className="flex items-center gap-4 flex-col bg-[#fff1d0] border-4 border-[#3CAFFF] rounded-2xl p-6 text-center group">
-            <div className="w-16 h-16 rounded-full bg-[#003554] flex items-center justify-center shrink-0 mx-auto mb-2">
-              <Headphones className="w-8 h-8 text-[#fff1d0]" />
-            </div>
-            <p className="text-xl font-black text-[#003554] mb-2 uppercase tracking-wide">24/7 Support</p>
-            <p className="text-[#003554]/70 text-sm font-medium">Expert operational engineering dispatch crew available at all frames.</p>
+            <h3 className="text-lg font-black text-[#003554] mb-2 uppercase tracking-wide">Instant Setup</h3>
+            <p className="text-[#003554]/75 text-sm font-bold leading-relaxed">
+              M3U playlists and Xtream Codes API credentials are dispatched to your email immediately upon ordering.
+            </p>
           </FadeInItem>
           
           <FadeInItem className="flex flex-col items-center text-center p-6 bg-[#fff1d0] border-4 border-[#3CAFFF] rounded-2xl shadow-xl hover:-translate-y-1 transition-all">
-            <div className="w-16 h-16 rounded-xl bg-[#3CAFFF]/10 flex items-center justify-center mb-4">
+            <div className="w-16 h-16 rounded-xl bg-[#3CAFFF]/15 flex items-center justify-center mb-4">
+              <Headphones className="w-8 h-8 text-[#3CAFFF]" />
+            </div>
+            <h3 className="text-lg font-black text-[#003554] mb-2 uppercase tracking-wide">24/7 Live Support</h3>
+            <p className="text-[#003554]/75 text-sm font-bold leading-relaxed">
+              Dedicated technical assistance team ready on live chat and WhatsApp to assist with hardware installations.
+            </p>
+          </FadeInItem>
+          
+          <FadeInItem className="flex flex-col items-center text-center p-6 bg-[#fff1d0] border-4 border-[#3CAFFF] rounded-2xl shadow-xl hover:-translate-y-1 transition-all">
+            <div className="w-16 h-16 rounded-xl bg-[#3CAFFF]/15 flex items-center justify-center mb-4">
               <Award className="w-8 h-8 text-[#3CAFFF]" />
             </div>
-            <p className="text-xl font-black text-[#003554] mb-2 uppercase tracking-wide">Top Tier Level</p>
-            <p className="text-[#003554]/70 text-sm font-medium">Enjoy high-tech aesthetic premium layouts matching top infrastructure needs.</p>
+            <h3 className="text-lg font-black text-[#003554] mb-2 uppercase tracking-wide">7-Day Guarantee</h3>
+            <p className="text-[#003554]/75 text-sm font-bold leading-relaxed">
+              Risk-free satisfaction guarantee. If our technical team cannot solve an issue, you receive a full refund.
+            </p>
           </FadeInItem>
         </div>
       </section>
 
-      {/* Money Back Guarantee Banner */}
-      <section className="py-16 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 bg-[#003554] w-full">
-        <div className="bg-[#fff1d0] border-4 border-[#3CAFFF] rounded-3xl p-8 md:p-10 text-center shadow-2xl">
-          <div className="inline-flex items-center gap-2 bg-[#3CAFFF] px-4 py-2 rounded-full mb-4 shadow-md">
-            <Award className="w-4 h-4 text-[#fff1d0]" />
-            <span className="text-[#fff1d0] font-black text-xs uppercase tracking-widest">Risk-Free</span>
+      {/* Speed & Guarantee Banner */}
+      <section className="py-8 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full" aria-label="Connection Guidance">
+        <div className="bg-[#fff1d0] border-4 border-[#fdc500] rounded-3xl p-6 sm:p-8 text-center shadow-2xl">
+          <div className="inline-flex items-center gap-2 bg-[#003554] text-[#fdc500] px-4 py-1.5 rounded-full mb-4 shadow-sm">
+            <Award className="w-4 h-4 fill-current" />
+            <span className="font-black text-xs uppercase tracking-widest">Recommended Connectivity</span>
           </div>
-          <p className="text-2xl md:text-3xl font-black text-[#003554] uppercase tracking-tight mb-3">7-Day Money-Back Guarantee</p>
-          <p className="text-[#003554]/80 max-w-2xl mx-auto text-sm md:text-base font-bold leading-relaxed mb-4">
-            Try Zyminex risk-free for 7 days. Not satisfied? Get a full refund on your plan. Check your internet connection via{' '}
+          <h2 className="text-2xl sm:text-3xl font-black text-[#003554] uppercase tracking-tight mb-3">
+            7-Day Money-Back Guarantee
+          </h2>
+          <p className="text-[#003554]/80 max-w-2xl mx-auto text-sm sm:text-base font-bold leading-relaxed">
+            {`Try ${CONSTANTS.BRAND_NAME} risk-free. Verify your connection via `}
             <a 
               href="https://www.speedtest.net/" 
               target="_blank" 
@@ -256,89 +288,86 @@ export default function PricingPage() {
               className="text-[#3CAFFF] underline hover:text-[#003554] inline-flex items-center gap-1 font-black"
             >
               Speedtest <ExternalLink className="w-3.5 h-3.5" />
-            </a>{' '}
-            to ensure optimum 25+ Mbps speed for Ultra 4K streams.
+            </a>
+            {` to ensure at least 25+ Mbps for uninterrupted Ultra 4K sports streaming.`}
           </p>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 bg-[#003554] relative">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-96 bg-[#3CAFFF]/5 blur-[120px] rounded-full pointer-events-none" />
-        
-        <FadeIn className="text-center mb-16 relative z-10">
-          <h2 className="text-4xl md:text-5xl font-black text-[#fff1d0] mb-6 uppercase tracking-tighter">
-            Frequently Asked <span className="text-[#3CAFFF]">Questions</span>
+      {/* Synchronized FAQ Section matching Schema */}
+      <section className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative" aria-label="Subscription FAQ">
+        <FadeIn className="text-center mb-14 relative z-10">
+          <h2 className="text-3xl sm:text-5xl font-black text-[#fff1d0] mb-4 uppercase tracking-tight">
+            FREQUENTLY ASKED <span className="text-[#3CAFFF]">QUESTIONS</span>
           </h2>
-          <p className="text-[#fdc500] font-bold text-lg">Everything you need to know about pricing and plans parameters layout allocation loops.</p>
+          <p className="text-[#fdc500] font-bold text-base sm:text-lg">
+            Answers to common questions regarding subscriptions, device activations, and payments.
+          </p>
         </FadeIn>
         
         <FadeInStagger className="space-y-4 relative z-10">
           <FAQItem 
-            question={`What payment methods does Zyminex accept?`} 
-            answer={`Zyminex accepts all major credit cards including Visa, Mastercard, American Express, and Discover. We also accept PayPal, cryptocurrencies (Bitcoin, Ethereum, USDT), and various regional payment methods. All payments are processed through secure, encrypted gateways with SSL technology.`}
+            question={`What payment methods does ${CONSTANTS.BRAND_NAME} accept?`} 
+            answer={`${CONSTANTS.BRAND_NAME} accepts major credit cards (Visa, Mastercard), PayPal, and cryptocurrencies (Bitcoin, USDT) with 256-bit SSL encrypted checkout protocols.`}
           />
           <FAQItem 
-            question={`Can I upgrade or downgrade my plan?`} 
-            answer={`Yes, you can upgrade or downgrade your zyminex subscription plan at any time. If you upgrade, you'll only pay the price difference. If you downgrade, the credit will be applied to your next billing cycle. Simply contact our support team and they will assist you with the plan change immediately.`}
+            question={`Can I upgrade or downgrade my ${CONSTANTS.BRAND_NAME} plan?`} 
+            answer={`Yes, you can upgrade connections or extend your subscription period at any time by connecting with 24/7 technical live assistance.`}
           />
           <FAQItem 
-            question={`Is there a contract loop requirement?`} 
-            answer={`No, there are no contracts or long-term commitments with our streaming networks. All plans are prepaid and you can cancel at any time without penalties or hidden fees. You only pay for the multi-device tier duration you choose.`}
+            question={`Is there a long-term contract with ${CONSTANTS.BRAND_NAME}?`} 
+            answer={`No, all ${CONSTANTS.BRAND_NAME} plans operate on a prepaid, pay-as-you-go basis without lock-in contracts or hidden termination fees.`}
           />
           <FAQItem 
-            question={`What happens after my subscription expires?`} 
-            answer={`Before your subscription expires, you'll receive email reminders. You can easily renew through your account dashboard or by contacting support. If you don't renew, your access will be suspended but your account data will be preserved for 30 days.`}
+            question={`Does ${CONSTANTS.BRAND_NAME} offer a refund policy?`} 
+            answer={`Yes, ${CONSTANTS.BRAND_NAME} provides a 7-day money-back satisfaction guarantee on all multi-device subscription plans.`}
           />
           <FAQItem 
-            question={`Does your platform offer refunds?`} 
-            answer={`Yes, we offer an absolute 7-day money-back guarantee on all zyminex tv models. If you're not completely satisfied with our streaming quality, channel selection, or customer service, simply contact our support team within 7 days of your purchase for a full refund. No questions asked.`}
+            question={`Can I stream ${CONSTANTS.BRAND_NAME} on multiple devices simultaneously?`} 
+            answer={`Yes, multi-room packages support concurrent viewing on 2 or 3 separate terminals across Smart TVs, Firestick, Android, and iOS.`}
           />
           <FAQItem 
-            question={`Can I use subscription services on multiple devices?`} 
-            answer={`Yes, depending on your selected tier. The 1 Device plan supports 3 Months = $35 | 6 Months = $45 | 12 Months = $75. The 2 Devices plan supports 3 Months = $60 | 6 Months = $80 | 12 Months = $110, and the 3 Devices plan supports 3 Months = $75 | 6 Months = $105 | 12 Months = $150 simultaneously.`}
-          />
-          <FAQItem 
-            question={`Are there long-term deployment discounts?`} 
-            answer={`Yes, our 12-month tier options offer the absolute highest value parameters with fixed multi-device savings. We also run seasonal promotions and special discounts for long-term subscribers.`}
+            question={`What is included with ${CONSTANTS.BRAND_NAME} subscription plans?`} 
+            answer={`Every plan includes uncompressed 4K 60FPS feeds, 15,000+ international channels, 60,000+ daily VOD releases, and full EPG synchronization.`}
           />
         </FadeInStagger>
-      </div>
+      </section>
 
       {/* Bottom CTA Section */}
-      <section className="py-20 bg-[#003554] border-t border-white/5 w-full">
+      <section className="py-16 bg-[#00263d] border-t border-white/5 w-full">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <FadeIn>
-            <h2 className="text-3xl md:text-4xl font-black text-[#fff1d0] mb-4 uppercase tracking-tight">
-              Ready to Start Streaming with us?
+            <h2 className="text-3xl sm:text-4xl font-black text-[#fff1d0] mb-4 uppercase tracking-tight">
+              Ready to Upgrade Your Streaming?
             </h2>
-            <p className="text-[#fdc500] font-bold text-lg mb-8 max-w-2xl mx-auto">
-              Join over 20,000 satisfied customers enjoying premium entertainment loops today.
+            <p className="text-[#fdc500] font-bold text-base sm:text-lg mb-8 max-w-2xl mx-auto">
+              Join thousands of cord-cutters enjoying crystal-clear 4K entertainment with zero buffering today.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full max-w-md mx-auto">
               <Link
                 href="#pricing-section"
-                aria-label="Choose your IPTV pricing subscription plan"
-                className="w-full sm:w-auto text-center whitespace-nowrap px-8 py-4 rounded-full bg-[#3CAFFF] text-[#fff1d0] font-black uppercase tracking-widest text-sm transition-transform hover:scale-105 shadow-[0_0_30px_rgba(60,175,255,0.3)]"
+                aria-label={`Select your ${CONSTANTS.BRAND_NAME} pricing subscription plan`}
+                className="w-full sm:w-auto text-center whitespace-nowrap px-8 py-4 rounded-full bg-[#fdc500] hover:bg-amber-400 text-[#003554] font-black uppercase tracking-widest text-sm transition-all hover:scale-105 shadow-lg"
               >
                 Choose Your Plan
               </Link>
               <Link
                 href="/setup"
-                aria-label="View multi-device IPTV setup instructions"
-                className="w-full sm:w-auto text-center whitespace-nowrap px-8 py-4 rounded-full bg-[#fff1d0] text-[#3CAFFF] font-black uppercase tracking-widest text-sm transition-transform hover:scale-105 border-2 border-[#3CAFFF]"
+                aria-label="View installation guides for streaming devices"
+                className="w-full sm:w-auto text-center whitespace-nowrap px-8 py-4 rounded-full bg-[#003554] hover:bg-[#3CAFFF] text-[#fff1d0] font-black uppercase tracking-widest text-sm transition-all hover:scale-105 border-2 border-[#3CAFFF]"
               >
                 Setup Guide
               </Link>
             </div>
-            <div className="flex flex-wrap justify-center gap-6 mt-8 text-[#fff1d0]/40 text-xs font-black uppercase tracking-widest">
+            <div className="flex flex-wrap justify-center gap-6 mt-8 text-[#fff1d0]/50 text-xs font-black uppercase tracking-widest">
               <span className="flex items-center gap-2"><Zap className="w-3.5 h-3.5 text-[#3CAFFF]" /> Instant Activation</span>
               <span className="flex items-center gap-2"><Lock className="w-3.5 h-3.5 text-[#3CAFFF]" /> Secure Checkout</span>
-              <span className="flex items-center gap-2"><CreditCard className="w-3.5 h-3.5 text-[#3CAFFF]" /> All Major Cards</span>
+              <span className="flex items-center gap-2"><CreditCard className="w-3.5 h-3.5 text-[#3CAFFF]" /> Major Cards &amp; Crypto</span>
             </div>
           </FadeIn>
         </div>
       </section>
+
     </div>
   );
 }

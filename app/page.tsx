@@ -8,6 +8,7 @@ import { CONSTANTS } from '@/lib/seo';
 import { blogPosts } from '@/lib/blog';
 import { FadeIn, FadeInStagger, FadeInItem } from './components/AnimatedSection';
 import SocialShareSection from './components/SocialShareSection';
+import CountryMarquee from './components/CountryMarquee';
 import AnimatedCounter from './components/AnimatedCounter';
 import { 
   PlayCircle, 
@@ -96,33 +97,37 @@ function HomePage() {
         <div className="absolute inset-0 z-0">
           <Image
             src="/img/background.webp"
-            alt={`${CONSTANTS.BRAND_NAME} 4K streaming entertainment library setup`}
+            alt={`${CONSTANTS.BRAND_NAME} IPTV 4K streaming entertainment library setup`}
             fill
             priority
             className="object-cover object-center brightness-[0.25]"
             sizes="100vw"
             quality={85}
           />
-          <div className="absolute inset-0 bg-[#003554]/60" />
+          <div className="absolute inset-0 bg-[#003554]/30" />
         </div>
         
         <FadeIn className="relative z-10 max-w-5xl pt-10 mx-auto flex flex-col items-center justify-center my-auto w-full">
           <div className="inline-flex items-center gap-2 bg-[#3CAFFF] px-4 py-2 rounded-full mb-6">
             <Award className="w-4 h-4 text-[#fff1d0]" />
-            <span className="text-[#fff1d0] font-bold text-xs uppercase tracking-widest">Top Rated 4K Streaming Network</span>
+            <span className="text-[#fff1d0] font-bold text-xs uppercase tracking-widest">
+              Top Rated 4K Streaming Network
+            </span>
           </div>
           
+          {/* Main H1 featuring Zyminex + IPTV */}
           <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter uppercase text-[#fff1d0] mb-6 leading-none whitespace-normal break-words">
-            {CONSTANTS.BRAND_NAME} - BEST <br className="hidden md:block" />
-            <span className="text-[#3CAFFF]">IPTV PROVIDER</span>
+            {`${CONSTANTS.BRAND_NAME} - PREMIUM`} <br className="hidden md:block" />
+            <span className="text-[#3CAFFF]">IPTV SERVICE & 4K STREAMING</span>
           </h1>
           
+          {/* First Paragraph including focus & high-intent secondary keywords */}
           <p className="text-base sm:text-lg md:text-2xl text-[#fff1d0]/90 max-w-3xl mx-auto mb-6 font-medium leading-relaxed px-2">
-            Unlock premium entertainment with {CONSTANTS.BRAND_NAME}. Stream over 15,000 live international channels, 60,000 movies on demand, and major pay-per-view sports events with ultra-stable anti-freeze server technology and instant multi-device activation.
+            {`Unlock premier entertainment on the official ${CONSTANTS.BRAND_NAME} website. Stream over 15,000 live international channels, 60,000 on-demand movies, and major PPV sports events with the ultra-stable ${CONSTANTS.BRAND_NAME} IPTV service featuring instant login credentials.`}
           </p>
 
           <p className="text-xs sm:text-sm text-[#fdc500] max-w-2xl mx-auto mb-10 font-semibold leading-relaxed">
-            Rated by thousands on Reddit and community streaming forums for zero-buffering 60 FPS sports playback and affordable multi-device pricing packages.
+            {`Discover why ${CONSTANTS.BRAND_NAME} review reddit discussions confirm is ${CONSTANTS.BRAND_NAME} legit with zero-buffering 60 FPS sports playback and transparent multi-device subscription plans.`}
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 items-center justify-center w-full max-w-md sm:max-w-xl mx-auto px-4">
@@ -130,7 +135,7 @@ function HomePage() {
               href="/pricing" 
               className="w-full sm:w-auto text-center whitespace-nowrap px-6 sm:px-8 py-4 rounded-full bg-[#3CAFFF] text-[#fff1d0] font-black text-base sm:text-lg hover:bg-[#3CAFFF]/80 transition-transform hover:scale-105 uppercase tracking-wider shrink-0"
             >
-              View {CONSTANTS.BRAND_NAME} Cost & Plans
+              {`Check ${CONSTANTS.BRAND_NAME} Cost & Plans`}
             </Link>
             <Link 
               href="#channels" 
@@ -153,17 +158,25 @@ function HomePage() {
         {isMounted ? <PartnerSlider /> : <div className="h-32 bg-transparent" />}
       </div>
 
+
+        {/* Infinite Country Flags Ticker */}
+        <CountryMarquee/>
+
+
+
       {/* 3-Step Setup Section */}
       <section className="py-24 bg-[#3CAFFF] relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <FadeIn>
             <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mb-20">
-              <span className="text-[#003554] bg-[#fff1d0] px-4 py-1 rounded-full font-black uppercase tracking-widest text-xs mb-4">Quick Setup Tutorial</span>
+              <span className="text-[#003554] bg-[#fff1d0] px-4 py-1 rounded-full font-black uppercase tracking-widest text-xs mb-4">
+                Quick Setup Tutorial
+              </span>
               <h2 className="text-4xl md:text-6xl font-black text-[#fff1d0] tracking-tighter uppercase leading-none">
                 START STREAMING IN <br/><span className="text-[#003554]">3 SIMPLE STEPS</span>
               </h2>
               <p className="text-[#fff1d0] text-lg mt-6 font-bold">
-                Setting up your {CONSTANTS.BRAND_NAME} subscription is fast and straightforward. Follow our simple activation guide to deploy high-speed streaming on Smart TVs, Firestick, Android, and iOS devices within minutes.
+                {`Setting up your ${CONSTANTS.BRAND_NAME} IPTV subscription is fast and straightforward. Receive your ${CONSTANTS.BRAND_NAME} login credentials to deploy high-speed streaming on Smart TVs, Firestick, Android, and iOS devices within minutes.`}
               </p>
             </div>
           </FadeIn>
@@ -173,9 +186,9 @@ function HomePage() {
                 <div className="absolute -top-1 -right-1 w-8 h-8 rounded-full bg-[#fff1d0] text-[#003554] font-black flex items-center justify-center text-sm shadow-lg">1</div>
                 <CreditCard className="w-10 h-10 text-[#fff1d0]" />
               </div>
-              <p className="text-2xl font-black text-[#fff1d0] mb-4 tracking-tighter uppercase">Choose Your Plan</p>
+              <h3 className="text-2xl font-black text-[#fff1d0] mb-4 tracking-tighter uppercase">Choose Your Plan</h3>
               <p className="text-[#fdc500] text-base font-bold leading-relaxed">
-                Select your preferred subscription period with flexible 1, 3, 6, or 12-month packages and multi-device connection options.
+                {`Review ${CONSTANTS.BRAND_NAME} cost options with flexible 1, 3, 6, or 12-month packages and multi-device connection options.`}
               </p>
             </FadeInItem>
 
@@ -184,7 +197,7 @@ function HomePage() {
                 <div className="absolute -top-1 -right-1 w-8 h-8 rounded-full bg-[#fff1d0] text-[#003554] font-black flex items-center justify-center text-sm shadow-lg">2</div>
                 <Download className="w-10 h-10 text-[#fff1d0]" />
               </div>
-              <p className="text-2xl font-black text-[#fff1d0] mb-4 tracking-tighter uppercase">Install Your App</p>
+              <h3 className="text-2xl font-black text-[#fff1d0] mb-4 tracking-tighter uppercase">Install Your App</h3>
               <p className="text-[#fdc500] text-base font-bold leading-relaxed">
                 Download your favorite player like IPTV Smarters Pro, TiviMate, or IBO Player onto your streaming hardware.
               </p>
@@ -195,9 +208,9 @@ function HomePage() {
                 <div className="absolute -top-1 -right-1 w-8 h-8 rounded-full bg-[#fff1d0] text-[#003554] font-black flex items-center justify-center text-sm shadow-lg">3</div>
                 <Tv2 className="w-10 h-10 text-[#fff1d0]" />
               </div>
-              <p className="text-2xl font-black text-[#fff1d0] mb-4 tracking-tighter uppercase">Instant Activation</p>
+              <h3 className="text-2xl font-black text-[#fff1d0] mb-4 tracking-tighter uppercase">Instant Activation</h3>
               <p className="text-[#fdc500] text-base font-bold leading-relaxed">
-                Log in using your Xtream Codes API credentials sent immediately to your email and start watching in ultra 4K.
+                {`Log in using your ${CONSTANTS.BRAND_NAME} login details and Xtream Codes API sent to your email to start streaming in ultra 4K.`}
               </p>
             </FadeInItem>
           </FadeInStagger>
@@ -231,14 +244,14 @@ function HomePage() {
 
         <div className="w-full max-w-3xl px-4 text-center mt-10">
           <p className="text-base md:text-lg leading-relaxed text-[#fdc500] font-bold">
-            Stream your favorite uncompressed live channels while relaxing in total comfort. {CONSTANTS.BRAND_NAME} delivers high-throughput server architecture directly to Smart TVs, streaming boxes, and mobile displays without complex hardware decoders.
+            {`Stream your favorite uncompressed live channels with peace of mind. ${CONSTANTS.BRAND_NAME} IPTV delivers high-throughput server architecture directly to Smart TVs, streaming boxes, and mobile displays without complex hardware decoders.`}
           </p>
           <div className="w-full flex justify-center mt-8">
             <Link 
               href="/pricing" 
               className="bg-[#fff1d0] px-10 py-4 text-sm font-black uppercase tracking-widest text-[#3CAFFF] hover:bg-[#3CAFFF] hover:text-[#fff1d0] transition duration-300 rounded-full"
             >
-              Get Started with {CONSTANTS.BRAND_NAME}
+              {`Get Started with ${CONSTANTS.BRAND_NAME}`}
             </Link>
           </div>
         </div>
@@ -249,10 +262,10 @@ function HomePage() {
         <FadeIn className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col justify-between items-start mb-12 gap-6 relative z-10 w-full">
           <div>
             <h2 className="text-4xl md:text-5xl font-black text-[#003554] mb-4 uppercase tracking-tighter leading-none">
-              PREMIUM ULTRA HD CHANNEL LIBRARY
+              {`${CONSTANTS.BRAND_NAME.toUpperCase()} IPTV CHANNELS & ULTRA HD LIBRARY`}
             </h2>
             <p className="text-[#003554] font-bold text-lg max-w-3xl">
-              Access thousands of high-definition channels, live sports networks, and on-demand movies with real-time electronic program guide (EPG) synchronization.
+              {`Explore the complete directory of ${CONSTANTS.BRAND_NAME} IPTV channels. Access thousands of high-definition channels, live sports networks, and on-demand movies with real-time EPG synchronization.`}
             </p>
           </div>
         </FadeIn>
@@ -300,7 +313,7 @@ function HomePage() {
               </div>
               <div>
                 <p className="font-black text-[#003554] text-xl uppercase tracking-tight">24/7 Live Support</p>
-                <p className="text-[#3CAFFF] font-bold text-sm">Technical assistance available via live chat and WhatsApp</p>
+                <p className="text-[#3CAFFF] font-bold text-sm">Immediate troubleshooting if Zyminex not working properly</p>
               </div>
             </FadeInItem>
             <FadeInItem className="flex items-center gap-4">
@@ -321,7 +334,7 @@ function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <FadeIn className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-black text-[#003554] mb-4 uppercase tracking-tighter">
-              {CONSTANTS.BRAND_NAME} BY THE NUMBERS
+              {`${CONSTANTS.BRAND_NAME} BY THE NUMBERS`}
             </h2>
             <p className="text-[#fff1d0] text-base font-bold bg-[#003554] px-6 py-2 rounded-2xl max-w-xl mx-auto mt-4">
               Industry-leading performance metrics and verifiable server uptime statistics.
@@ -361,7 +374,7 @@ function HomePage() {
               WHY <span className="text-[#3CAFFF]">{CONSTANTS.BRAND_NAME}</span> IS THE LEADING STREAMING CHOICE
             </h2>
             <p className="text-[#003554] font-bold text-lg max-w-3xl mx-auto">
-              Discover why cord-cutters and home theater enthusiasts choose our high-bitrate streaming infrastructure for daily viewing.
+              {`Discover why home theater enthusiasts evaluate ${CONSTANTS.BRAND_NAME} reviews and complaints and choose our high-bitrate streaming infrastructure.`}
             </p>
           </FadeIn>
           <FadeInStagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
@@ -379,7 +392,7 @@ function HomePage() {
                   <div className="w-14 h-14 rounded-xl bg-[#3CAFFF] flex items-center justify-center mb-6">
                     <Icon className="w-7 h-7 text-[#fff1d0]" />
                   </div>
-                  <p className="text-xl font-bold text-[#fff1d0] mb-3 uppercase tracking-wide">{item.title}</p>
+                  <h3 className="text-xl font-bold text-[#fff1d0] mb-3 uppercase tracking-wide">{item.title}</h3>
                   <p className="text-[#fdc500] font-medium">{item.desc}</p>
                 </div>
               );
@@ -415,7 +428,7 @@ function HomePage() {
                 <div key={idx} className="bg-[#fff1d0] rounded-xl p-4 border-3 border-[#3CAFFF] hover:border-[#fff1d0] transition-all">
                   <div className="flex items-center gap-2 mb-2">
                     <Icon className="w-5 h-5 text-[#3CAFFF]" />
-                    <p className="font-bold text-[#3CAFFF] text-sm sm:text-base uppercase tracking-wider">{item.cat}</p>
+                    <h3 className="font-bold text-[#3CAFFF] text-sm sm:text-base uppercase tracking-wider">{item.cat}</h3>
                   </div>
                   <p className="text-[#003554] font-medium text-xs">{item.channels}</p>
                 </div>
@@ -468,7 +481,7 @@ function HomePage() {
                 EXPERIENCE ADVANCED <span className="text-[#3CAFFF]">4K STREAMING SERVERS</span>
               </h2>
               <p className="mt-6 text-base leading-relaxed text-[#fdc500] font-bold">
-                Pairing enterprise-grade server infrastructure with hardware-accelerated video rendering guarantees seamless playback across all your devices. {CONSTANTS.BRAND_NAME} delivers uncompressed feeds with rapid channel switching and full EPG integration.
+                {`Pairing enterprise server infrastructure with hardware video acceleration ensures uninterrupted playback across all setups. ${CONSTANTS.BRAND_NAME} IPTV delivers uncompressed feeds with sub-second channel zapping and full EPG integration.`}
               </p>
               <div className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-2">
                 {['Anti-freeze server load balancing', 'Sub-second channel switching speeds', 'High-capacity on-demand movie vault', 'Compatible with Smart TVs, Firestick & Android'].map((item) => (
@@ -497,7 +510,7 @@ function HomePage() {
                 STREAM EVERY MAJOR <span className="text-[#fdc500]">STADIUM & ARENA MATCH</span>
               </h2>
               <p className="mt-6 text-base leading-relaxed text-[#fdc500] font-bold">
-                Never miss a single match. Gain instant access to premier football tournaments, championship boxing matches, MMA fights, motorsport races, and basketball leagues in pristine 60 FPS without blackout restrictions.
+                {`Never miss a single match. Gain instant access to premier football tournaments, championship boxing matches, MMA fights, and basketball leagues in pristine 60 FPS on ${CONSTANTS.BRAND_NAME} IPTV.`}
               </p>
               <div className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-2">
                 {['Premier League, Champions League & La Liga', 'UFC, Boxing PPV & WWE Events', 'Low-latency 60 FPS live sports feeds', 'Multi-language audio track options'].map((item) => (
@@ -554,10 +567,10 @@ function HomePage() {
               <span className="text-[#fdc500] font-bold text-sm uppercase tracking-wider">Side-by-Side Comparison</span>
             </div>
             <h2 className="text-4xl md:text-5xl font-black text-[#fff1d0] mb-6 uppercase tracking-tight">
-              {CONSTANTS.BRAND_NAME.toUpperCase()} VS TRADITIONAL CABLE
+              {`${CONSTANTS.BRAND_NAME.toUpperCase()} VS TRADITIONAL CABLE`}
             </h2>
             <p className="text-[#fff1d0]/80 text-lg max-w-3xl mx-auto font-medium">
-              See why thousands of viewers are cutting the cord and switching to {CONSTANTS.DOMAIN} for flexible, high-resolution home entertainment.
+              {`See why thousands of viewers are cutting the cord and switching to ${CONSTANTS.DOMAIN} for flexible, high-resolution home entertainment.`}
             </p>
           </FadeIn>
 
@@ -626,14 +639,14 @@ function HomePage() {
             TRUSTED BY OVER <span className="text-[#3CAFFF]">20,000+ SUBSCRIBERS</span> WORLDWIDE
           </h2>
           <p className="text-[#fdc500] text-lg font-bold max-w-2xl mx-auto">
-            Read real feedback from cord-cutters who upgraded their home streaming with {CONSTANTS.BRAND_NAME}.
+            {`Verified feedback from users checking ${CONSTANTS.BRAND_NAME} review reddit threads before upgrading.`}
           </p>
         </FadeIn>
         <FadeInStagger className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {[
-            { name: "Marcus V.", text: "I've tried multiple streaming services, but Zyminex operates with unmatched stability. The 4K sports channels stream with zero buffering even during major football derbies.", role: "Home Entertainment Enthusiast" },
-            { name: "Sophia L.", text: "Completely cancelled my expensive cable box. Zyminex gives me all the live sports, news channels, and movie libraries my whole family needs across every TV.", role: "Smart Home Streamer" },
-            { name: "Damian K.", text: "The international channel selection is incredible. Fast channel zapping, crystal-clear 4K quality, and responsive customer support whenever needed.", role: "Verified Subscriber" }
+            { name: "Marcus V.", text: `I checked multiple services before reading the ${CONSTANTS.BRAND_NAME} review reddit threads. The 4K sports channels stream with zero buffering even during major football derbies.`, role: "Home Entertainment Enthusiast" },
+            { name: "Sophia L.", text: `Completely cancelled my expensive cable box. ${CONSTANTS.BRAND_NAME} gives me all the live sports, news channels, and movie libraries my whole family needs across every TV.`, role: "Smart Home Streamer" },
+            { name: "Damian K.", text: `The ${CONSTANTS.BRAND_NAME} IPTV channels selection is incredible. Fast channel zapping, crystal-clear 4K quality, and responsive customer support whenever needed.`, role: "Verified Subscriber" }
           ].map((testimonial, idx) => (
             <div key={idx} className="bg-[#fff1d0] rounded-3xl p-8 border-4 border-[#3CAFFF] shadow-2xl transition-transform hover:-translate-y-2 duration-300">
               <div className="flex gap-2 mb-6 items-center">
@@ -661,7 +674,7 @@ function HomePage() {
             COMPATIBLE WITH ALL STREAMING DEVICES
           </h2>
           <p className="text-[#fff1d0]/80 text-lg max-w-3xl mx-auto mb-16 font-medium">
-            {CONSTANTS.BRAND_NAME} integrates seamlessly with your favorite media player apps and operating systems with simple 5-minute setup guides.
+            {`${CONSTANTS.BRAND_NAME} IPTV integrates seamlessly with your favorite media player apps and operating systems with simple 5-minute setup guides.`}
           </p>
         </FadeIn>
         <FadeInStagger className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 relative z-10">
@@ -784,7 +797,7 @@ function HomePage() {
                 UPGRADE YOUR <br/><span className="text-[#3CAFFF]">ENTERTAINMENT TODAY</span>
               </h2>
               <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-[#fff1d0]/80 md:text-lg font-medium">
-                Stream 15,000+ live channels, 60,000+ movies on demand, and uninterrupted 4K sports with {CONSTANTS.DOMAIN}. Instant account activation with 24/7 dedicated customer support.
+                {`Stream 15,000+ live channels, 60,000+ movies on demand, and uninterrupted 4K sports with ${CONSTANTS.DOMAIN}. Instant account activation with 24/7 dedicated customer support.`}
               </p>
               <div className="mx-auto mt-10 grid max-w-4xl grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
                 {[

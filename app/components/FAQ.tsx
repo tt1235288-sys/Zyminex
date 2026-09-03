@@ -7,28 +7,28 @@ import { CONSTANTS } from '@/lib/seo';
 
 const faqs = [
   { 
-    q: "What is IPTV?", 
-    a: "IPTV stands for Internet Protocol Television. It delivers live TV broadcasts, channels, and video-on-demand content directly through your internet connection, skipping the need for traditional cable or satellite hardware." 
+    q: `What is ${CONSTANTS.BRAND_NAME} and how does the service work?`, 
+    a: `${CONSTANTS.BRAND_NAME} is a high-speed streaming platform that delivers live sports, PPV events, 15,000+ international TV channels, and 60,000+ movies directly over your internet connection without requiring satellite dishes or cable box hardware.` 
   },
   { 
-    q: "What is the best IPTV service?", 
-    a: "Zyminex is widely considered a premier choice. It offers unmatched stream stability with over 15,000 global live stations and an extensive VOD library optimized for high-performance viewing." 
+    q: `Is ${CONSTANTS.BRAND_NAME} legit and safe to use?`, 
+    a: `Yes, ${CONSTANTS.BRAND_NAME} is fully verified and trusted by thousands of active subscribers. We safeguard checkouts with 256-bit SSL encryption protocols, operate redundant anti-freeze servers with 99.9% verified uptime, and provide 24/7 dedicated customer assistance.` 
   },
   { 
-    q: "What is the best IPTV?", 
-    a: "The best systems require advanced anti-freeze server backends, high-bitrate video output, and support across multiple concurrent terminal connections—all features fully integrated into Zyminex." 
+    q: `How do I receive my ${CONSTANTS.BRAND_NAME} login and activation details?`, 
+    a: `Immediately after choosing your subscription package, your official ${CONSTANTS.BRAND_NAME} login credentials—including M3U URLs and Xtream Codes API connection parameters—are dispatched to your email inbox for instant multi-device setup.` 
   },
   { 
-    q: "Which IPTV is the best?", 
-    a: "A top-tier option must deliver crystal-clear 4K streaming channels, stable server uptimes, and zero hardware throttling. Zyminex consistently ranks as a leader for these metrics." 
+    q: `What should I do if ${CONSTANTS.BRAND_NAME} is not working or buffering?`, 
+    a: `If you experience buffering or playback latency, verify that your internet speed exceeds 25 Mbps, clear your media player cache, or toggle your player's hardware video decoder. If an issue persists, our technical team is available 24/7 via live chat and WhatsApp.` 
   },
   { 
-    q: "How does IPTV work?", 
-    a: "Instead of radio signals from traditional cable systems, content is routed as standard secure data packets. Your media terminal or an IPTV encoder box translates these inbound network feeds into real-time playback." 
+    q: `What is the ${CONSTANTS.BRAND_NAME} cost across different devices?`, 
+    a: `The ${CONSTANTS.BRAND_NAME} cost starts at an affordable $11.60 per month with flexible 3, 6, and 12-month payment options. We offer single-connection access as well as discounted multi-room packages supporting Smart TVs, Firestick, Android, and iOS hardware.` 
   },
   { 
-    q: "How do I set up IPTV?", 
-    a: "Configuration is straightforward. Simply deploy our recommended application files onto your target hardware terminal, input your activation token details, and initialize the system feed instantly." 
+    q: `Where can I read ${CONSTANTS.BRAND_NAME} review reddit threads and user feedback?`, 
+    a: `Unfiltered community feedback and reviews can be found across independent streaming forums and Reddit discussion boards, where cord-cutters frequently highlight our zero-buffering 60 FPS sports coverage and rapid zapping speeds.` 
   }
 ];
 
@@ -36,7 +36,10 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="py-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full border-t border-white/5 mt-16 relative" aria-label="Frequently Asked Questions about Zyminex">
+    <section 
+      className="py-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full border-t border-white/5 mt-16 relative" 
+      aria-label={`Frequently Asked Questions about ${CONSTANTS.BRAND_NAME}`}
+    >
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-96 bg-[#3CAFFF]/5 blur-[120px] rounded-full pointer-events-none" />
       
       <FadeIn className="text-center mb-16 relative z-10">
@@ -47,14 +50,13 @@ export default function FAQ() {
           Frequently Asked <span className="text-[#3CAFFF]">Questions</span>
         </h2>
         <p className="text-[#fdc500] font-bold text-lg max-w-2xl mx-auto mt-4">
-          Everything you need to know about our {CONSTANTS.FOCUS_KEYWORD} service parameters layout allocation loops.
+          Everything you need to know about {CONSTANTS.BRAND_NAME} IPTV subscriptions, server performance, and setup.
         </p>
       </FadeIn>
       
       <FadeInStagger className="space-y-4 relative z-10">
         {faqs.map((faq, i) => (
           <FadeInItem key={i}>
-            {/* ✅ FIXED: Applied the exact Premier Cream bg, border-4 layout style used on the Pricing and Page FAQs */}
             <button
               onClick={() => setOpenIndex(openIndex === i ? null : i)}
               className={`w-full text-left bg-[#fff1d0] border-4 ${openIndex === i ? 'border-[#3CAFFF]' : 'border-white/5'} rounded-2xl p-6 hover:border-[#3CAFFF]/60 transition-all duration-300 group`}
@@ -62,10 +64,10 @@ export default function FAQ() {
               aria-controls={`faq-answer-${i}`}
             >
               <div className="flex justify-between items-center gap-4">
-                <p className={`text-lg md:text-xl font-black uppercase tracking-tight transition-colors ${openIndex === i ? 'text-[#3CAFFF]' : 'text-[#003554] group-hover:text-[#3CAFFF]'} flex items-center gap-3`}>
+                <h3 className={`text-lg md:text-xl font-black uppercase tracking-tight transition-colors ${openIndex === i ? 'text-[#3CAFFF]' : 'text-[#003554] group-hover:text-[#3CAFFF]'} flex items-center gap-3`}>
                   <span className={`${openIndex === i ? 'text-[#3CAFFF]' : 'text-[#003554]/30'} font-black text-2xl`}>Q.</span> 
                   {faq.q}
-                </p>
+                </h3>
                 <ChevronDown className={`w-6 h-6 flex-shrink-0 transition-transform duration-300 ${openIndex === i ? 'rotate-180 text-[#3CAFFF]' : 'text-[#003554]/30 group-hover:text-[#3CAFFF]/50'}`} />
               </div>
               <div 

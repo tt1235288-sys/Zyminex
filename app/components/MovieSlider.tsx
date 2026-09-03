@@ -4,12 +4,12 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useState } from 'react';
 import { CONSTANTS } from '@/lib/seo';
-import { Film, Tv2, Trophy } from 'lucide-react';
+import { Film, Tv2, Trophy, Play } from 'lucide-react';
 
 interface SliderItem {
   id: string;
   imagePath: string;
-  altText: string;
+  title: string;
 }
 
 // 12 Items for each row
@@ -18,7 +18,7 @@ const movies: SliderItem[] = Array.from({ length: 12 }).map((_, i) => {
   return {
     id: `movie-${i + 1}`,
     imagePath: `/img/sliders/movies/Zyminex-movies-${number}.webp`,
-    altText: `${CONSTANTS.BRAND_NAME} 4K on-demand blockbuster movie title ${i + 1}`,
+    title: `Featured 4K Cinema Title ${i + 1}`,
   };
 });
 
@@ -27,7 +27,7 @@ const series: SliderItem[] = Array.from({ length: 12 }).map((_, i) => {
   return {
     id: `series-${i + 1}`,
     imagePath: `/img/sliders/series/Zyminex-serie-${number}.webp`,
-    altText: `${CONSTANTS.BRAND_NAME} popular television series episode release ${i + 1}`,
+    title: `Popular TV Series ${i + 1}`,
   };
 });
 
@@ -36,7 +36,7 @@ const sports: SliderItem[] = Array.from({ length: 12 }).map((_, i) => {
   return {
     id: `sport-${i + 1}`,
     imagePath: `/img/sliders/sports/Zyminex-sports-${number}.webp`,
-    altText: `${CONSTANTS.BRAND_NAME} live championship sports stream ${i + 1}`,
+    title: `Live Match Card ${i + 1}`,
   };
 });
 
@@ -63,6 +63,8 @@ const InfiniteSlider = ({
   category: string 
 }) => {
   const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
+  
+  // Base list + visual duplicate loop
   const infiniteList = [...items, ...items, ...items];
 
   return (
@@ -82,40 +84,52 @@ const InfiniteSlider = ({
           ease: "linear" 
         }}
       >
-        {infiniteList.map((item, idx) => (
-          <div
-            key={`${item.id}-${idx}`}
-            onClick={scrollToPricing}
-            className="flex-shrink-0 w-32 sm:w-40 md:w-48 aspect-[2/3] block cursor-pointer group"
-          >
-            <div className="relative w-full h-full rounded-xl overflow-hidden bg-[#003554] border-2 border-[#3CAFFF] shadow-md group-hover:border-[#003554] group-hover:shadow-2xl transition-all duration-300">
-              {!failedImages[`${item.id}-${idx}`] ? (
-                <>
-                  <Image
-                    src={item.imagePath}
-                    alt={item.altText}
-                    fill
-                    unoptimized
-                    sizes="(max-width: 640px) 128px, (max-width: 1024px) 160px, 192px"
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                    onError={() => setFailedImages(prev => ({ ...prev, [`${item.id}-${idx}`]: true }))}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#003554]/95 via-[#003554]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-end p-3 text-center">
-                    <span className="text-[#3CAFFF] text-[10px] font-black uppercase tracking-wider mb-1">Ultra 4K Stream</span>
-                    <p className="text-[#fff1d0] text-xs font-black uppercase tracking-widest">Get Access</p>
+        {infiniteList.map((item, idx) => {
+          // Hide duplicate loop iterations from screen readers and search crawlers
+          const isDuplicate = idx >= items.length;
+
+          return (
+            <div
+              key={`${item.id}-${idx}`}
+              onClick={scrollToPricing}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') scrollToPricing(); }}
+              role="button"
+              tabIndex={isDuplicate ? -1 : 0}
+              aria-hidden={isDuplicate}
+              aria-label={isDuplicate ? undefined : `${item.title} - ${CONSTANTS.BRAND_NAME}`}
+              className="flex-shrink-0 w-32 sm:w-40 md:w-48 aspect-[2/3] block cursor-pointer group focus:outline-none"
+            >
+              <div className="relative w-full h-full rounded-xl overflow-hidden bg-[#003554] border-2 border-[#3CAFFF] shadow-md group-hover:border-[#003554] group-hover:shadow-2xl transition-all duration-300">
+                {!failedImages[`${item.id}-${idx}`] ? (
+                  <>
+                    <Image
+                      src={item.imagePath}
+                      alt={isDuplicate ? "" : `${CONSTANTS.BRAND_NAME} ${category} lineup cover`}
+                      fill
+                      unoptimized
+                      sizes="(max-width: 640px) 128px, (max-width: 1024px) 160px, 192px"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                      onError={() => setFailedImages(prev => ({ ...prev, [`${item.id}-${idx}`]: true }))}
+                    />
+                    
+                    {/* Visual Hover Overlay with Play Icon instead of keyword stuffing text */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#003554]/90 via-[#003554]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-3 text-center">
+                      <div className="w-10 h-10 rounded-full bg-[#fdc500] text-[#003554] flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
+                        <Play className="w-5 h-5 fill-current ml-0.5" />
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <div className="w-full h-full flex flex-col items-center justify-center bg-[#003554] p-3 text-center">
+                    <Film className="w-8 h-8 text-[#3CAFFF] mb-2" />
+                    <span className="text-[#fff1d0] text-xs font-black uppercase tracking-wide">{category}</span>
                   </div>
-                </>
-              ) : (
-                <div className="w-full h-full flex flex-col items-center justify-center bg-[#003554] p-3 text-center">
-                  <Film className="w-8 h-8 text-[#3CAFFF] mb-2" />
-                  <span className="text-[#fff1d0] text-xs font-black uppercase tracking-wide">{category}</span>
-                  <span className="text-[#fdc500] text-[10px] font-bold mt-1">4K UHD</span>
-                </div>
-              )}
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </motion.div>
     </div>
   );
@@ -123,7 +137,7 @@ const InfiniteSlider = ({
 
 export default function MovieSlider() {
   return (
-    <section className="w-full py-16 bg-[#fff1d0]">
+    <section className="w-full py-16 bg-[#fff1d0]" aria-label={`${CONSTANTS.BRAND_NAME} VOD Movies, TV Series & Sports Catalog`}>
       {/* Category 1: Blockbuster Movies */}
       <div className="mb-12">
         <div className="w-[85%] md:w-[80%] mx-auto px-4 mb-6">
@@ -131,13 +145,13 @@ export default function MovieSlider() {
             <div className="w-2 h-7 bg-[#3CAFFF] rounded-full" />
             <div className="flex items-center gap-2">
               <Film className="w-5 h-5 text-[#003554]" />
-              <p className="text-2xl lg:text-3xl font-black text-[#003554] uppercase tracking-tight">
-                Latest 4K Movies
-              </p>
+              <h3 className="text-2xl lg:text-3xl font-black text-[#003554] uppercase tracking-tight">
+                Latest 4K Movies & VOD Releases
+              </h3>
             </div>
           </div>
           <p className="text-[#003554]/80 text-sm mt-2 font-bold hidden md:block">
-            Stream worldwide cinema premieres and blockbuster titles updated on daily release cycles.
+            {`Stream worldwide cinema premieres and blockbuster titles on ${CONSTANTS.BRAND_NAME} with daily updates.`}
           </p>
         </div>
         <InfiniteSlider items={movies} direction="left" speed={30} category="Movie" />
@@ -150,13 +164,13 @@ export default function MovieSlider() {
             <div className="w-2 h-7 bg-[#3CAFFF] rounded-full" />
             <div className="flex items-center gap-2">
               <Tv2 className="w-5 h-5 text-[#003554]" />
-              <p className="text-2xl lg:text-3xl font-black text-[#003554] uppercase tracking-tight">
-                Trending TV Series & Box Sets
-              </p>
+              <h3 className="text-2xl lg:text-3xl font-black text-[#003554] uppercase tracking-tight">
+                Trending TV Series & Complete Box Sets
+              </h3>
             </div>
           </div>
           <p className="text-[#003554]/80 text-sm mt-2 font-bold hidden md:block">
-            Binge-watch complete seasons with multi-language subtitle tracks and full episode archives.
+            {`Binge-watch complete seasons with multi-language subtitle tracks on ${CONSTANTS.BRAND_NAME} IPTV.`}
           </p>
         </div>
         <InfiniteSlider items={series} direction="right" speed={30} category="Series" />
@@ -169,13 +183,13 @@ export default function MovieSlider() {
             <div className="w-2 h-7 bg-[#003554] rounded-full" />
             <div className="flex items-center gap-2">
               <Trophy className="w-5 h-5 text-[#003554]" />
-              <p className="text-2xl lg:text-3xl font-black text-[#003554] uppercase tracking-tight">
+              <h3 className="text-2xl lg:text-3xl font-black text-[#003554] uppercase tracking-tight">
                 Live Sports & Pay-Per-View Events
-              </p>
+              </h3>
             </div>
           </div>
           <p className="text-[#003554]/80 text-sm mt-2 font-bold hidden md:block">
-            Catch every football league derby, boxing match, and motorsport circuit in progressive 60 FPS.
+            {`Catch football league derbies, boxing PPVs, and motorsport circuits on ${CONSTANTS.BRAND_NAME} in native 60 FPS.`}
           </p>
         </div>
         <InfiniteSlider items={sports} direction="left" speed={35} category="Sports" />

@@ -20,7 +20,6 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Force state directly onto the body element to bypass JS event delays
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -36,7 +35,6 @@ export default function Header() {
     };
   }, [isOpen]);
 
-  // Close menu when route changes
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
@@ -62,11 +60,15 @@ export default function Header() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <div className="flex items-center">
-              <Link href="/" className="flex items-center group">
+              <Link 
+                href="/" 
+                className="flex items-center group"
+                aria-label={`${CONSTANTS.BRAND_NAME} Official 4K Streaming - Home`}
+              >
                 <div className="h-10 flex items-center group-hover:scale-105 transition-transform">
                   <Image
                     src="/img/iptv-logo.webp"
-                    alt={CONSTANTS.BRAND_NAME}
+                    alt={`${CONSTANTS.BRAND_NAME} IPTV Official Logo`}
                     width={160}
                     height={40}
                     className="object-contain h-full w-auto"
@@ -99,9 +101,13 @@ export default function Header() {
               </ul>
             </nav>
 
-            {/* Sub Button (Cream/Off-White) */}
+            {/* CTA Button */}
             <div className="hidden md:flex">
-              <Link href="/pricing" className="px-6 py-2.5 rounded-full border border-3 border-[#3CAFFF] bg-[#fff1d0] text-[#3CAFFF] font-black tracking-widest uppercase text-sm hover:bg-[#fdc500] hover:text-[#003554] transition-all shadow-lg">
+              <Link 
+                href="/pricing" 
+                aria-label={`Get Started with ${CONSTANTS.BRAND_NAME} IPTV Plans`}
+                className="px-6 py-2.5 rounded-full border border-3 border-[#3CAFFF] bg-[#fff1d0] text-[#3CAFFF] font-black tracking-widest uppercase text-sm hover:bg-[#fdc500] hover:text-[#003554] transition-all shadow-lg"
+              >
                 Get Started
               </Link>
             </div>
@@ -150,6 +156,7 @@ export default function Header() {
               <Link 
                 href="/pricing"
                 onClick={() => setIsOpen(false)}
+                aria-label={`Get Started with ${CONSTANTS.BRAND_NAME} IPTV Plans`}
                 className="w-full text-center whitespace-nowrap px-6 py-5 rounded-2xl bg-[#fff1d0] text-[#3CAFFF] font-black text-xl tracking-widest uppercase shadow-2xl transition-transform hover:scale-105 shrink-0"
               >
                 Get Started

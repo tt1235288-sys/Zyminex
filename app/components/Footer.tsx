@@ -12,10 +12,10 @@ export default function Footer() {
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#3CAFFF]/50 to-transparent" />
 
       <div className="relative z-10 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10">
           
           {/* Brand Section */}
-          <div className="md:col-span-2">
+          <div className="sm:col-span-2 lg:col-span-2">
             <Link
               href="/"
               className="flex items-center gap-3 mb-5 group inline-flex"
@@ -24,7 +24,7 @@ export default function Footer() {
               <div className="w-auto h-12 flex items-center group-hover:scale-105 transition-transform">
                 <Image
                   src="/img/iptv-logo.webp"
-                  alt={CONSTANTS.BRAND_NAME}
+                  alt={`${CONSTANTS.BRAND_NAME} Official Logo`}
                   width={180}
                   height={48}
                   className="object-contain h-full w-auto"
@@ -35,31 +35,37 @@ export default function Footer() {
 
             <p className="text-base font-bold text-[#fff1d0]/80 max-w-md leading-relaxed mb-6">
               Experience the future of entertainment with{" "}
-              <strong className="text-[#3CAFFF]">Zyminex</strong>. 
-              Delivering premium IPTV Service worldwide with 15,000+ channels and 60,000+ VODs. Explore premium IPTV Providers options at zyminex.stream.
+              <strong className="text-[#3CAFFF]">{CONSTANTS.BRAND_NAME}</strong>. 
+              Delivering premium {CONSTANTS.BRAND_NAME} IPTV services worldwide with 15,000+ live channels, PPV events, and 60,000+ movies on demand.
             </p>
 
-            {/* Social Icons */}
+            {/* Social Links matching Schema sameAs */}
             <div className="flex items-center gap-3">
               <a
-                href="#"
-                aria-label="Follow Zyminex on Twitter"
+                href="https://twitter.com/zyminex"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Follow ${CONSTANTS.BRAND_NAME} on Twitter / X`}
                 className="group w-10 h-10 rounded-full bg-white/[0.03] border border-white/10 flex items-center justify-center hover:bg-[#3CAFFF] hover:border-[#3CAFFF] transition-all duration-300"
               >
                 <Twitter className="w-4 h-4 text-[#fff1d0]/50 group-hover:text-[#fff1d0] transition-colors" />
               </a>
 
               <a
-                href="#"
-                aria-label="Follow Zyminex on Instagram"
+                href="https://instagram.com/zyminex"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Follow ${CONSTANTS.BRAND_NAME} on Instagram`}
                 className="group w-10 h-10 rounded-full bg-white/[0.03] border border-white/10 flex items-center justify-center hover:bg-[#3CAFFF] hover:border-[#3CAFFF] transition-all duration-300"
               >
                 <Instagram className="w-4 h-4 text-[#fff1d0]/50 group-hover:text-[#fff1d0] transition-colors" />
               </a>
 
               <a
-                href="#"
-                aria-label="Follow Zyminex on Facebook"
+                href="https://facebook.com/zyminex"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Follow ${CONSTANTS.BRAND_NAME} on Facebook`}
                 className="group w-10 h-10 rounded-full bg-white/[0.03] border border-white/10 flex items-center justify-center hover:bg-[#3CAFFF] hover:border-[#3CAFFF] transition-all duration-300"
               >
                 <Facebook className="w-4 h-4 text-[#fff1d0]/50 group-hover:text-[#fff1d0] transition-colors" />
@@ -67,42 +73,77 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Pages links */}
+          {/* Quick Pages */}
           <div>
-            <h4 className="text-[#fff1d0] font-black mb-5 tracking-widest uppercase text-sm">
+            <h3 className="text-[#fff1d0] font-black mb-5 tracking-widest uppercase text-sm">
               Pages
-            </h4>
+            </h3>
             <ul className="space-y-3 text-sm font-bold">
               <li><Link href="/" className="text-[#fff1d0]/50 hover:text-[#fdc500] transition-colors">Home Page</Link></li>
-              <li><Link href="/pricing" className="text-[#fff1d0]/50 hover:text-[#fdc500] transition-colors">Pricing Page</Link></li>
-              <li><Link href="/setup" className="text-[#fff1d0]/50 hover:text-[#fdc500] transition-colors">Setup Guide Page</Link></li>
-              <li><Link href="/blog" className="text-[#fff1d0]/50 hover:text-[#fdc500] transition-colors">Blog Page</Link></li>
-              <li><Link href="/contact" className="text-[#fff1d0]/50 hover:text-[#fdc500] transition-colors">Contact</Link></li>
+              <li><Link href="/pricing" className="text-[#fff1d0]/50 hover:text-[#fdc500] transition-colors">Pricing & Plans</Link></li>
+              <li><Link href="/setup" className="text-[#fff1d0]/50 hover:text-[#fdc500] transition-colors">Setup Guide</Link></li>
+              <li><Link href="/blog" className="text-[#fff1d0]/50 hover:text-[#fdc500] transition-colors">Blog & Tutorials</Link></li>
+              <li><Link href="/contact" className="text-[#fff1d0]/50 hover:text-[#fdc500] transition-colors">24/7 Support</Link></li>
             </ul>
           </div>
 
-          {/* Legal links */}
+          {/* Channels Row */}
           <div>
-            <h4 className="text-[#fff1d0] font-black mb-5 tracking-widest uppercase text-sm">
+            <h3 className="text-[#fff1d0] font-black mb-5 tracking-widest uppercase text-sm">
+              Channels
+            </h3>
+            <ul className="space-y-3 text-sm font-bold">
+              <li>
+                <Link href="/channels/live-sports-hd" className="text-[#fff1d0]/50 hover:text-[#fdc500] transition-colors">
+                  Live Sports HD
+                </Link>
+              </li>
+              <li>
+                <Link href="/channels/us-uk-entertainment" className="text-[#fff1d0]/50 hover:text-[#fdc500] transition-colors">
+                  US & UK Channels
+                </Link>
+              </li>
+              <li>
+                <Link href="/channels/international-feeds" className="text-[#fff1d0]/50 hover:text-[#fdc500] transition-colors">
+                  International Feeds
+                </Link>
+              </li>
+              <li>
+                <Link href="/channels/24-7-news-feeds" className="text-[#fff1d0]/50 hover:text-[#fdc500] transition-colors">
+                  24/7 News Feeds
+                </Link>
+              </li>
+              <li>
+                <Link href="/channels/ppv-cinema-vod" className="text-[#fff1d0]/50 hover:text-[#fdc500] transition-colors">
+                  PPV & Cinema VOD
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Legal Links */}
+          <div>
+            <h3 className="text-[#fff1d0] font-black mb-5 tracking-widest uppercase text-sm">
               Legal
-            </h4>
+            </h3>
             <ul className="space-y-3 text-sm font-bold">
               <li><Link href="/terms" className="text-[#fff1d0]/50 hover:text-[#fdc500] transition-colors">Terms of Service</Link></li>
               <li><Link href="/privacy" className="text-[#fff1d0]/50 hover:text-[#fdc500] transition-colors">Privacy Policy</Link></li>
-              <li><Link href="/about" className="text-[#fff1d0]/50 hover:text-[#fdc500] transition-colors">About US</Link></li>
+              <li><Link href="/about" className="text-[#fff1d0]/50 hover:text-[#fdc500] transition-colors">About Us</Link></li>
               <li><Link href="/refund" className="text-[#fff1d0]/50 hover:text-[#fdc500] transition-colors">Refund Policy</Link></li>
             </ul>
           </div>
+
         </div>
       </div>
 
-      {/* Bottom Bar Payment Allocations */}
+      {/* Bottom Bar Payment Icons */}
       <div className="max-w-7xl mx-auto mt-12 pt-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
         <p className="text-xs text-[#fff1d0]/40 font-bold">
           © {new Date().getFullYear()} {CONSTANTS.BRAND_NAME}. All rights reserved.
         </p>
 
-        <div className="flex items-center gap-3 flex-wrap ">
+        <div className="flex items-center gap-3 flex-wrap">
           {[
             { src: "/img/payment/1.png", alt: "PayPal" },
             { src: "/img/payment/2.png", alt: "Bitcoin" },

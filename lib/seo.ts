@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 const DOMAIN = 'www.zyminex.stream';
 const BRAND_NAME = 'Zyminex';
-const FOCUS_KEYWORD = 'Zyminex IPTV';
+const FOCUS_KEYWORD = 'Zyminex';
 
 export const CONSTANTS = {
   DOMAIN,
@@ -11,18 +11,20 @@ export const CONSTANTS = {
 };
 
 export const generateSEOMetadata = (
-  pageName: string,
+  pageName?: string,
   customDescription?: string,
   path: string = ''
 ): Metadata => {
   const cleanPath = path.startsWith('/') ? path : path ? `/${path}` : '';
   const canonicalUrl = `https://${CONSTANTS.DOMAIN}${cleanPath}`;
   
-  // Exact 50-55 char range to prevent truncation and pixel overflow (< 500px)
-  const metaTitle = `${pageName} | ${CONSTANTS.BRAND_NAME}`;
+  // Front-load focus keyword for homepage; use standard template for subpages (45-55 chars)
+  const metaTitle = pageName 
+    ? `${pageName} | ${CONSTANTS.BRAND_NAME}`
+    : `${CONSTANTS.FOCUS_KEYWORD}: Official 4K Live Streaming & TV Service`;
   
-  // Clean, non-repetitive 150-158 character description with high-intent keywords
-  const defaultDesc = `Explore ${CONSTANTS.BRAND_NAME} with 20,000+ live channels, 4K sports streams & on-demand movies. Low-latency anti-freeze servers with fast setup.`;
+  // High-CTR description containing focus keyword within optimal 140-155 character range
+  const defaultDesc = `Stream with ${CONSTANTS.BRAND_NAME} official website. Access 15,000+ live channels, 4K sports & VOD movies with anti-freeze servers and instant multi-device setup.`;
   const cleanDescription = customDescription || defaultDesc;
 
   return {
@@ -34,12 +36,15 @@ export const generateSEOMetadata = (
     description: cleanDescription,
     keywords: [
       CONSTANTS.FOCUS_KEYWORD,
+      `${CONSTANTS.BRAND_NAME} website`,
+      `${CONSTANTS.BRAND_NAME} iptv service`,
       `${CONSTANTS.BRAND_NAME} cost`,
       `${CONSTANTS.BRAND_NAME} channels`,
+      `${CONSTANTS.BRAND_NAME} login`,
+      `is ${CONSTANTS.BRAND_NAME} legit`,
       `${CONSTANTS.BRAND_NAME} review reddit`,
       '4K sports streaming',
       'anti-freeze live TV',
-      'stable media player setup',
     ],
     alternates: {
       canonical: canonicalUrl,
@@ -56,7 +61,7 @@ export const generateSEOMetadata = (
           url: `https://${CONSTANTS.DOMAIN}/img/structer.webp`,
           width: 1200,
           height: 630,
-          alt: `${CONSTANTS.BRAND_NAME} 4K Live Entertainment`,
+          alt: `${CONSTANTS.BRAND_NAME} Official 4K Live Streaming Service`,
         },
       ],
     },

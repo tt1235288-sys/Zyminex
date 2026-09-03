@@ -3,11 +3,26 @@ import { CONSTANTS, generateSEOMetadata } from '@/lib/seo';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowLeft, Calendar, User, Tag, Clock, ArrowRight, Sparkles, Zap, ShieldCheck, Headphones, ExternalLink } from 'lucide-react';
+import { 
+  ArrowLeft, 
+  Calendar, 
+  User, 
+  Tag, 
+  Clock, 
+  ArrowRight, 
+  Sparkles, 
+  Zap, 
+  ShieldCheck, 
+  Headphones, 
+  ExternalLink,
+  BookOpen,
+  CheckCircle2,
+  Tv
+} from 'lucide-react';
 
 type Props = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
   return blogPosts.map((post) => ({
     slug: post.slug,
   }));
@@ -16,33 +31,36 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props) {
   const resolvedParams = await params;
   const post = blogPosts.find((p) => p.slug === resolvedParams.slug);
-  if (!post) return generateSEOMetadata('Post Not Found');
+  if (!post) return generateSEOMetadata('Article Not Found');
+
+  // Exact SERP title strictly under 60 characters with front-loaded keywords
+  const pageTitle = `${post.title} | ${CONSTANTS.BRAND_NAME}`;
   
-  // Clean, short title strictly under 550px
-  const cleanTitle = post.title.length > 45 ? post.title.substring(0, 42).trim() + '...' : post.title;
-  const metaTitle = `${cleanTitle} | Zyminex Blog`;
+  // Clean, sentence-aware description under 155 characters
+  const rawDesc = post.description || post.excerpt || `Step-by-step technical guide on IPTV streaming, bandwidth optimization, and 4K server setup.`;
+  const metaDescription = rawDesc.length > 155 ? `${rawDesc.slice(0, 152).trim()}...` : rawDesc;
   
-  // Clean description under 150 chars (under 950px)
-  const rawDesc = post.description || post.excerpt || `Read our definitive guide on IPTV streaming, bandwidth optimization, and 4K server setup.`;
-  const metaDescription = rawDesc.length > 145 ? rawDesc.substring(0, 142).trim() + '...' : rawDesc;
-  
-  const postUrl = `https://www.zyminex.stream/blog/${post.slug}`;
-  const postImage = post.image || `https://www.zyminex.stream/img/structer.webp`;
+  const postUrl = `https://${CONSTANTS.DOMAIN}/blog/${post.slug}`;
+  const postImage = post.image || `https://${CONSTANTS.DOMAIN}/img/structer.webp`;
 
   return {
-    title: metaTitle,
+    title: {
+      absolute: pageTitle,
+    },
     description: metaDescription,
     keywords: post.keywords ? post.keywords.join(', ') : '',
     alternates: {
       canonical: postUrl,
     },
     openGraph: {
-      title: metaTitle,
+      title: pageTitle,
       description: metaDescription,
       url: postUrl,
       type: 'article',
       publishedTime: post.date,
       authors: [post.author],
+      siteName: CONSTANTS.BRAND_NAME,
+      locale: 'en_US',
       images: [
         {
           url: postImage,
@@ -54,9 +72,11 @@ export async function generateMetadata({ params }: Props) {
     },
     twitter: {
       card: 'summary_large_image',
-      title: metaTitle,
+      title: pageTitle,
       description: metaDescription,
       images: [postImage],
+      creator: `@${CONSTANTS.BRAND_NAME}`,
+      site: `@${CONSTANTS.BRAND_NAME}`,
     },
   };
 }
@@ -64,19 +84,26 @@ export async function generateMetadata({ params }: Props) {
 export default async function BlogPostPage({ params }: Props) {
   const resolvedParams = await params;
   const post = blogPosts.find((p) => p.slug === resolvedParams.slug);
-  
+
   if (!post) {
     notFound();
   }
 
+  // Calculate read time and clean word metrics
   const wordCount = post.content.replace(/<[^>]*>/g, '').split(/\s+/).length;
   const readTime = Math.max(3, Math.ceil(wordCount / 200));
   const displayCategory = post.keywords && post.keywords.length > 0 ? post.keywords[0] : 'IPTV Guide';
-  const postUrl = `https://www.zyminex.stream/blog/${post.slug}`;
+  const postUrl = `https://${CONSTANTS.DOMAIN}/blog/${post.slug}`;
+
+  // Get related articles excluding the current post
+  const relatedPosts = blogPosts
+    .filter((p) => p.slug !== post.slug)
+    .slice(0, 3);
 
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
+    '@id': `${postUrl}/#article`,
     headline: post.title,
     description: post.description || post.excerpt,
     keywords: post.keywords ? post.keywords.join(', ') : '',
@@ -89,10 +116,10 @@ export default async function BlogPostPage({ params }: Props) {
     },
     publisher: {
       '@type': 'Organization',
-      name: "Zyminex",
+      name: CONSTANTS.BRAND_NAME,
       logo: {
         '@type': 'ImageObject',
-        url: `https://www.zyminex.stream/img/structer.webp`,
+        url: `https://${CONSTANTS.DOMAIN}/img/structer.webp`,
       },
     },
     mainEntityOfPage: {
@@ -102,69 +129,55 @@ export default async function BlogPostPage({ params }: Props) {
   };
 
   return (
-    <article className="flex flex-col min-h-screen bg-[#003554]">
-      
+    <article className="flex flex-col min-h-screen bg-[#003554] text-[#fff1d0]">
+      {/* Article Schema */}
       <script
         type="application/ld+json"
+        id="blog-article-schema"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Hero Section Container */}
-      <section className="relative min-h-fit md:min-h-[55vh] lg:min-h-[60vh] flex items-center justify-center overflow-hidden">
-        
+      {/* Hero Section */}
+      <section className="relative min-h-[45vh] sm:min-h-[50vh] flex items-center justify-center overflow-hidden pt-28 pb-12">
         <div className="absolute inset-0 z-0">
           <Image
             src={post.image}
-            alt={`${post.title} - Zyminex Blog Article`}
-            width={1920}
-            height={1080}
+            alt={`${post.title} - ${CONSTANTS.BRAND_NAME} Article Cover`}
+            fill
             priority
-            className="w-full h-full object-cover scale-105 brightness-[0.2]"
+            className="object-cover scale-105 brightness-[0.18]"
             sizes="100vw"
+            quality={85}
           />
-          <div className="absolute inset-0 bg-[#003554]/5" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#003554] via-transparent to-[#00355400]" />
+          <div className="absolute inset-0 bg-[#003554]/0" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#003554]/30 via-transparent to-[#003554]" />
         </div>
-        
-        <div 
-          className="absolute inset-0 z-0 opacity-5"
-          style={{ 
-            backgroundImage: `
-              linear-gradient(to right, #3CAFFF 1px, transparent 1px),
-              linear-gradient(to bottom, #3CAFFF 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px',
-          }}
-        />
-        
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] md:w-[600px] md:h-[600px] bg-[#3CAFFF]/10 blur-[120px] md:blur-[150px] rounded-full pointer-events-none z-0" />
-        
-        <div className="max-w-4xl mx-auto w-full px-4 sm:px-6 lg:px-8 text-center relative z-10 pt-32 sm:pt-36 md:pt-40 lg:pt-48 pb-12 md:pb-16 flex flex-col items-center justify-center">
-          
-          <div className="inline-block mb-4 md:mb-6">
-            <span className="px-4 py-2 bg-[#3CAFFF] text-[#fff1d0] text-xs font-black uppercase tracking-widest rounded-full shadow-md">
+
+        <div className="max-w-4xl mx-auto w-full px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <div className="inline-block mb-4">
+            <span className="px-4 py-1.5 bg-[#fdc500] text-[#003554] text-xs font-black uppercase tracking-widest rounded-full shadow-md">
               {displayCategory}
             </span>
           </div>
-          
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-[#fff1d0] tracking-tighter uppercase mb-4 md:mb-6 leading-none">
+
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-[#fff1d0] tracking-tighter uppercase mb-4 leading-tight">
             {post.title}
           </h1>
-          
-          <p className="text-base sm:text-lg md:text-xl text-[#fff1d0]/80 font-bold max-w-2xl mx-auto leading-relaxed mb-6">
+
+          <p className="text-sm sm:text-base md:text-lg text-[#fff1d0]/80 font-bold max-w-2xl mx-auto leading-relaxed mb-6">
             {post.description}
           </p>
-          
-          <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-[#fff1d0]/50 text-xs md:text-sm font-black uppercase tracking-widest">
-            <div className="flex items-center gap-2">
+
+          <div className="flex flex-wrap justify-center gap-4 text-[#fff1d0]/60 text-xs sm:text-sm font-black uppercase tracking-widest">
+            <div className="flex items-center gap-1.5">
               <Calendar className="w-4 h-4 text-[#3CAFFF]" />
               <span>{post.date}</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
               <User className="w-4 h-4 text-[#3CAFFF]" />
               <span>{post.author}</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
               <Clock className="w-4 h-4 text-[#3CAFFF]" />
               <span>{readTime} min read</span>
             </div>
@@ -172,133 +185,183 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
       </section>
 
-      {/* Back Button Link */}
-      <div className="max-w-4xl mx-auto w-full px-4 sm:px-6 lg:px-8 mt-8 md:mt-10">
+      {/* Breadcrumb Navigation */}
+      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-4">
         <Link 
           href="/blog" 
           aria-label="Back to all IPTV guides and blog articles"
-          className="inline-flex items-center gap-2 text-[#3CAFFF] hover:text-[#fff1d0] transition-colors font-black text-xs uppercase tracking-widest group"
+          className="inline-flex items-center gap-2 text-[#3CAFFF] hover:text-[#fdc500] transition-colors font-black text-xs uppercase tracking-widest group bg-white/5 border border-white/10 px-4 py-2 rounded-full"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Back to all articles
         </Link>
       </div>
 
-      {/* Main Content Layout Wrapper */}
-      <div className="max-w-4xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+      {/* Main Grid: Content (8 cols) + Sticky Sidebar (4 cols) */}
+      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          
+          {/* Main Article Body (8 cols) */}
+          <div className="lg:col-span-8 min-w-0">
+            <div 
+              className="prose prose-invert prose-base md:prose-lg max-w-none
+                [&>h2]:text-2xl [&>h2]:sm:text-3xl [&>h2]:font-black [&>h2]:text-[#fff1d0] [&>h2]:mb-4 [&>h2]:mt-10 [&>h2]:tracking-tight [&>h2]:uppercase
+                [&>h3]:text-xl [&>h3]:sm:text-2xl [&>h3]:font-black [&>h3]:text-[#fff1d0] [&>h3]:mb-3 [&>h3]:mt-6 [&>h3]:uppercase
+                [&>p]:text-[#fff1d0]/80 [&>p]:text-base [&>p]:font-medium [&>p]:leading-relaxed [&>p]:mb-6
+                [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:mb-6 [&>ul]:text-[#fff1d0]/80 [&>ul]:font-medium
+                [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:mb-6 [&>ol]:text-[#fff1d0]/80 [&>ol]:font-medium
+                [&>li]:mb-2
+                [&>a]:text-[#3CAFFF] [&>a]:font-black [&>a]:hover:text-[#fdc500] [&>a]:transition-colors
+                [&>blockquote]:border-l-4 [&>blockquote]:border-[#3CAFFF] [&>blockquote]:bg-white/5 [&>blockquote]:pl-6 [&>blockquote]:py-3 [&>blockquote]:my-6 [&>blockquote]:text-[#fff1d0]/75 [&>blockquote]:italic
+                [&>img]:rounded-2xl [&>img]:my-8 [&>img]:border-2 [&>img]:border-[#3CAFFF]/20 [&>img]:w-full [&>img]:h-auto
+                [&>hr]:border-white/10 [&>hr]:my-10
+              "
+              dangerouslySetInnerHTML={{ __html: post.content }}
+            />
 
-        {/* Content Box Core with custom Prose override configurations */}
-        <div 
-          className="prose prose-invert prose-base md:prose-lg max-w-none
-            [&>h1]:text-2xl [&>h1]:md:text-3xl [&>h1]:lg:text-4xl [&>h1]:font-black [&>h1]:text-[#fff1d0] [&>h1]:mb-4 [&>h1]:md:mb-6 [&>h1]:tracking-tight [&>h1]:uppercase
-            [&>h2]:text-xl [&>h2]:md:text-2xl [&>h2]:lg:text-3xl [&>h2]:font-black [&>h2]:text-[#fff1d0] [&>h2]:mb-4 [&>h2]:md:mb-5 [&>h2]:mt-8 [&>h2]:md:mt-12 [&>h2]:tracking-tight [&>h2]:uppercase
-            [&>h3]:text-lg [&>h3]:md:text-xl [&>h3]:lg:text-2xl [&>h3]:font-black [&>h3]:text-[#fff1d0] [&>h3]:mb-3 [&>h3]:md:mb-4 [&>h3]:mt-6 [&>h3]:md:mt-8 [&>h3]:uppercase
-            [&>h4]:text-base [&>h4]:md:text-lg [&>h4]:lg:text-xl [&>h4]:font-black [&>h4]:text-[#3CAFFF] [&>h4]:mb-2 [&>h4]:md:mb-3 [&>h4]:mt-4 [&>h4]:md:mt-6 [&>h4]:uppercase
-            [&>p]:text-[#fff1d0]/80 [&>p]:text-sm [&>p]:md:text-base [&>p]:lg:text-lg [&>p]:font-medium [&>p]:leading-relaxed [&>p]:mb-4 [&>p]:md:mb-6
-            [&>ul]:list-disc [&>ul]:pl-5 [&>ul]:md:pl-6 [&>ul]:mb-4 [&>ul]:md:mb-6 [&>ul]:text-[#fff1d0]/80 [&>ul]:font-bold
-            [&>ol]:list-decimal [&>ol]:pl-5 [&>ol]:md:pl-6 [&>ol]:mb-4 [&>ol]:md:mb-6 [&>ol]:text-[#fff1d0]/80 [&>ol]:font-bold
-            [&>li]:mb-1.5 [&>li]:md:mb-2 [&>li]:text-[#fff1d0]/80
-            [&>a]:text-[#3CAFFF] [&>a]:font-black [&>a]:hover:text-[#fff1d0] [&>a]:transition-colors
-            [&>blockquote]:border-l-4 [&>blockquote]:border-[#3CAFFF] [&>blockquote]:bg-[#fff1d0]/5 [&>blockquote]:pl-4 [&>blockquote]:md:pl-6 [&>blockquote]:py-2 [&>blockquote]:my-4 [&>blockquote]:md:my-6 [&>blockquote]:text-[#fff1d0]/70 [&>blockquote]:italic
-            [&>code]:bg-[#fff1d0]/10 [&>code]:px-2 [&>code]:py-1 [&>code]:rounded-lg [&>code]:text-[#3CAFFF] [&>code]:text-xs [&>code]:md:text-sm
-            [&>pre]:bg-[#003554] [&>pre]:p-4 [&>pre]:md:p-6 [&>pre]:rounded-2xl [&>pre]:overflow-x-auto [&>pre]:border-2 [&>pre]:border-[#3CAFFF]/20
-            [&>img]:rounded-2xl [&>img]:my-6 [&>img]:md:my-8 [&>img]:border-2 [&>img]:border-[#3CAFFF]/20 [&>img]:w-full [&>img]:h-auto
-            [&>hr]:border-[#3CAFFF]/20 [&>hr]:my-8 [&>hr]:md:my-12
-          "
-          dangerouslySetInnerHTML={{ __html: post.content }}
-        />
-
-        {/* Network & Speed Verification Reference (External Link for SEO) */}
-        <div className="my-8 p-6 bg-[#fff1d0] border-4 border-[#3CAFFF] rounded-2xl text-[#003554]">
-          <p className="font-black text-lg uppercase mb-2">Network Diagnostic Note</p>
-          <p className="text-sm font-medium leading-relaxed">
-            Ensure your connection meets the recommended 25+ Mbps threshold for uncompressed 4K streaming. You can benchmark your network throughput via{' '}
-            <a 
-              href="https://www.speedtest.net/" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="text-[#3CAFFF] underline font-black inline-flex items-center gap-1"
-            >
-              Speedtest by Ookla <ExternalLink className="w-3.5 h-3.5" />
-            </a>.
-          </p>
-        </div>
-
-        {/* Topics Tag Section Module Area */}
-        <div className="mt-8 md:mt-12 pt-6 md:pt-8 border-t border-white/10">
-          <div className="flex items-center gap-2 mb-4">
-            <Tag className="w-5 h-5 text-[#3CAFFF]" />
-            <p className="text-[#fff1d0] font-black text-base md:text-lg uppercase tracking-wide">Topics</p>
-          </div>
-          <div className="flex flex-wrap gap-2 md:gap-3">
-            {post.keywords.slice(0, 8).map(keyword => (
-              <span 
-                key={keyword} 
-                className="px-4 py-2 bg-[#fff1d0] text-[#003554] text-xs md:text-sm font-black uppercase tracking-wider rounded-full border-4 border-[#3CAFFF] shadow-md hover:bg-[#3CAFFF] hover:text-[#fff1d0] transition-all cursor-pointer"
-              >
-                {keyword}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* Author Metadata Frame Block Card */}
-        <div className="mt-8 md:mt-12 p-6 md:p-8 rounded-2xl border-4 border-[#3CAFFF] bg-[#fff1d0]">
-          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 md:gap-6 text-center sm:text-left">
-            <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#3CAFFF] flex items-center justify-center text-[#fff1d0] font-black text-2xl md:text-3xl uppercase flex-shrink-0 shadow-lg">
-              {post.author[0]}
-            </div>
-            <div>
-              <p className="text-[#003554] font-black text-xl md:text-2xl mb-1 uppercase tracking-tight">{post.author}</p>
-              <p className="text-[#3CAFFF] text-xs md:text-sm uppercase tracking-widest font-black mb-2 md:mb-3">Content Editor at Zyminex</p>
-              <p className="text-[#003554]/80 text-sm md:text-base font-medium leading-relaxed">
-                Dedicated to bringing you the best insights, tutorials, and updates about IPTV technology, 
-                streaming optimization, and entertainment content. Passionate about helping users get the 
-                most out of their viewing experience.
+            {/* Network Diagnostic Callout Note */}
+            <div className="my-10 p-6 bg-[#fff1d0] border-4 border-[#3CAFFF] rounded-2xl text-[#003554] shadow-xl">
+              <h3 className="font-black text-lg uppercase mb-2">Network Diagnostic Note</h3>
+              <p className="text-sm font-bold leading-relaxed">
+                Ensure your connection meets the recommended 25+ Mbps threshold for uncompressed 4K streaming. You can benchmark your network throughput via{' '}
+                <a 
+                  href="https://www.speedtest.net/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-[#3CAFFF] underline font-black inline-flex items-center gap-1"
+                >
+                  Speedtest by Ookla <ExternalLink className="w-3.5 h-3.5" />
+                </a>.
               </p>
             </div>
-          </div>
-        </div>
 
-        {/* Continuation Container Widget Loop Panel */}
-        <div className="mt-12 md:mt-16 p-6 md:p-8 rounded-2xl bg-[#fff1d0] border-4 border-[#3CAFFF] text-center shadow-xl">
-          <div className="inline-flex items-center gap-2 bg-[#3CAFFF] px-4 py-2 rounded-full mb-4 shadow-md">
-            <Sparkles className="w-4 h-4 text-[#fff1d0]" />
-            <span className="text-[#fff1d0] font-black text-xs uppercase tracking-widest">Continue Reading</span>
-          </div>
-          <p className="text-xl md:text-2xl font-black text-[#003554] uppercase tracking-wide mb-2">Enjoyed this article?</p>
-          <p className="text-[#3CAFFF] font-bold text-sm md:text-base max-w-md mx-auto mb-6">
-            Explore more guides and tutorials to enhance your IPTV Service experience.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full max-w-md mx-auto px-4">
-            <Link 
-              href="/blog" 
-              aria-label="Explore all IPTV tutorial articles"
-              className="w-full sm:w-auto text-center px-6 py-4 rounded-full bg-[#3CAFFF] text-[#fff1d0] font-black text-xs uppercase tracking-widest hover:bg-[#3CAFFF]/80 transition-colors"
-            >
-              View All Articles
-            </Link>
-            <Link 
-              href="/pricing" 
-              aria-label="View Zyminex subscription plans"
-              className="w-full sm:w-auto text-center px-6 py-4 rounded-full bg-[#003554] text-[#3CAFFF] font-black text-xs uppercase tracking-widest border-2 border-[#3CAFFF]"
-            >
-              View Plans
-            </Link>
-          </div>
-        </div>
-      </div>
+            {/* Article Topics Tags */}
+            <div className="mt-10 pt-6 border-t border-white/10">
+              <div className="flex items-center gap-2 mb-4">
+                <Tag className="w-5 h-5 text-[#3CAFFF]" />
+                <h3 className="text-[#fff1d0] font-black text-base uppercase tracking-wide">Related Topics</h3>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {post.keywords.slice(0, 6).map((keyword) => (
+                  <span 
+                    key={keyword} 
+                    className="px-3.5 py-1.5 bg-[#fff1d0] text-[#003554] text-xs font-black uppercase tracking-wider rounded-full border-2 border-[#3CAFFF] shadow-sm"
+                  >
+                    {keyword}
+                  </span>
+                ))}
+              </div>
+            </div>
 
-      {/* Trust Footer Layout Container Segment */}
-      <div className="border-t border-white/5 mt-8 md:mt-12 py-6 md:py-8 bg-[#003554]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap justify-center gap-4 md:gap-8 text-[#fff1d0]/40 text-xs font-black uppercase tracking-widest">
-            <span className="flex items-center gap-2"><Zap className="w-4 h-4 text-[#3CAFFF]" /> 4K Quality</span>
-            <span className="flex items-center gap-2"><ShieldCheck className="w-4 h-4 text-[#3CAFFF]" /> 99.9% Uptime</span>
-            <span className="flex items-center gap-2"><Headphones className="w-4 h-4 text-[#3CAFFF]" /> 24/7 Support</span>
+            {/* Author Bio Box */}
+            <div className="mt-10 p-6 sm:p-8 rounded-2xl border-4 border-[#3CAFFF] bg-[#fff1d0] shadow-xl">
+              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 text-center sm:text-left">
+                <div className="w-16 h-16 rounded-full bg-[#003554] text-[#fdc500] flex items-center justify-center font-black text-2xl uppercase shrink-0 shadow-md">
+                  {post.author[0]}
+                </div>
+                <div>
+                  <h3 className="text-[#003554] font-black text-xl mb-1 uppercase tracking-tight">{post.author}</h3>
+                  <p className="text-[#3CAFFF] text-xs uppercase tracking-widest font-black mb-2">Content Editor at {CONSTANTS.BRAND_NAME}</p>
+                  <p className="text-[#003554]/80 text-sm font-bold leading-relaxed">
+                    {`Specializing in high-throughput streaming architecture, media player configurations, and IPTV network optimization for ${CONSTANTS.BRAND_NAME}.`}
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-          <p className="text-center text-[#fff1d0]/30 text-xs mt-6 font-bold">
-            © 2026 Zyminex. All rights reserved.
-          </p>
+
+          {/* Sticky Sidebar (4 cols) */}
+          <aside className="lg:col-span-4 space-y-8 lg:sticky lg:top-24">
+            
+            {/* CTA Order Card */}
+            <div className="bg-[#fff1d0] border-4 border-[#fdc500] rounded-3xl p-6 shadow-2xl text-center">
+              <div className="inline-flex items-center gap-1.5 bg-[#003554] text-[#fdc500] px-3.5 py-1 rounded-full text-[11px] font-black uppercase tracking-widest mb-4">
+                <Sparkles className="w-3.5 h-3.5 fill-current" />
+                <span>Zero Buffering Setup</span>
+              </div>
+              <h3 className="text-2xl font-black text-[#003554] uppercase tracking-tight mb-2">
+                Get {CONSTANTS.BRAND_NAME} 4K Access
+              </h3>
+              <p className="text-xs text-[#003554]/80 font-bold leading-relaxed mb-6">
+                Stream 15,000+ live sports and cinema channels on Firestick, Smart TV, and Android from $11.60/mo.
+              </p>
+              <Link
+                href="/pricing"
+                className="w-full block py-3.5 px-4 rounded-full bg-[#fdc500] hover:bg-amber-400 text-[#003554] font-black text-xs uppercase tracking-widest transition-all duration-200 shadow-md hover:scale-[1.02]"
+              >
+                View Plans &amp; Pricing
+              </Link>
+              <p className="text-[10px] text-[#003554]/60 font-black uppercase tracking-wider mt-3">
+                7-Day Money-Back Guarantee
+              </p>
+            </div>
+
+            {/* Related Articles Widget */}
+            <div className="bg-[#00263d] border-2 border-white/10 rounded-3xl p-6 shadow-xl">
+              <div className="flex items-center gap-2 mb-6 pb-4 border-b border-white/10">
+                <BookOpen className="w-5 h-5 text-[#3CAFFF]" />
+                <h3 className="text-base font-black text-[#fff1d0] uppercase tracking-wider">
+                  Related Guides
+                </h3>
+              </div>
+
+              <div className="space-y-4">
+                {relatedPosts.map((rel) => (
+                  <Link
+                    key={rel.slug}
+                    href={`/blog/${rel.slug}`}
+                    className="group flex gap-3.5 items-start p-2.5 rounded-2xl hover:bg-white/5 transition-colors"
+                  >
+                    <div className="relative w-20 h-16 rounded-xl overflow-hidden shrink-0 border border-white/10 bg-black/40">
+                      <Image
+                        src={rel.image}
+                        alt={rel.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        sizes="80px"
+                      />
+                    </div>
+                    <div className="min-w-0">
+                      <h4 className="text-xs font-black text-[#fff1d0] group-hover:text-[#fdc500] transition-colors line-clamp-2 uppercase leading-snug">
+                        {rel.title}
+                      </h4>
+                      <div className="flex items-center gap-2 mt-1 text-[10px] text-[#fff1d0]/50 font-bold uppercase">
+                        <span>{rel.date}</span>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+
+              <Link
+                href="/blog"
+                className="mt-6 w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-black uppercase tracking-wider text-[#3CAFFF] transition-colors"
+              >
+                <span>View All Articles</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+
+            {/* Support & Setup Quick Card */}
+            <div className="bg-[#00263d]/60 border border-white/10 rounded-3xl p-6 text-center">
+              <div className="w-12 h-12 rounded-full bg-[#3CAFFF]/10 border border-[#3CAFFF]/30 flex items-center justify-center mx-auto mb-3 text-[#3CAFFF]">
+                <Headphones className="w-6 h-6" />
+              </div>
+              <h3 className="text-sm font-black uppercase tracking-wide text-[#fff1d0] mb-1">
+                Need Device Help?
+              </h3>
+              <p className="text-xs text-[#fff1d0]/70 font-medium mb-4">
+                Follow our step-by-step setup tutorials for IPTV Smarters, TiviMate, and Firestick.
+              </p>
+              <Link
+                href="/setup"
+                className="inline-flex items-center gap-1.5 text-xs font-black text-[#fdc500] hover:underline uppercase tracking-wider"
+              >
+                Open Setup Guide <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+
+          </aside>
+
         </div>
       </div>
     </article>
