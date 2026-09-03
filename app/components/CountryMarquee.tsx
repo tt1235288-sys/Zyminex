@@ -1,110 +1,106 @@
 'use client';
 
-import { useState } from 'react';
-import Image from 'next/image';
-
-interface Country {
-  name: string;
-  code: string;
-  flagUrl: string;
-  channelCount?: string;
-}
-
-// Default country list for the marquee/filter
-const DEFAULT_COUNTRIES: Country[] = [
-  { name: 'United States', code: 'us', flagUrl: 'https://flagcdn.com/w80/us.png', channelCount: '4,500+' },
-  { name: 'United Kingdom', code: 'gb', flagUrl: 'https://flagcdn.com/w80/gb.png', channelCount: '3,200+' },
-  { name: 'Canada', code: 'ca', flagUrl: 'https://flagcdn.com/w80/ca.png', channelCount: '2,100+' },
-  { name: 'Italy', code: 'it', flagUrl: 'https://flagcdn.com/w80/it.png', channelCount: '2,800+' },
-  { name: 'Germany', code: 'de', flagUrl: 'https://flagcdn.com/w80/de.png', channelCount: '2,400+' },
-  { name: 'France', code: 'fr', flagUrl: 'https://flagcdn.com/w80/fr.png', channelCount: '2,200+' },
-  { name: 'Spain', code: 'es', flagUrl: 'https://flagcdn.com/w80/es.png', channelCount: '1,900+' },
-  { name: 'Brazil', code: 'br', flagUrl: 'https://flagcdn.com/w80/br.png', channelCount: '1,500+' },
-  { name: 'Arab World', code: 'sa', flagUrl: 'https://flagcdn.com/w80/sa.png', channelCount: '3,800+' },
-  { name: 'Latin America', code: 'mx', flagUrl: 'https://flagcdn.com/w80/mx.png', channelCount: '2,500+' },
-];
+import { useState, useEffect } from 'react';
+import ReactCountryFlag from 'react-country-flag';
+import { WORLD_COUNTRIES, CountryMeta } from '@/lib/channels';
+import { Globe } from 'lucide-react';
 
 interface CountryMarqueeProps {
-  countries?: Country[];
   selectedCountry?: string | null;
-  onSelectCountry?: (countryName: string | null) => void;
-  isInteractiveFilter?: boolean;
+  onSelectCountry?: (code: string | null) => void;
 }
 
-export default function CountryMarquee({
-  countries = DEFAULT_COUNTRIES,
-  selectedCountry = null,
-  onSelectCountry,
-  isInteractiveFilter = false,
-}: CountryMarqueeProps) {
-  // Internal state if used standalone
-  const [activeCountry, setActiveCountry] = useState<string | null>(selectedCountry);
+export default function CountryMarquee({ selectedCountry = null, onSelectCountry }: CountryMarqueeProps) {
+  // Prevent hydration mismatch during static prerendering
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
-  const handleCountryClick = (countryName: string) => {
-    const newValue = activeCountry === countryName ? null : countryName;
-    setActiveCountry(newValue);
+  // Internal fallback state if used without parent props
+  const [internalSelected, setInternalSelected] = useState<string | null>(null);
+
+  const activeSelected = selectedCountry !== undefined ? selectedCountry : internalSelected;
+  const handleSelect = (code: string | null) => {
     if (onSelectCountry) {
-      onSelectCountry(newValue);
+      onSelectCountry(code);
+    } else {
+      setInternalSelected(code);
     }
   };
 
+  // Triple the list to create a seamless loop
+  const infiniteList: CountryMeta[] = [...WORLD_COUNTRIES, ...WORLD_COUNTRIES, ...WORLD_COUNTRIES];
+
+  if (!isMounted) {
+    return <div className="w-full relative my-10 h-20 bg-[#00263d]/40 rounded-2xl animate-pulse" />;
+  }
+
   return (
-    <div className="w-full py-8 overflow-hidden bg-[#003554]/60 backdrop-blur-md border-y border-white/5 relative">
-      
-      {/* Optional Header for Channels page filter mode */}
-      {isInteractiveFilter && (
-        <div className="max-w-7xl mx-auto px-4 mb-6 flex items-center justify-between">
-          <h3 className="text-sm font-black uppercase tracking-widest text-[#fff1d0]">
-            Filter by Country Feed
-          </h3>
-          {activeCountry && (
-            <button 
-              onClick={() => { setActiveCountry(null); if(onSelectCountry) onSelectCountry(null); }}
-              className="text-xs font-bold text-[#3CAFFF] hover:underline uppercase"
-            >
-              Reset Filter ✕
-            </button>
-          )}
+    <div className="w-full relative my-10">
+      {/* Top Section Header */}
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4">
+        <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[#fdc500]">
+          <Globe className="w-4 h-4 text-[#3CAFFF]" />
+          <span>Browse By Country ({WORLD_COUNTRIES.length}+ Nations Available)</span>
         </div>
-      )}
+        {activeSelected && (
+          <button
+            onClick={() => handleSelect(null)}
+            className="text-xs font-black uppercase tracking-wider text-[#3CAFFF] hover:text-[#fff1d0] bg-white/5 border border-white/10 px-3 py-1 rounded-full transition-colors cursor-pointer"
+          >
+            Clear Filter ✕
+          </button>
+        )}
+      </div>
 
-      {/* Marquee Slider Track / Grid */}
-      <div className="flex w-full overflow-x-auto no-scrollbar px-4 sm:px-6 lg:px-8 gap-4 justify-start lg:justify-center items-center">
-        {countries.map((country) => {
-          const isSelected = activeCountry === country.name;
+      {/* Marquee Track */}
+      <div className="relative w-full overflow-hidden py-3 bg-[#00263d]/60 border-y border-white/10 backdrop-blur-md">
+        {/* Soft Left & Right Fade Gradients */}
+        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-[#003554] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-[#003554] to-transparent z-10 pointer-events-none" />
 
-          return (
-            <div
-              key={country.code}
-              onClick={() => handleCountryClick(country.name)}
-              className={`flex items-center gap-3 px-4 py-3 rounded-2xl border-2 transition-all duration-300 shrink-0 cursor-pointer ${
-                isSelected 
-                  ? 'bg-[#3CAFFF] border-[#fff1d0] text-[#003554] shadow-lg scale-105' 
-                  : 'bg-white/[0.03] border-white/10 hover:border-[#3CAFFF]/50 hover:bg-white/[0.06] text-[#fff1d0]'
-              }`}
-            >
-              <div className="relative w-7 h-5 rounded overflow-hidden shadow-sm shrink-0 border border-black/20">
-                <Image
-                  src={country.flagUrl}
-                  alt={`${country.name} streaming channels`}
-                  fill
-                  className="object-cover"
-                  sizes="28px"
-                />
-              </div>
-              <div className="flex flex-col text-left">
-                <span className="text-xs sm:text-sm font-black uppercase tracking-wide leading-none">
+        <div className="flex w-max gap-4 animate-marquee hover:[animation-play-state:paused]">
+          {infiniteList.map((country, idx) => {
+            const isSelected = activeSelected === country.code;
+            return (
+              <button
+                key={`${country.code}-${idx}`}
+                onClick={() => handleSelect(isSelected ? null : country.code)}
+                className={`flex items-center gap-2.5 px-4 py-2 rounded-full border transition-all duration-300 shrink-0 cursor-pointer ${
+                  isSelected
+                    ? 'bg-[#fdc500] border-[#fdc500] text-[#003554] shadow-[0_0_20px_rgba(253,197,0,0.5)] scale-105'
+                    : 'bg-[#003554]/80 border-white/10 text-[#fff1d0] hover:border-[#3CAFFF] hover:bg-[#3CAFFF]/20'
+                }`}
+                title={`Filter channels for ${country.name}`}
+              >
+                {/* Rounded Country Flag */}
+                <div className="w-6 h-6 rounded-full overflow-hidden shrink-0 flex items-center justify-center border border-white/20 shadow-inner">
+                  <ReactCountryFlag
+                    countryCode={country.code}
+                    svg
+                    style={{
+                      width: '1.6em',
+                      height: '1.6em',
+                      objectFit: 'cover',
+                      borderRadius: '50%',
+                    }}
+                  />
+                </div>
+                <span className="text-xs font-black tracking-wider uppercase whitespace-nowrap">
                   {country.name}
                 </span>
-                {country.channelCount && (
-                  <span className={`text-[10px] font-bold mt-1 ${isSelected ? 'text-[#003554]/80' : 'text-[#fdc500]'}`}>
-                    {country.channelCount} Feeds
-                  </span>
-                )}
-              </div>
-            </div>
-          );
-        })}
+                <span
+                  className={`text-[10px] font-bold px-1.5 py-0.5 rounded-md ${
+                    isSelected ? 'bg-[#003554] text-[#fdc500]' : 'bg-white/10 text-[#fff1d0]/60'
+                  }`}
+                >
+                  {country.count}
+                </span>
+              </button>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
