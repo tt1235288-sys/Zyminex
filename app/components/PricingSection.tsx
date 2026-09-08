@@ -30,16 +30,16 @@ export default function PricingSection() {
   const WHATSAPP_NUMBER = '+447549589503';
 
   const handleWhatsAppRedirect = (months: number) => {
-    const message = `Hello, I want to order the ${CONSTANTS.BRAND_NAME} ${months}-month subscription plan for ${devices} device(s).`;
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
-  };
+      const message = `Hello, I want to order the ${CONSTANTS.BRAND_NAME} ${months}-month subscription plan for ${devices} device(s).`;
+      const whatsappUrl = `https://live-support.netlify.app/?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, '_blank');
+    };
 
-  const handleFreeTrialRedirect = () => {
-    const message = `Hello, I would like to request a 24h free trial token to test ${CONSTANTS.BRAND_NAME} IPTV channels and server stability.`;
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
-  };
+    const handleFreeTrialRedirect = () => {
+      const message = `Hello, I would like to request a 24h free trial token to test ${CONSTANTS.BRAND_NAME} IPTV channels and server stability.`;
+      const whatsappUrl = `https://live-support.netlify.app/?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, '_blank');
+    };
 
   return (
     <section 

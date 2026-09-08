@@ -656,8 +656,7 @@ export default function SetupPage() {
             <p className="text-xl font-black text-[#003554] mb-2 uppercase tracking-wide">24/7 Live Support</p>
             <p className="text-[#3CAFFF] text-sm font-medium mb-5">Connect with our support engineering crew on WhatsApp for instant setup assistance.</p>
             <a 
-              href="https://wa.me/447549589503?text=Hello%20Zyminex%2C%20I%20need%20help%20with%20setup"
-              target="_blank" 
+              href="https://live-support.netlify.app/?text=Hello%20Zyminex%2C%20I%20need%20help%20with%20setup"              target="_blank" 
               rel="noopener noreferrer" 
               aria-label="Contact Zyminex customer support on WhatsApp"
               className="inline-flex items-center gap-2 text-green-500 font-black uppercase text-xs tracking-widest hover:gap-3 transition-all cursor-pointer"

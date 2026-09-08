@@ -331,7 +331,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-[#003554]/40 text-xs uppercase tracking-widest font-black">Phone</p>
-                    <a href="tel:+447549589503" className="text-[#003554] hover:text-[#3CAFFF] transition-colors text-sm font-bold">
+                    <a href="https://live-support.netlify.app" className="text-[#003554] hover:text-[#3CAFFF] transition-colors text-sm font-bold">
                       +44 7549 589503
                     </a>
                   </div>
