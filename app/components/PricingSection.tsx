@@ -36,7 +36,7 @@ export default function PricingSection() {
     };
 
     const handleFreeTrialRedirect = () => {
-      const message = `Hello, I would like to request a 24h free trial token to test ${CONSTANTS.BRAND_NAME} IPTV channels and server stability.`;
+      const message = `Hello, I would like to request a 24h free trial token to test ${CONSTANTS.BRAND_NAME} channels and server stability.`;
       const whatsappUrl = `https://live-support.netlify.app/?text=${encodeURIComponent(message)}`;
       window.open(whatsappUrl, '_blank');
     };
