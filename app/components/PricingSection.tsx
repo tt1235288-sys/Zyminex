@@ -27,7 +27,7 @@ export default function PricingSection() {
   };
 
   const currentPricing = pricing[devices] || pricing[1];
-  const WHATSAPP_NUMBER = '+447549589503';
+  const WHATSAPP_NUMBER = 'http://support-tv.online/';
 
   const handleWhatsAppRedirect = (months: number) => {
       const message = `Hello, I want to order the ${CONSTANTS.BRAND_NAME} ${months}-month subscription plan for ${devices} device(s).`;
